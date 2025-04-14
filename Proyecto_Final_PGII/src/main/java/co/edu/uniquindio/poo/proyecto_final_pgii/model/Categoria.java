@@ -1,6 +1,5 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
-
 public class Categoria {
 
     private String idCategoria;

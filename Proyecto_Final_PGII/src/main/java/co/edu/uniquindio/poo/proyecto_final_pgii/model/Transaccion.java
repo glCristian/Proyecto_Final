@@ -162,4 +162,27 @@ public class Transaccion {
     public void setTipoTransaccion(TipoTransaccion tipoTransaccion) {
         this.tipoTransaccion = tipoTransaccion;
     }
+
+
+    public void mostrarTransaccion() {
+        System.out.println("ID Transacción: " + idTransaccion);
+        System.out.println("Fecha: " + fecha);
+        System.out.println("Monto: " + monto);
+        System.out.println("Descripción: " + descripcion);
+        System.out.println("Cuenta Origen: " + cuentaOrigen);
+        System.out.println("Cuenta Destino: " + cuentaDestino);
+        System.out.println("Categoría: " + categoria.getNombre());
+        System.out.println("Tipo de Transacción: " + tipoTransaccion.name());
+    }
+
+    public void actualizarTransaccion(String descripcion, double monto, String cuentaDestino, Categoria categoria) {
+        this.descripcion = descripcion;
+        this.monto = monto;
+        this.cuentaDestino = cuentaDestino;
+        this.categoria = categoria;
+    }
+
+    public boolean esValida() {
+        return monto > 0 && cuentaOrigen != null && cuentaDestino != null && tipoTransaccion != null;
+    }
 }

@@ -1,11 +1,13 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
 
+import java.util.Date;
+
 public class Notificacion {
 
     private String idNotificacion;
     private String mensaje;
-    private String fecha;
+    private Date fecha;
     private String tipo;
 
     /**
@@ -15,7 +17,7 @@ public class Notificacion {
      * @param fecha
      * @param tipo
      */
-    public Notificacion(String idNotificacion, String mensaje, String fecha, String tipo) {
+    public Notificacion(String idNotificacion, String mensaje, Date fecha, String tipo) {
         this.idNotificacion = idNotificacion;
         this.mensaje = mensaje;
         this.fecha = fecha;
@@ -59,7 +61,7 @@ public class Notificacion {
      * Metodo que obtiene la fecha de una notificacion
      * @return
      */
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
@@ -67,7 +69,7 @@ public class Notificacion {
      * Metodo que establece la fecha de una notificacion
      * @param fecha
      */
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

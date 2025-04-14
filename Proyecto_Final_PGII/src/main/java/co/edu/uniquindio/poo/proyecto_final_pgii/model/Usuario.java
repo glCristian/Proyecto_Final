@@ -7,6 +7,7 @@ import java.util.LinkedList;
 public class Usuario extends Persona{
 
     private String idUsuario;
+    private String contrasena;
     private Administrador administrador;
     private Notificacion notificacion;
     private Collection<Movimiento> listaMovimientos;
@@ -25,9 +26,10 @@ public class Usuario extends Persona{
      * @param administrador
      * @param notificacion
      */
-    public Usuario(String nombres, String apellidos, String email, String telefono, String direccion, String idUsuario, Administrador administrador, Notificacion notificacion) {
+    public Usuario(String nombres, String apellidos, String email, String telefono, String direccion, String idUsuario, String contrasena, Administrador administrador, Notificacion notificacion) {
         super(nombres, apellidos, email, telefono, direccion);
         this.idUsuario = idUsuario;
+        this.contrasena = contrasena;
         this.administrador = administrador;
         this.notificacion = notificacion;
         this.listaMovimientos = new LinkedList<>();
@@ -52,6 +54,16 @@ public class Usuario extends Persona{
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
 
     /**
      * Metodo que obtiene el administrador
@@ -148,4 +160,45 @@ public class Usuario extends Persona{
     public void setListaTransacciones(Collection<Transaccion> listaTransacciones) {
         this.listaTransacciones = listaTransacciones;
     }
+
+
+
+
+    public void modificarPerfil(String nombres, String apellidos, String email, String telefono, String direccion) {
+        super.setNombres(nombres);
+        super.setApellidos(apellidos);
+        super.setEmail(email);
+        super.setTelefono(telefono);
+        super.setDireccion(direccion);
+    }
+
+
+    public void agregarCuenta(Cuenta cuenta) {
+        listaCuentas.add(cuenta);
+    }
+
+    public boolean eliminarCuenta(String idCuenta) {
+        for (Cuenta cuenta : listaCuentas) {
+            if (cuenta.getIdCuenta().equals(idCuenta)) {
+                listaCuentas.remove(cuenta);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+    public Collection<Cuenta> consultarCuentas() {
+        return listaCuentas;
+    }
+
+
+    public void agregarDinero(double monto) {
+    }
+
+
+    public boolean retirarDinero(double monto) {
+    }
+
 }
