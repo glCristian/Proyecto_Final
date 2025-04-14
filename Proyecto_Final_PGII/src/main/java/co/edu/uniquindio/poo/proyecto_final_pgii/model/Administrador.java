@@ -54,4 +54,17 @@ public class Administrador extends Persona{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+
+    public void gestionarUsuarios(){
+
+    }
+
+    public void gestionarCuentas(){
+
+    }
+
+    public void gestionarTransacciones(){
+
+    }
 }

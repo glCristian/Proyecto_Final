@@ -49,4 +49,6 @@ public class Movimiento {
     public void setListaTransacciones(Collection<Transaccion> listaTransacciones) {
         this.listaTransacciones = listaTransacciones;
     }
+
+
 }

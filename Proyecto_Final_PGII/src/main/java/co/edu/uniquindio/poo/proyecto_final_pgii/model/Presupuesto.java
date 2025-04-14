@@ -5,7 +5,7 @@ public class Presupuesto {
 
     private String idPresupuesto;
     private String nombre;
-    private double montoTotal;
+    private double montoAsignado;
     private double montoGastado;
     private Categoria categoria;
 
@@ -17,10 +17,10 @@ public class Presupuesto {
      * @param montoGastado
      * @param categoria
      */
-    public Presupuesto(String idPresupuesto, String nombre, double montoTotal, double montoGastado, Categoria categoria) {
+    public Presupuesto(String idPresupuesto, String nombre, double montoAsignado, double montoGastado, Categoria categoria) {
         this.idPresupuesto = idPresupuesto;
         this.nombre = nombre;
-        this.montoTotal = montoTotal;
+        this.montoAsignado = montoAsignado;
         this.montoGastado = montoGastado;
         this.categoria = categoria;
     }
@@ -59,19 +59,19 @@ public class Presupuesto {
     }
 
     /**
-     * Metodo que obtiene el monto total de un presupuesto
+     * Metodo que obtiene el monto asignado de un presupuesto
      * @return
      */
-    public double getMontoTotal() {
-        return montoTotal;
+    public double getMontoAsignado() {
+        return montoAsignado;
     }
 
     /**
-     * Metodo que establece el monto total de un presupuesto
-     * @param montoTotal
+     * Metodo que establece el monto asignado de un presupuesto
+     * @param montoAsignado
      */
-    public void setMontoTotal(double montoTotal) {
-        this.montoTotal = montoTotal;
+    public void setMontoAsignado(double montoAsignado) {
+        this.montoAsignado = montoAsignado;
     }
 
     /**
@@ -104,5 +104,20 @@ public class Presupuesto {
      */
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+
+    public void actualizarPresupuesto(double montoNuevo){
+        this.montoAsignado = montoNuevo;
+        System.out.println("Presupuesto actualizado a " + montoNuevo);
+    }
+
+    public String consultarEstado(){
+        return "Presupuesto: " + nombre + "\nMonto Asignado: " + montoAsignado + "\nMonto Gastado: " + montoGastado;
+    }
+
+    public void agregarGasto(double monto) {
+        montoGastado += monto;
+        System.out.println("Gasto agregado de " + monto + " al presupuesto " + nombre);
     }
 }

@@ -126,4 +126,40 @@ public class Cuenta {
     public void setListaTransacciones(Collection<Transaccion> listaTransacciones) {
         this.listaTransacciones = listaTransacciones;
     }
+
+
+    public void depositar(double monto) {
+        if (monto > 0) {
+            saldoTotal += monto;
+            System.out.println("Se han depositado " + monto + " en la cuenta " + idCuenta);
+        } else {
+            System.out.println("Monto inválido para el depósito.");
+        }
+    }
+
+    public boolean retirar(double monto) {
+        if (saldoTotal >= monto) {
+            saldoTotal -= monto;
+            System.out.println("Retiro de " + monto + " realizado en la cuenta " + idCuenta);
+            return true;
+        }
+        System.out.println("Saldo insuficiente para retirar " + monto);
+        return false;
+    }
+
+
+    public void actualizarInformacion(String nuevoBanco, String nuevoNumeroCuenta, TipoCuenta nuevoTipoCuenta) {
+        this.nombreBanco = nuevoBanco;
+        this.numeroCuenta = nuevoNumeroCuenta;
+        this.tipoCuenta = nuevoTipoCuenta;
+        System.out.println("La información de la cuenta " + idCuenta + " ha sido actualizada.");
+    }
+
+
+    public double consultarSaldo() {
+        return saldoTotal;
+    }
+
+
+
 }

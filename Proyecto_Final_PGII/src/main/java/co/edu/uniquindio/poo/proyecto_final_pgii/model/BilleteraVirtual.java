@@ -12,6 +12,7 @@ public class BilleteraVirtual {
     private Usuario usuarioActual; //Uusuario en sesion
     private Administrador administrador;
     private Collection<Notificacion> listaNotificaciones;
+    private Collection<Transaccion> listaTransacciones;
 
 
     public BilleteraVirtual(String nombre, Administrador administrador) {
@@ -20,6 +21,7 @@ public class BilleteraVirtual {
         this.usuarioActual = null;
         this.administrador = administrador;
         this.listaNotificaciones = new LinkedList<>();
+        this.listaTransacciones = new LinkedList<>();
     }
 
     public String getNombre() {
@@ -54,6 +56,23 @@ public class BilleteraVirtual {
         this.listaNotificaciones = listaNotificaciones;
     }
 
+    public Usuario getUsuarioActual() {
+        return usuarioActual;
+    }
+
+    public void setUsuarioActual(Usuario usuarioActual) {
+        this.usuarioActual = usuarioActual;
+    }
+
+    public Collection<Transaccion> getListaTransacciones() {
+        return listaTransacciones;
+    }
+
+    public void setListaTransacciones(Collection<Transaccion> listaTransacciones) {
+        this.listaTransacciones = listaTransacciones;
+    }
+
+
 
 
 
@@ -72,6 +91,11 @@ public class BilleteraVirtual {
     }
 
 
+    public void eliminarUsuario(){
+
+    }
+
+
 
     public boolean autenticarUsuario(String email, String contrasena) {
         for (Usuario u : listaUsuarios) {
@@ -87,6 +111,11 @@ public class BilleteraVirtual {
 
     public void cerrarSesion() {
         usuarioActual = null;
+    }
+
+
+    public void registrarAdministrador(){
+
     }
 
 

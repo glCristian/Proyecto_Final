@@ -8,6 +8,7 @@ public class Usuario extends Persona{
 
     private String idUsuario;
     private String contrasena;
+    private double saldoTotal;
     private Administrador administrador;
     private Notificacion notificacion;
     private Collection<Movimiento> listaMovimientos;
@@ -26,10 +27,11 @@ public class Usuario extends Persona{
      * @param administrador
      * @param notificacion
      */
-    public Usuario(String nombres, String apellidos, String email, String telefono, String direccion, String idUsuario, String contrasena, Administrador administrador, Notificacion notificacion) {
+    public Usuario(String nombres, String apellidos, String email, String telefono, String direccion, String idUsuario, String contrasena, double saldoTotal, Administrador administrador, Notificacion notificacion) {
         super(nombres, apellidos, email, telefono, direccion);
         this.idUsuario = idUsuario;
         this.contrasena = contrasena;
+        this.saldoTotal = 0;
         this.administrador = administrador;
         this.notificacion = notificacion;
         this.listaMovimientos = new LinkedList<>();
@@ -64,6 +66,13 @@ public class Usuario extends Persona{
         this.contrasena = contrasena;
     }
 
+    public double getSaldoTotal() {
+        return saldoTotal;
+    }
+
+    public void setSaldoTotal(double saldoTotal) {
+        this.saldoTotal = saldoTotal;
+    }
 
     /**
      * Metodo que obtiene el administrador
@@ -164,17 +173,9 @@ public class Usuario extends Persona{
 
 
 
-    public void modificarPerfil(String nombres, String apellidos, String email, String telefono, String direccion) {
-        super.setNombres(nombres);
-        super.setApellidos(apellidos);
-        super.setEmail(email);
-        super.setTelefono(telefono);
-        super.setDireccion(direccion);
-    }
-
-
     public void agregarCuenta(Cuenta cuenta) {
         listaCuentas.add(cuenta);
+        System.out.println("Cuenta agregada: " + cuenta.getIdCuenta());
     }
 
     public boolean eliminarCuenta(String idCuenta) {
@@ -194,11 +195,80 @@ public class Usuario extends Persona{
     }
 
 
-    public void agregarDinero(double monto) {
+    public boolean agregarDinero(Cuenta cuenta, double monto) {
+        if (listaCuentas.contains(cuenta)) {
+            cuenta.depositar(monto);
+
+            Transaccion transaccion = new Transaccion("Depósito", monto, null, cuenta);
+            listaTransacciones.add(transaccion);
+            System.out.println("Depósito de " + monto + " realizado a la cuenta " + cuenta.getIdCuenta());
+            return true;
+        } else {
+            System.out.println("Cuenta no encontrada.");
+            return false;
+        }
     }
 
 
-    public boolean retirarDinero(double monto) {
+    public boolean retirarDinero(Cuenta cuenta, double monto) {
+        if (cuenta.retirar(monto)) {
+
+            Transaccion transaccion = new Transaccion("Retiro", monto, cuenta, null);
+            listaTransacciones.add(transaccion);
+            System.out.println("Retiro exitoso de la cuenta " + cuenta.getIdCuenta());
+            return true;
+        } else {
+            System.out.println("Saldo insuficiente en la cuenta " + cuenta.getIdCuenta());
+            return false;
+        }
+    }
+
+
+    public void transferirDinero(Cuenta cuentaOrigen, Cuenta cuentaDestino, double monto){
+        if (cuentaOrigen.retirar(monto)) {
+            cuentaDestino.depositar(monto);
+
+            Transaccion transaccion = new Transaccion("Transferencia", monto, cuentaOrigen, cuentaDestino);
+            listaTransacciones.add(transaccion);
+            System.out.println("Transferencia exitosa de " + monto + " desde " + cuentaOrigen.getIdCuenta() + " hacia " + cuentaDestino.getIdCuenta());
+            return true;
+        }
+        return false;
+    }
+
+    public void crearPresupuesto(Presupuesto presupuesto){
+        listaPresupuestos.add(presupuesto);
+        System.out.println("Presupuesto creado: " + presupuesto.getNombre());
+    }
+
+
+    public void modificarPresupuesto(String id, Presupuesto nuevoPresupuesto) {
+        for (Presupuesto presupuesto : listaPresupuestos) {
+            if (presupuesto.getIdPresupuesto().equals(id)) {
+                presupuesto.actualizar(nuevoPresupuesto.getMontoAsignado());
+                System.out.println("Presupuesto actualizado: " + nuevoPresupuesto.getNombre());
+            }
+        }
+    }
+
+
+    public void eliminarPresupuesto(String idPresupuesto) {
+        listaPresupuestos.removeIf(p -> p.getIdPresupuesto().equals(p.getIdPresupuesto()));
+        System.out.println("Presupuesto eliminado.");
+    }
+
+
+
+    public Collection<Transaccion> consultarTransacciones() {
+        return listaTransacciones;
+    }
+
+    public double consultarSaldo() {
+        double saldoTotal = 0;
+        for (Cuenta cuenta : listaCuentas) {
+            saldoTotal += cuenta.consultarSaldo();
+        }
+        return saldoTotal;
     }
 
 }

@@ -88,4 +88,10 @@ public class Notificacion {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+
+
+    public String mostrarNotificacion() {
+        return "Notificación ID: " + idNotificacion + "\nMensaje: " + mensaje + "\nFecha: " + fecha + "\nTipo: " + tipo;
+    }
 }

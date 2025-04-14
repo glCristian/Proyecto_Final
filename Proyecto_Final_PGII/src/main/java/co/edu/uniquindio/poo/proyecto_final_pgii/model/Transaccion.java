@@ -164,6 +164,11 @@ public class Transaccion {
     }
 
 
+    public void crearTransaccion(){
+
+    }
+
+
     public void mostrarTransaccion() {
         System.out.println("ID Transacción: " + idTransaccion);
         System.out.println("Fecha: " + fecha);
