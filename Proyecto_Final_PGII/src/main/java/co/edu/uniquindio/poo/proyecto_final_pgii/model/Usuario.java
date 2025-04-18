@@ -1,15 +1,16 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.UUID;
 
 public class Usuario extends Persona{
 
     private String idUsuario;
     private String contrasena;
     private double saldoTotal;
-    private Administrador administrador;
     private Notificacion notificacion;
     private Collection<Movimiento> listaMovimientos;
     private Collection<Cuenta> listaCuentas;
@@ -24,15 +25,13 @@ public class Usuario extends Persona{
      * @param telefono
      * @param direccion
      * @param idUsuario
-     * @param administrador
      * @param notificacion
      */
-    public Usuario(String nombres, String apellidos, String email, String telefono, String direccion, String idUsuario, String contrasena, double saldoTotal, Administrador administrador, Notificacion notificacion) {
+    public Usuario(String nombres, String apellidos, String email, String telefono, String direccion, String idUsuario, String contrasena, Notificacion notificacion) {
         super(nombres, apellidos, email, telefono, direccion);
         this.idUsuario = idUsuario;
         this.contrasena = contrasena;
         this.saldoTotal = 0;
-        this.administrador = administrador;
         this.notificacion = notificacion;
         this.listaMovimientos = new LinkedList<>();
         this.listaCuentas = new LinkedList<>();
@@ -74,21 +73,6 @@ public class Usuario extends Persona{
         this.saldoTotal = saldoTotal;
     }
 
-    /**
-     * Metodo que obtiene el administrador
-     * @return
-     */
-    public Administrador getAdministrador() {
-        return administrador;
-    }
-
-    /**
-     * Metodo que establece el administrador
-     * @param administrador
-     */
-    public void setAdministrador(Administrador administrador) {
-        this.administrador = administrador;
-    }
 
     /**
      * Metodo que obtiene una notificacion
@@ -194,12 +178,30 @@ public class Usuario extends Persona{
         return listaCuentas;
     }
 
+    /**
+     * Metodo que genera un ID de manera aleatoria
+     * @return idUnico
+     */
+    public static String generarIdUnico() {
+        return UUID.randomUUID().toString().substring(0, 8);
+    }
+
+    /**
+     * Metodo que obtiene la fecha actual y la devuelve como String
+     * @return fecha Actual
+     */
+    public static String obtenerFechaActual() {
+        return LocalDate.now().toString();
+    }
+
 
     public boolean agregarDinero(Cuenta cuenta, double monto) {
         if (listaCuentas.contains(cuenta)) {
             cuenta.depositar(monto);
 
-            Transaccion transaccion = new Transaccion("Depósito", monto, null, cuenta);
+            Transaccion transaccion = new Transaccion(generarIdUnico(), obtenerFechaActual(), monto, "Deposito",
+                    null, cuenta.getIdCuenta(), null, TipoTransaccion.DEPOSITO);
+
             listaTransacciones.add(transaccion);
             System.out.println("Depósito de " + monto + " realizado a la cuenta " + cuenta.getIdCuenta());
             return true;
@@ -210,10 +212,13 @@ public class Usuario extends Persona{
     }
 
 
+
+
     public boolean retirarDinero(Cuenta cuenta, double monto) {
         if (cuenta.retirar(monto)) {
 
-            Transaccion transaccion = new Transaccion("Retiro", monto, cuenta, null);
+            Transaccion transaccion = new Transaccion(generarIdUnico(), obtenerFechaActual(), monto, "Retiro", cuenta.getIdCuenta(),
+                    null, null, TipoTransaccion.RETIRO);
             listaTransacciones.add(transaccion);
             System.out.println("Retiro exitoso de la cuenta " + cuenta.getIdCuenta());
             return true;
@@ -228,12 +233,13 @@ public class Usuario extends Persona{
         if (cuentaOrigen.retirar(monto)) {
             cuentaDestino.depositar(monto);
 
-            Transaccion transaccion = new Transaccion("Transferencia", monto, cuentaOrigen, cuentaDestino);
+            Transaccion transaccion = new Transaccion(generarIdUnico(), obtenerFechaActual(), monto, "Deposito a otra cuenta. ",
+                    cuentaOrigen.getIdCuenta(), cuentaDestino.getIdCuenta(), null, TipoTransaccion.TRANSFERENCIA );
             listaTransacciones.add(transaccion);
             System.out.println("Transferencia exitosa de " + monto + " desde " + cuentaOrigen.getIdCuenta() + " hacia " + cuentaDestino.getIdCuenta());
-            return true;
+            //return true; para que los return??
         }
-        return false;
+        //return false;
     }
 
     public void crearPresupuesto(Presupuesto presupuesto){
@@ -245,7 +251,7 @@ public class Usuario extends Persona{
     public void modificarPresupuesto(String id, Presupuesto nuevoPresupuesto) {
         for (Presupuesto presupuesto : listaPresupuestos) {
             if (presupuesto.getIdPresupuesto().equals(id)) {
-                presupuesto.actualizar(nuevoPresupuesto.getMontoAsignado());
+                presupuesto.actualizarPresupuesto(nuevoPresupuesto.getMontoAsignado());
                 System.out.println("Presupuesto actualizado: " + nuevoPresupuesto.getNombre());
             }
         }
@@ -253,7 +259,7 @@ public class Usuario extends Persona{
 
 
     public void eliminarPresupuesto(String idPresupuesto) {
-        listaPresupuestos.removeIf(p -> p.getIdPresupuesto().equals(p.getIdPresupuesto()));
+        listaPresupuestos.removeIf(p -> p.getIdPresupuesto().equals(idPresupuesto));
         System.out.println("Presupuesto eliminado.");
     }
 
