@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                co.edu.uniquindio.poo.proyecto_final_pgii/co.edu.uniquindio.poo.proyecto_final_pgii.HelloApplication
+                                co.edu.uniquindio.poo.proyecto_final_pgii/co.edu.uniquindio.poo.proyecto_final_pgii.app.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
