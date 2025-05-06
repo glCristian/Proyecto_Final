@@ -18,12 +18,12 @@
             <TextField fx:id="TextField_IngresarNombres" layoutX="71.0" layoutY="128.0" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #302E66;" />
             <TextField fx:id="TextField_IngresarApellidos" layoutX="71.0" layoutY="182.0" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #302E66;" />
             <Button fx:id="Button_Registrarse" layoutX="69.0" layoutY="386.0" mnemonicParsing="false" onAction="#onClick_Registrarse" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #9327f0;" text="Registrarse" />
-            <ImageView fitHeight="35.0" fitWidth="129.0" layoutX="106.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="35.0" fitWidth="129.0" layoutX="98.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../../../../logo1.png" />
                </image>
             </ImageView>
-            <Label layoutX="132.0" layoutY="67.0" text="Empezar" textFill="LIGHTGRAY">
+            <Label layoutX="126.0" layoutY="65.0" text="Empezar" textFill="LIGHTGRAY">
                <font>
                   <Font name="System Bold" size="19.0" />
                </font>
