@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.menuRegistrarse"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="759.0" style="-fx-background-color: #19173D;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.MenuRegistrarseViewController">
+   <children>
+      <Pane layoutX="209.0" layoutY="28.0" prefHeight="451.0" prefWidth="341.0" style="-fx-background-color: #262450;">
+         <children>
+            <Label layoutX="75.0" layoutY="109.0" text="Nombres" textFill="#d3d3d3" />
+            <Label layoutX="71.0" layoutY="163.0" text="Apellidos" textFill="LIGHTGRAY" />
+            <TextField fx:id="TextField_IngresarNombres" layoutX="71.0" layoutY="128.0" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #302E66;" />
+            <TextField fx:id="TextField_IngresarApellidos" layoutX="71.0" layoutY="182.0" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #302E66;" />
+            <Button fx:id="Button_Registrarse" layoutX="69.0" layoutY="386.0" mnemonicParsing="false" onAction="#onClick_Registrarse" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #9327f0;" text="Registrarse" />
+            <ImageView fitHeight="35.0" fitWidth="129.0" layoutX="106.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../logo1.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="132.0" layoutY="67.0" text="Empezar" textFill="LIGHTGRAY">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="71.0" layoutY="217.0" text="Email" textFill="LIGHTGRAY" />
+            <TextField fx:id="TextField_IngresarEmail" layoutX="71.0" layoutY="235.0" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #302E66;" />
+            <Label layoutX="71.0" layoutY="270.0" text="Telefono" textFill="LIGHTGRAY" />
+            <TextField fx:id="TextField_IngresarTelefono" layoutX="71.0" layoutY="288.0" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #302E66;" />
+            <Label layoutX="71.0" layoutY="323.0" text="Crear Contraseña" textFill="LIGHTGRAY" />
+            <TextField fx:id="TextField_IngresarCrearContrasenia" layoutX="71.0" layoutY="342.0" prefHeight="25.0" prefWidth="186.0" promptText="******" style="-fx-background-color: #302E66;" />
+            <Button fx:id="Button_AtrasMenuInicio" mnemonicParsing="false" onAction="#onClick_AtrasMenuInicio" prefHeight="46.0" prefWidth="57.0" style="-fx-background-color: #262450;" text="￩" textFill="#9327f0">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</Pane>
