@@ -7,12 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.stage.Stage;
-import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 
 public class PantallaPrincipalUsuarioViewController {
 
@@ -23,13 +21,13 @@ public class PantallaPrincipalUsuarioViewController {
     private URL location;
 
     @FXML
+    private AnchorPane AnchorPane_PantallaPrincipalUsuario;
+
+    @FXML
     private Button Button_MenuCuentas;
 
     @FXML
     private Button Button_MenuMovimientos;
-
-    @FXML
-    private Button Button_MenuPerfilUsuario;
 
     @FXML
     private Button Button_MenuPresupuesto;
@@ -38,105 +36,59 @@ public class PantallaPrincipalUsuarioViewController {
     private Button Button_MenuTransaccion;
 
     @FXML
-    private Label Label_MostrarSaldoTotal;
+    private Button Button_PerfilUsuario;
 
     @FXML
-    private ListView<?> ListView_MostrarResumenMovimientos;
+    private Label Label_SaldoTotal;
+
+    @FXML
+    private ListView<?> TableView_Movimientos;
 
     @FXML
     void onClick_MenuCuentas(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/parcial_2/.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/cuentas.fxml");
     }
 
     @FXML
     void onClick_MenuMovimientos(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/parcial_2/.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void onClick_MenuPerfilUsuario(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/parcial_2/.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/movimientos.fxml");
     }
 
     @FXML
     void onClick_MenuPresupuesto(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/parcial_2/.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/presupuesto.fxml");
     }
 
     @FXML
     void onClick_MenuTransaccion(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/parcial_2/.fxml"));
-            Parent root = loader.load();
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/transaccion.fxml");
+    }
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    void onClick_PerfilUsuario(ActionEvent event) {
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/perfilUsuario.fxml");
     }
 
     @FXML
     void initialize() {
-        assert Button_MenuCuentas != null : "fx:id=\"Button_MenuCuentas\" was not injected: check your FXML file 'pantallaPrincipalUsuario.fxml'.";
-        assert Button_MenuMovimientos != null : "fx:id=\"Button_MenuMovimientos\" was not injected: check your FXML file 'pantallaPrincipalUsuario.fxml'.";
-        assert Button_MenuPerfilUsuario != null : "fx:id=\"Button_MenuPerfilUsuario\" was not injected: check your FXML file 'pantallaPrincipalUsuario.fxml'.";
-        assert Button_MenuPresupuesto != null : "fx:id=\"Button_MenuPresupuesto\" was not injected: check your FXML file 'pantallaPrincipalUsuario.fxml'.";
-        assert Button_MenuTransaccion != null : "fx:id=\"Button_MenuTransaccion\" was not injected: check your FXML file 'pantallaPrincipalUsuario.fxml'.";
-        assert Label_MostrarSaldoTotal != null : "fx:id=\"Label_MostrarSaldoTotal\" was not injected: check your FXML file 'pantallaPrincipalUsuario.fxml'.";
-        assert ListView_MostrarResumenMovimientos != null : "fx:id=\"ListView_MostrarResumenMovimientos\" was not injected: check your FXML file 'pantallaPrincipalUsuario.fxml'.";
+        assert AnchorPane_PantallaPrincipalUsuario != null : "fx:id=\"AnchorPane_PantallaPrincipalUsuario\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
+        assert Button_MenuCuentas != null : "fx:id=\"Button_MenuCuentas\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
+        assert Button_MenuMovimientos != null : "fx:id=\"Button_MenuMovimientos\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
+        assert Button_MenuPresupuesto != null : "fx:id=\"Button_MenuPresupuesto\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
+        assert Button_MenuTransaccion != null : "fx:id=\"Button_MenuTransaccion\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
+        assert Button_PerfilUsuario != null : "fx:id=\"Button_PerfilUsuario\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
+        assert Label_SaldoTotal != null : "fx:id=\"Label_SaldoTotal\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
+        assert TableView_Movimientos != null : "fx:id=\"TableView_Movimientos\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
 
+    }
+
+    private void cargarVista(String nombreFXML) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));
+            Parent vista = loader.load();
+            AnchorPane_PantallaPrincipalUsuario.getChildren().setAll(vista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

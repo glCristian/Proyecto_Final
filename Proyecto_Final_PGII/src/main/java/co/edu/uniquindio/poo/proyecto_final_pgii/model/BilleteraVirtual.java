@@ -137,7 +137,7 @@ public class BilleteraVirtual {
 
             listaNotificaciones.add(notificacion);
 
-            usuarioActual.recibirNotificacion(notificacion);
+            //usuarioActual.recibirNotificacion(notificacion);
         }
     }
 
