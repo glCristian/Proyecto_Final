@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="759.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.MenuInicioViewController">
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <children>
+      <Pane layoutX="-2.0" prefHeight="500.0" prefWidth="175.0" style="-fx-background-color: #292757;">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="121.0" layoutX="31.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../logo1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="29.0" layoutX="18.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../user-svgrepo-com.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="Button_MenuPerfilUsuario" layoutX="53.0" layoutY="448.0" mnemonicParsing="false" onAction="#onClick_MenuPerfilUsuario" style="-fx-background-color: #292757;" text=" Perfil   &gt;" textFill="LIGHTGRAY">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="Button_MenuPresupuesto" layoutX="55.0" layoutY="253.0" mnemonicParsing="false" onAction="#onClick_MenuPresupuesto" style="-fx-background-color: #292757;" text="Presupuesto  &gt;" textFill="LIGHTGRAY">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="Button_MenuTransaccion" layoutX="57.0" layoutY="196.0" mnemonicParsing="false" onAction="#onClick_MenuTransaccion" style="-fx-background-color: #292757;" text="Transaccion  &gt;" textFill="LIGHTGRAY">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="42.0" fitWidth="39.0" layoutX="11.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../business-finance-corporate-5-svgrepo-com.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="17.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../arrows-horizontal-svgrepo-com.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="Button_MenuCuentas" layoutX="57.0" layoutY="147.0" mnemonicParsing="false" onAction="#onClick_MenuCuentas" style="-fx-background-color: #292757;" text="Cuentas  &gt;" textFill="LIGHTGRAY">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="18.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../credit-card-svgrepo-com.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="Button_MenuMovimientos" layoutX="55.0" layoutY="300.0" mnemonicParsing="false" onAction="#onClick_MenuMovimientos" style="-fx-background-color: #292757;" text="Movimientos  &gt;" textFill="LIGHTGRAY">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="17.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../file-backup-2-svgrepo-com.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="195.0" layoutY="28.0" prefHeight="27.0" prefWidth="102.0" text="Mi Billetera" textFill="LIGHTGRAY">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="375.0" layoutY="119.0" prefHeight="25.0" prefWidth="102.0" text="Balance Total" textFill="LIGHTGRAY">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="Label_MostrarSaldoTotal" layoutX="366.0" layoutY="150.0" prefHeight="39.0" prefWidth="121.0" text="\$ ******" textFill="LIGHTGRAY">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="ListView_MostrarResumenMovimientos" layoutX="266.0" layoutY="216.0" prefHeight="161.0" prefWidth="322.0" style="-fx-background-color: #292757;" />
+   </children>
+</Pane>
