@@ -24,6 +24,9 @@ public class PantallaPrincipalUsuarioViewController {
     private AnchorPane AnchorPane_PantallaPrincipalUsuario;
 
     @FXML
+    private Button Button_CerrarSesionUsuario;
+
+    @FXML
     private Button Button_MenuCuentas;
 
     @FXML
@@ -70,8 +73,14 @@ public class PantallaPrincipalUsuarioViewController {
     }
 
     @FXML
+    void onClick_CerrarSesionUsuario(ActionEvent event) {
+
+    }
+
+    @FXML
     void initialize() {
         assert AnchorPane_PantallaPrincipalUsuario != null : "fx:id=\"AnchorPane_PantallaPrincipalUsuario\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
+        assert Button_CerrarSesionUsuario != null : "fx:id=\"Button_CerrarSesionUsuario\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
         assert Button_MenuCuentas != null : "fx:id=\"Button_MenuCuentas\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
         assert Button_MenuMovimientos != null : "fx:id=\"Button_MenuMovimientos\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
         assert Button_MenuPresupuesto != null : "fx:id=\"Button_MenuPresupuesto\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
@@ -81,6 +90,8 @@ public class PantallaPrincipalUsuarioViewController {
         assert TableView_Movimientos != null : "fx:id=\"TableView_Movimientos\" was not injected: check your FXML file 'pantallaPrincipalUsuario1.fxml'.";
 
     }
+
+
 
     private void cargarVista(String nombreFXML) {
         try {
