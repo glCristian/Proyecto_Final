@@ -2,9 +2,13 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.UUID;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 public class Usuario extends Persona{
 
@@ -25,9 +29,9 @@ public class Usuario extends Persona{
      * @param telefono
      * @param direccion
      * @param idUsuario
-     * @param notificacion
+     *
      */
-    public Usuario(String nombres, String apellidos, String email, String telefono, String direccion, String idUsuario, String contrasena, Notificacion notificacion) {
+    public Usuario(String nombres, String apellidos, String email, String telefono, String direccion, String idUsuario, String contrasena) {
         super(nombres, apellidos, email, telefono, direccion);
         this.idUsuario = idUsuario;
         this.contrasena = contrasena;
@@ -190,8 +194,8 @@ public class Usuario extends Persona{
      * Metodo que obtiene la fecha actual y la devuelve como String
      * @return fecha Actual
      */
-    public static String obtenerFechaActual() {
-        return LocalDate.now().toString();
+    public static LocalDateTime obtenerFechaActual() {
+        return LocalDateTime.now();
     }
 
 
@@ -237,9 +241,8 @@ public class Usuario extends Persona{
                     cuentaOrigen.getIdCuenta(), cuentaDestino.getIdCuenta(), null, TipoTransaccion.TRANSFERENCIA );
             listaTransacciones.add(transaccion);
             System.out.println("Transferencia exitosa de " + monto + " desde " + cuentaOrigen.getIdCuenta() + " hacia " + cuentaDestino.getIdCuenta());
-            //return true; para que los return??
         }
-        //return false;
+
     }
 
     public void crearPresupuesto(Presupuesto presupuesto){
@@ -276,5 +279,10 @@ public class Usuario extends Persona{
         }
         return saldoTotal;
     }
+
+   public LinkedList<Transaccion> fitrarPorTipoTransaccion(TipoTransaccion tipo) {
+        return (LinkedList<Transaccion>) listaTransacciones.stream().filter(t -> t.getTipoTransaccion()
+                .equals(tipo)).collect(Collectors.toList());
+   }
 
 }
