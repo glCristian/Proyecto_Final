@@ -23,12 +23,12 @@
             </ImageView>
             <ImageView fitHeight="27.0" fitWidth="29.0" layoutX="18.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../user-svgrepo-com.png" />
+                  <Image url="@../../../../../../../../../../user-svgrepo-comm.png" />
                </image>
             </ImageView>
-            <Button fx:id="Button_MenuPerfilUsuario" layoutX="53.0" layoutY="448.0" mnemonicParsing="false" onAction="#onClick_MenuPerfilUsuario" style="-fx-background-color: #292757;" text=" Perfil   &gt;" textFill="LIGHTGRAY">
+            <Button fx:id="Button_MenuPerfilUsuario" layoutX="53.0" layoutY="448.0" mnemonicParsing="false" onAction="#onClick_MenuPerfilUsuario" style="-fx-background-color: #292757;" text=" Perfil   &gt;" textFill="#9327f0">
                <font>
-                  <Font size="13.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Button>
             <Button fx:id="Button_MenuPresupuesto" layoutX="55.0" layoutY="253.0" mnemonicParsing="false" onAction="#onClick_MenuPresupuesto" style="-fx-background-color: #292757;" text="Presupuesto  &gt;" textFill="LIGHTGRAY">
