@@ -10,64 +10,73 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="759.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.PantallaPrincipalUsuarioViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="759.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <Pane prefHeight="500.0" prefWidth="175.0" style="-fx-background-color: #292757;" BorderPane.alignment="CENTER">
+      <Pane prefHeight="500.0" prefWidth="146.0" style="-fx-background-color: #292757;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="25.0" fitWidth="121.0" layoutX="31.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="22.0" fitWidth="107.0" layoutX="24.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../../../../logo1.png" />
                </image>
             </ImageView>
-            <Button fx:id="Button_MenuCuentas" layoutX="56.0" layoutY="134.0" mnemonicParsing="false" onAction="#onClick_MenuCuentas" style="-fx-background-color: #292757;" text="Cuentas  &gt;" textFill="LIGHTGRAY">
+            <Button fx:id="Button_MenuCuentas" layoutX="41.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClick_MenuCuentas" style="-fx-background-color: #292757;" text="Cuentas" textFill="LIGHTGRAY">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="Button_MenuTransaccion" layoutX="55.0" layoutY="186.0" mnemonicParsing="false" onAction="#onClick_MenuTransaccion" style="-fx-background-color: #292757;" text="Transaccion  &gt;" textFill="LIGHTGRAY">
+            <Button fx:id="Button_MenuTransaccion" layoutX="30.0" layoutY="175.0" mnemonicParsing="false" onAction="#onClick_MenuTransaccion" style="-fx-background-color: #292757;" text="Transaccion" textFill="LIGHTGRAY">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="Button_MenuPresupuesto" layoutX="54.0" layoutY="243.0" mnemonicParsing="false" onAction="#onClick_MenuPresupuesto" style="-fx-background-color: #292757;" text="Presupuesto  &gt;" textFill="LIGHTGRAY">
+            <Button fx:id="Button_MenuPresupuesto" layoutX="28.0" layoutY="243.0" mnemonicParsing="false" onAction="#onClick_MenuPresupuesto" style="-fx-background-color: #292757;" text="Presupuesto" textFill="LIGHTGRAY">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="Button_MenuMovimientos" layoutX="52.0" layoutY="296.0" mnemonicParsing="false" onAction="#onClick_MenuMovimientos" style="-fx-background-color: #292757;" text="Movimientos  &gt;" textFill="LIGHTGRAY">
+            <Button fx:id="Button_MenuMovimientos" layoutX="27.0" layoutY="307.0" mnemonicParsing="false" onAction="#onClick_MenuMovimientos" style="-fx-background-color: #292757;" text="Movimientos" textFill="LIGHTGRAY">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="Button_PerfilUsuario" layoutX="56.0" layoutY="438.0" mnemonicParsing="false" onAction="#onClick_PerfilUsuario" style="-fx-background-color: #292757;" text="Perfil  &gt;" textFill="#9327f0">
+            <Button fx:id="Button_PerfilUsuario" layoutX="49.0" layoutY="373.0" mnemonicParsing="false" onAction="#onClick_PerfilUsuario" style="-fx-background-color: #292757;" text="Perfil" textFill="#9327f0">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="18.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="60.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../credit-card-svgrepo-com.png" />
+                  <Image url="@../../../../../../../../../../institution-credit-card-svgrepo-com.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="18.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="60.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../../../../arrows-horizontal-svgrepo-com.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="14.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="56.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../../../../business-finance-corporate-5-svgrepo-com.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="18.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="60.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../../../../file-backup-2-svgrepo-com.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="18.0" layoutY="438.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="60.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../../../../user-svgrepo-comm.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="Button_CerrarSesionUsuario" layoutX="14.0" layoutY="447.0" mnemonicParsing="false" onAction="#onClick_CerrarSesionUsuario" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #292757;" text="Cerrar Sesion" textFill="#9327f0" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="58.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../logout-svgrepo-com%20(2).png" />
                </image>
             </ImageView>
          </children>
