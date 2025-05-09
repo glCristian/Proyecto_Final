@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="759.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="759.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.PantallaPrincipalUsuarioViewController">
    <left>
       <Pane prefHeight="500.0" prefWidth="146.0" style="-fx-background-color: #292757;" BorderPane.alignment="CENTER">
          <children>
@@ -85,7 +85,7 @@
    <center>
       <AnchorPane fx:id="AnchorPane_PantallaPrincipalUsuario" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #262450FF;" BorderPane.alignment="CENTER">
          <children>
-            <ListView fx:id="TableView_Movimientos" layoutX="115.0" layoutY="205.0" prefHeight="195.0" prefWidth="356.0" style="-fx-background-color: #292757;" />
+            <ListView fx:id="TableView_Movimientos" layoutX="115.0" layoutY="205.0" prefHeight="195.0" prefWidth="356.0" style="-fx-background-color: #292757; -fx-background-radius: 10;" />
             <Label fx:id="Label_SaldoTotal" layoutX="253.0" layoutY="163.0" text="\$ ********" textFill="LIGHTGRAY">
                <font>
                   <Font size="19.0" />

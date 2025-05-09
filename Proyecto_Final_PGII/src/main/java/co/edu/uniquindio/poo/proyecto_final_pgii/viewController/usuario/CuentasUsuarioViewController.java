@@ -27,6 +27,9 @@ public class CuentasUsuarioViewController {
     private AnchorPane AnchorPane_MenuCuentas;
 
     @FXML
+    private Button Button_ActualizarCuenta;
+
+    @FXML
     private Button Button_AnadirCuenta;
 
     @FXML
@@ -45,6 +48,11 @@ public class CuentasUsuarioViewController {
     private ListView<?> ListView_Cuentas;
 
     @FXML
+    void onClick_ActualizarCuenta(ActionEvent event) {
+
+    }
+
+    @FXML
     void onClick_EliminarCuenta(ActionEvent event) {
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/eliminarCuenta.fxml");
     }
@@ -58,6 +66,7 @@ public class CuentasUsuarioViewController {
     @FXML
     void initialize() {
         assert AnchorPane_MenuCuentas != null : "fx:id=\"AnchorPane_MenuCuentas\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";
+        assert Button_ActualizarCuenta != null : "fx:id=\"Button_ActualizarCuenta\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";
         assert Button_AnadirCuenta != null : "fx:id=\"Button_AnadirCuenta\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";
         assert Button_EliminarCuenta != null : "fx:id=\"Button_EliminarCuenta\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";
         assert Label_BancoCuenta != null : "fx:id=\"Label_BancoCuenta\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";

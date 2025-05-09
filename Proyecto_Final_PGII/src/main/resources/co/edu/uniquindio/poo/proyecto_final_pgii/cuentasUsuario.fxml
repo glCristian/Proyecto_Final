@@ -34,12 +34,13 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="Button_AnadirCuenta" layoutX="187.0" layoutY="416.0" mnemonicParsing="false" onAction="#onClick_anadirCuenta" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Añadir Cuenta" textFill="LIGHTGRAY" />
-      <Button fx:id="Button_EliminarCuenta" layoutX="337.0" layoutY="416.0" mnemonicParsing="false" onAction="#onClick_EliminarCuenta" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Eliminar Cuenta" textFill="LIGHTGRAY" />
+      <Button fx:id="Button_AnadirCuenta" layoutX="135.0" layoutY="416.0" mnemonicParsing="false" onAction="#onClick_anadirCuenta" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Añadir Cuenta" textFill="LIGHTGRAY" />
+      <Button fx:id="Button_EliminarCuenta" layoutX="370.0" layoutY="416.0" mnemonicParsing="false" onAction="#onClick_EliminarCuenta" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Eliminar Cuenta" textFill="LIGHTGRAY" />
       <Label layoutX="26.0" layoutY="27.0" prefHeight="30.0" prefWidth="118.0" text="Mis Cuentas" textFill="LIGHTGRAY">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
+      <Button fx:id="Button_ActualizarCuenta" layoutX="253.0" layoutY="416.0" mnemonicParsing="false" onAction="#onClick_ActualizarCuenta" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Actualizar Cuenta" textFill="LIGHTGRAY" />
    </children>
 </AnchorPane>
