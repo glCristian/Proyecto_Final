@@ -49,7 +49,7 @@ public class CuentasUsuarioViewController {
 
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
-
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/actualizarCuentaUsuario.fxml");
     }
 
     @FXML

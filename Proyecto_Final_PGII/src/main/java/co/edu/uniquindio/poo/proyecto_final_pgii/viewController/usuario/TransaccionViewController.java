@@ -1,9 +1,12 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -43,17 +46,17 @@ public class TransaccionViewController {
 
     @FXML
     void onClick_AgregarDinero(ActionEvent event) {
-
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/agregarDineroUsuario.fxml");
     }
 
     @FXML
     void onClick_EnviarDinero(ActionEvent event) {
-
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/enviarDineroUsuario.fxml");
     }
 
     @FXML
     void onClick_RetirarDinero(ActionEvent event) {
-
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/sacarDineroUsuario.fxml");
     }
 
     @FXML
@@ -67,6 +70,16 @@ public class TransaccionViewController {
         assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'transaccionUsuario.fxml'.";
         assert TableView_CuentasTransaccion != null : "fx:id=\"TableView_CuentasTransaccion\" was not injected: check your FXML file 'transaccionUsuario.fxml'.";
 
+    }
+
+    private void cargarVista(String nombreFXML) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));
+            Parent vista = loader.load();
+            AnchorPane_MenuTransaccion.getChildren().setAll(vista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
