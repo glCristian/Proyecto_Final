@@ -1,7 +1,10 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.app.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,17 +46,8 @@ public class MenuRegistrarseViewController {
     @FXML
     void onClick_AtrasMenuInicio(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/proyecto_final_pgii/menuInicio.fxml"));
-            Parent root = loader.load();
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-
-            Stage currentStage = (Stage) Button_AtrasMenuInicio.getScene().getWindow();
-            currentStage.close();
-
-            newStage.show();
-
-        } catch (Exception e) {
+            App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/menuInicio.fxml", event);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
