@@ -97,7 +97,7 @@ public class PantallaPrincipalUsuarioViewController {
     }
 
 
-    private void cargarVista(String nombreFXML) {
+    protected void cargarVista(String nombreFXML) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));
             Parent vista = loader.load();

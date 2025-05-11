@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -54,16 +55,9 @@ public class ActualizarPresupuestoViewController {
     void onClick_AtrasMenuPresupuesto(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/proyecto_final_pgii/presupuestoUsuario.fxml"));
-            Parent root = loader.load();
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-
-            Stage currentStage = (Stage) Button_AtrasMenuPresupuesto.getScene().getWindow();
-            currentStage.close();
-
-            newStage.show();
-
-        } catch (Exception e) {
+            Parent vista = loader.load();
+            AnchorPane_MenuActualizarPresupuesto.getChildren().setAll(vista);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
