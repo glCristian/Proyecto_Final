@@ -7,37 +7,40 @@ import java.util.List;
 
 public class BilleteraVirtual {
 
-    private String nombre;
-    private Collection<Usuario> listaUsuarios;
-    private Usuario usuarioActual; //Uusuario en sesion
+    private static BilleteraVirtual instancia;
+
     private Administrador administrador;
-    private Collection<Notificacion> listaNotificaciones;
-    private Collection<Transaccion> listaTransacciones;
+    private Collection<Usuario> usuarios;
+    private Collection<Cuenta> cuentas;
+    private Collection<Transaccion> transacciones;
 
-
-    public BilleteraVirtual(String nombre, Administrador administrador) {
-        this.nombre = nombre;
-        this.listaUsuarios = new LinkedList<>();
-        this.usuarioActual = null;
-        this.administrador = administrador;
-        this.listaNotificaciones = new LinkedList<>();
-        this.listaTransacciones = new LinkedList<>();
+    public BilleteraVirtual() {
+        this.usuarios = new LinkedList<>();
+        this.cuentas = new LinkedList<>();
+        this.transacciones = new LinkedList<>();
     }
 
-    public String getNombre() {
-        return nombre;
+    private BilleteraVirtual getInstancia() {
+        if (instancia == null) {
+            instancia = new BilleteraVirtual();
+        }
+        return instancia;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public Collection<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public Collection<Usuario> getListaUsuarios() {
-        return listaUsuarios;
+    public void setUsuarios(Collection<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
-    public void setListaUsuarios(Collection<Usuario> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
+    public Collection<Cuenta> getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(Collection<Cuenta> cuentas) {
+        this.cuentas = cuentas;
     }
 
     public Administrador getAdministrador() {
@@ -48,98 +51,11 @@ public class BilleteraVirtual {
         this.administrador = administrador;
     }
 
-    public Collection<Notificacion> getListaNotificaciones() {
-        return listaNotificaciones;
+    public Collection<Transaccion> getTransacciones() {
+        return transacciones;
     }
 
-    public void setListaNotificaciones(Collection<Notificacion> listaNotificaciones) {
-        this.listaNotificaciones = listaNotificaciones;
+    public void setTransacciones(Collection<Transaccion> transacciones) {
+        this.transacciones = transacciones;
     }
-
-    public Usuario getUsuarioActual() {
-        return usuarioActual;
-    }
-
-    public void setUsuarioActual(Usuario usuarioActual) {
-        this.usuarioActual = usuarioActual;
-    }
-
-    public Collection<Transaccion> getListaTransacciones() {
-        return listaTransacciones;
-    }
-
-    public void setListaTransacciones(Collection<Transaccion> listaTransacciones) {
-        this.listaTransacciones = listaTransacciones;
-    }
-
-
-
-
-
-    public void registrarUsuario(Usuario usuario) {
-        boolean existe = false;
-        for (Usuario u : listaUsuarios){
-            if(u.getIdUsuario().equals(usuario.getIdUsuario())){
-                existe = true;
-                break;
-            }
-        }
-
-        if(!existe){
-            listaUsuarios.add(usuario);
-        }
-    }
-
-
-    public void eliminarUsuario(){
-
-    }
-
-
-
-    public boolean autenticarUsuario(String email, String contrasena) {
-        for (Usuario u : listaUsuarios) {
-            if (u.getEmail().equals(email) && u.getContrasena().equals(contrasena)) {
-                usuarioActual = u;
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-
-    public void cerrarSesion() {
-        usuarioActual = null;
-    }
-
-
-    public void registrarAdministrador(){
-
-    }
-
-
-    public Collection<Usuario> listarUsuarios() {
-        return listaUsuarios;
-    }
-
-
-    public void enviarNotificacion(String mensaje) {
-        if (usuarioActual != null) {
-
-            String id = "N" + (listaNotificaciones.size() + 1);
-
-            Date fecha = new Date();
-
-            String tipo = "INFO";
-
-            Notificacion notificacion = new Notificacion(id, mensaje, fecha, tipo);
-
-            listaNotificaciones.add(notificacion);
-
-            //usuarioActual.recibirNotificacion(notificacion);
-        }
-    }
-
-
 }

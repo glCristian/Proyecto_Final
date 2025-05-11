@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import co.edu.uniquindio.poo.proyecto_final_pgii.app.App;
 
 public class PantallaPrincipalUsuarioViewController {
 
@@ -74,7 +75,11 @@ public class PantallaPrincipalUsuarioViewController {
 
     @FXML
     void onClick_CerrarSesionUsuario(ActionEvent event) {
-
+        try {
+            App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/menuInicio.fxml", event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -101,4 +106,6 @@ public class PantallaPrincipalUsuarioViewController {
             e.printStackTrace();
         }
     }
+
+
 }

@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import co.edu.uniquindio.poo.proyecto_final_pgii.app.App;
 
 public class MenuInicioViewController {
 
@@ -35,25 +36,25 @@ public class MenuInicioViewController {
 
     @FXML
     void onClick_IniciarSesion(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onClick_Registrarse(ActionEvent event) {
+        //PRUEBA----------------
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/proyecto_final_pgii/menuRegistrarse.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
+            App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/pantallaPrincipalUsuario.fxml", event);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
+    @FXML
+    void onClick_Registrarse(ActionEvent event) {
+        try {
+            App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/menuRegistrarse.fxml", event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @FXML
     void initialize() {
