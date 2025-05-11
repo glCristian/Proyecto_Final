@@ -1,10 +1,11 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaccion {
 
     private String idTransaccion;
-    private String fecha;
+    private LocalDateTime fecha;
     private double monto;
     private String descripcion;
     private String cuentaOrigen;
@@ -23,7 +24,8 @@ public class Transaccion {
      * @param categoria
      * @param tipoTransaccion
      */
-    public Transaccion(String idTransaccion, String fecha, double monto, String descripcion, String cuentaOrigen, String cuentaDestino, Categoria categoria, TipoTransaccion tipoTransaccion) {
+    public Transaccion(String idTransaccion, LocalDateTime fecha, double monto, String descripcion, String cuentaOrigen,
+                       String cuentaDestino, Categoria categoria, TipoTransaccion tipoTransaccion) {
         this.idTransaccion = idTransaccion;
         this.fecha = fecha;
         this.monto = monto;
@@ -55,7 +57,7 @@ public class Transaccion {
      * Metodo que obtiene la fecha de una transaccion
      * @return
      */
-    public String getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
@@ -63,7 +65,7 @@ public class Transaccion {
      * Metodo que establece la fecha de una transaccion
      * @param fecha
      */
-    public void setFecha(String fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 
