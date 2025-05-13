@@ -34,6 +34,9 @@ public class Usuario extends Persona{
     public Usuario(String nombres, String apellidos, String email, String telefono, String direccion, String idUsuario, String contrasena) {
         super(nombres, apellidos, email, telefono, direccion);
         this.idUsuario = idUsuario;
+
+        assert contrasena != null : "La contraseña no puede ser nulo";
+
         this.contrasena = contrasena;
         this.notificacion = notificacion;
         this.listaMovimientos = new LinkedList<>();

@@ -21,6 +21,9 @@ public class Administrador extends Persona{
      */
     public Administrador(String nombres, String apellidos, String email, String telefono, String direccion, String idAministrador, String contrasena) {
         super(nombres, apellidos, email, telefono, direccion);
+
+        assert contrasena != null : "La contraseña no puede ser nula";
+
         this.contrasena = contrasena;
         this.idAministrador = idAministrador;
     }
@@ -58,11 +61,6 @@ public class Administrador extends Persona{
                 cuentaOrigen, cuentaDestino, categoria, tipoTransaccion );
 
     }
-
-//    public void listarTransaccion(){
-//        billeteraVirtual.getTransacciones();
-//    }
-
 
 
 }

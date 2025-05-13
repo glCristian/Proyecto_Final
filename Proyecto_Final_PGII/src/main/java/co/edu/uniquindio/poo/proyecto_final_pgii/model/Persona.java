@@ -19,6 +19,9 @@ public class Persona {
     public Persona(String nombres, String apellidos, String email, String telefono, String direccion) {
         this.nombres = nombres;
         this.apellidos = apellidos;
+
+        assert email.contains("@") : "El email tiene que contener '@'";
+
         this.email = email;
         this.telefono = telefono;
         this.direccion = direccion;
