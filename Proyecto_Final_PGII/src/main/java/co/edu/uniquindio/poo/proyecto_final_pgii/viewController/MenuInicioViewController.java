@@ -3,16 +3,19 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPerfiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import co.edu.uniquindio.poo.proyecto_final_pgii.app.App;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 
 public class MenuInicioViewController {
 
@@ -28,19 +31,42 @@ public class MenuInicioViewController {
     @FXML
     private Button Button_Registrarse;
 
+
     @FXML
-    private TextField TextField_IngresarContrasenia;
+    private PasswordField TextField_IngresarContrasenia;
 
     @FXML
     private TextField TextField_IngresarEmail;
 
     @FXML
     void onClick_IniciarSesion(ActionEvent event) {
-        //PRUEBA----------------
-        try {
-            App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/pantallaPrincipalUsuario.fxml", event);
-        } catch (IOException e) {
-            e.printStackTrace();
+        String email = TextField_IngresarEmail.getText();
+        String contrasenia = TextField_IngresarContrasenia.getText();
+
+        if (email.isEmpty() || contrasenia.isEmpty()) {
+            System.out.println("Por favor, complete todos los campos.");
+            return;
+        }
+
+        boolean sesionIniciada = GestorPerfiles.getInstancia().autenticar(email, contrasenia);
+
+        if (sesionIniciada) {
+
+            if (GestorSesion.getInstancia().esAdministrador()) {
+                try {
+                    App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/menuAdministrador.fxml", event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (GestorSesion.getInstancia().esUsuario()) {
+                try {
+                    App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/pantallaPrincipalUsuario.fxml", event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("No se pudo iniciar sesión.");
+            }
         }
     }
 
@@ -62,6 +88,8 @@ public class MenuInicioViewController {
         assert Button_Registrarse != null : "fx:id=\"Button_Registrarse\" was not injected: check your FXML file 'menuInicio.fxml'.";
         assert TextField_IngresarContrasenia != null : "fx:id=\"TextField_IngresarContrasenia\" was not injected: check your FXML file 'menuInicio.fxml'.";
         assert TextField_IngresarEmail != null : "fx:id=\"TextField_IngresarEmail\" was not injected: check your FXML file 'menuInicio.fxml'.";
+
+
 
     }
 

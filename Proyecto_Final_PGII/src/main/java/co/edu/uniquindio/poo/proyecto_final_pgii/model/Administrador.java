@@ -5,8 +5,9 @@ import java.time.LocalDateTime;
 
 public class Administrador extends Persona{
 
+    private String contrasena;
     private String idAministrador;
-    private BilleteraVirtual billeteraVirtual;
+
 
 
     /**
@@ -18,11 +19,15 @@ public class Administrador extends Persona{
      * @param direccion
      * @param idAministrador
      */
-    public Administrador(String nombres, String apellidos, String email, String telefono, String direccion, String idAministrador) {
+    public Administrador(String nombres, String apellidos, String email, String telefono, String direccion, String idAministrador, String contrasena) {
         super(nombres, apellidos, email, telefono, direccion);
+        this.contrasena = contrasena;
         this.idAministrador = idAministrador;
     }
 
+    public String getContrasena() {
+        return contrasena;
+    }
 
     /**
      * Metodo que obtien el ID del administrador
@@ -41,48 +46,7 @@ public class Administrador extends Persona{
     }
 
 
-    //------------------------------ Gestion de usuarios-----------------------------//
 
-
-    public void crearUsuario(String nombres, String apellidos, String email, String telefono,
-                             String direccion, String idUsuario, String contrasena){
-        Usuario usuarioNuevo = new Usuario(nombres, apellidos, email, telefono, direccion,
-                idUsuario, contrasena);
-        billeteraVirtual.getUsuarios().add(usuarioNuevo);
-    }
-
-    public void eliminarUsuario(String idUsuario){
-        for (Usuario usuario : billeteraVirtual.getUsuarios()) {
-            if (usuario.getIdUsuario().equals(idUsuario)) {
-                billeteraVirtual.getUsuarios().remove(usuario);
-            }
-        }
-    }
-
-    public void listarUsuarios(){
-        billeteraVirtual.getUsuarios();
-    }
-
-
-
-
-
-    //--------------------------------Gestion de cuentas-----------------------------//
-    public void agregarCuenta(String idCuenta, String nombreBanco, String numeroCuenta,
-                               double saldoTotal, TipoCuenta tipoCuenta, Usuario usuario){
-        Cuenta cuentanueva = new Cuenta(idCuenta, nombreBanco, numeroCuenta, saldoTotal, tipoCuenta);
-        billeteraVirtual.getCuentas().add(cuentanueva);
-        usuario.agregarCuenta(cuentanueva);
-    }
-
-    public void eliminarCuenta(String idCuenta,Usuario usuario){
-        for (Cuenta cuenta : billeteraVirtual.getCuentas()) {
-            if (cuenta.getIdCuenta().equals(idCuenta)) {
-                billeteraVirtual.getCuentas().remove(cuenta);
-                usuario.eliminarCuenta(idCuenta);
-            }
-        }
-    }
 
 
     //-------------------------------------Gestion de transacciones------------------//
@@ -95,9 +59,9 @@ public class Administrador extends Persona{
 
     }
 
-    public void listarTransaccion(){
-        billeteraVirtual.getTransacciones();
-    }
+//    public void listarTransaccion(){
+//        billeteraVirtual.getTransacciones();
+//    }
 
 
 

@@ -35,12 +35,12 @@ public class Usuario extends Persona{
         super(nombres, apellidos, email, telefono, direccion);
         this.idUsuario = idUsuario;
         this.contrasena = contrasena;
-        this.saldoTotal = 0;
         this.notificacion = notificacion;
         this.listaMovimientos = new LinkedList<>();
         this.listaCuentas = new LinkedList<>();
         this.listaPresupuestos = new LinkedList<>();
         this.listaTransacciones = new LinkedList<>();
+        this.saldoTotal = getSaldoTotal();
     }
 
 
@@ -70,7 +70,11 @@ public class Usuario extends Persona{
     }
 
     public double getSaldoTotal() {
-        return saldoTotal;
+        double total = 0;
+        for (Cuenta cuenta : listaCuentas){
+            total+= cuenta.getSaldoTotal();
+        }
+        return total;
     }
 
     public void setSaldoTotal(double saldoTotal) {

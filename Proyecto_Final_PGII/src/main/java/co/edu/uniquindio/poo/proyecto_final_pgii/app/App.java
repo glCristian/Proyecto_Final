@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.app;
 
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPerfiles;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,36 @@ public class App extends Application {
         stage.show();
     }
 
+    private static void crearPerfilesPrueba() {
+        // Crear usuario de prueba
+        GestorPerfiles.getInstancia().crearUsuario(
+                "Carlos",
+                "López",
+                "carlos@email.com",
+                "3001234567",
+                "Calle 123",
+                "USR001",
+                "123456"
+        );
+
+
+        // Crear administrador de prueba
+        GestorPerfiles.getInstancia().crearAdministrador(
+                "Admin",
+                "Principal",
+                "admin@sistema.com",
+                "3009876543",
+                "Avenida Central",
+                "ADM001",
+                "admin123"
+        );
+
+        System.out.println("Perfiles de prueba creados exitosamente");
+        System.out.println("Usuario: carlos@email.com / Contraseña: 123456");
+        System.out.println("Admin: admin@sistema.com / Contraseña: admin123");
+    }
+
+
 
     /**
      * Metodo estático para cargar vistas FXML desde cualquier parte de la aplicación
@@ -38,6 +70,7 @@ public class App extends Application {
 
 
     public static void main(String[] args) {
+        crearPerfilesPrueba();
         launch();
     }
 }

@@ -3,6 +3,9 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +48,7 @@ public class CuentasUsuarioViewController {
     private Label Label_SaldoCuenta;
 
     @FXML
-    private ListView<?> ListView_Cuentas;
+    private ListView<Cuenta> ListView_Cuentas;
 
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
@@ -73,6 +76,9 @@ public class CuentasUsuarioViewController {
         assert Label_NumeroCuenta != null : "fx:id=\"Label_NumeroCuenta\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";
         assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";
         assert ListView_Cuentas != null : "fx:id=\"ListView_Cuentas\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";
+
+        ListView_Cuentas.setItems(FXCollections.observableArrayList(GestorSesion.getInstancia().getUsuarioActual().getListaCuentas()));
+
 
     }
 

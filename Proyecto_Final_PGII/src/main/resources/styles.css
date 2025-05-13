@@ -1,0 +1,24 @@
+.text-field {
+    -fx-text-fill: white;
+}
+
+.combo-box {
+    -fx-background-color: #33316B;
+    -fx-background-radius: 8;
+    -fx-mark-color: #9327f0; /* flecha morada */
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #33316B;
+    -fx-text-fill: white;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #9327f0; /* flecha morada */
+}

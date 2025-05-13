@@ -18,15 +18,14 @@ public class Cuenta {
      * @param idCuenta
      * @param nombreBanco
      * @param numeroCuenta
-     * @param saldoTotal
      * @param tipoCuenta
      */
-    public Cuenta(String idCuenta, String nombreBanco, String numeroCuenta, double saldoTotal, TipoCuenta tipoCuenta) {
+    public Cuenta(String idCuenta, String nombreBanco, String numeroCuenta, TipoCuenta tipoCuenta) {
         this.idCuenta = idCuenta;
         this.nombreBanco = nombreBanco;
         this.numeroCuenta = numeroCuenta;
-        this.saldoTotal = saldoTotal;
         this.tipoCuenta = tipoCuenta;
+        this.saldoTotal = 0;
         this.listaTransacciones = new LinkedList<>();
     }
 
@@ -148,12 +147,6 @@ public class Cuenta {
     }
 
 
-    public void actualizarInformacion(String nuevoBanco, String nuevoNumeroCuenta, TipoCuenta nuevoTipoCuenta) {
-        this.nombreBanco = nuevoBanco;
-        this.numeroCuenta = nuevoNumeroCuenta;
-        this.tipoCuenta = nuevoTipoCuenta;
-        System.out.println("La información de la cuenta " + idCuenta + " ha sido actualizada.");
-    }
 
 
     public double consultarSaldo() {

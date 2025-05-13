@@ -1,13 +1,18 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -40,10 +45,17 @@ public class AgregarCuentaViewController {
     private Label Label_SaldoCuenta;
 
     @FXML
-    private TextField TextField_AgregarBancoCuenta;
+    private TextField TextField_AgregarNumeroCuenta;
 
     @FXML
-    private TextField TextField_AgregarNumeroCuenta;
+    private TextField TextField_IDdeLaCuenta;
+
+
+    @FXML
+    private ComboBox<TipoCuenta> cmb_select_tipoCuenta;
+
+    @FXML
+    private TextField TextField_AgregarBancoCuenta;
 
     @FXML
     void onClick_AtrasMenuCuentas(ActionEvent event) {
@@ -65,7 +77,19 @@ public class AgregarCuentaViewController {
 
     @FXML
     void onClick_anadirCuenta(ActionEvent event) {
+        String idCuenta = TextField_IDdeLaCuenta.getText();
+        String bancoCuenta = TextField_AgregarBancoCuenta.getText();
+        String numeroCuenta = TextField_AgregarNumeroCuenta.getText();
+        TipoCuenta tipoCuenta = cmb_select_tipoCuenta.getSelectionModel().getSelectedItem();
+        double saldoCuenta = 0;
 
+        GestorCuentas.getInstancia().crearCuenta(idCuenta, bancoCuenta, numeroCuenta, tipoCuenta);
+
+    }
+
+    private void cargarComboBoxTipoCuenta() {
+        cmb_select_tipoCuenta.setItems(FXCollections.observableArrayList(TipoCuenta.values()));
+        cmb_select_tipoCuenta.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -78,6 +102,8 @@ public class AgregarCuentaViewController {
         assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'agregarCuenta.fxml'.";
         assert TextField_AgregarBancoCuenta != null : "fx:id=\"TextField_AgregarBancoCuenta\" was not injected: check your FXML file 'agregarCuenta.fxml'.";
         assert TextField_AgregarNumeroCuenta != null : "fx:id=\"TextField_AgregarNumeroCuenta\" was not injected: check your FXML file 'agregarCuenta.fxml'.";
+
+        cargarComboBoxTipoCuenta();
 
     }
 
