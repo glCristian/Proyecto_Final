@@ -3,6 +3,8 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -75,6 +77,7 @@ public class PantallaPrincipalUsuarioViewController {
 
     @FXML
     void onClick_CerrarSesionUsuario(ActionEvent event) {
+        GestorSesion.getInstancia().cerrarSesion();
         try {
             App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/menuInicio.fxml", event);
         } catch (IOException e) {
