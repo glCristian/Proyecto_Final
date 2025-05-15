@@ -16,10 +16,10 @@ public class Usuario extends Persona{
     private String contrasena;
     private double saldoTotal;
     private Notificacion notificacion;
-    private Collection<Movimiento> listaMovimientos;
+    private Collection<Transaccion> listaTransacciones;
     private Collection<Cuenta> listaCuentas;
     private Collection<Presupuesto> listaPresupuestos;
-    private Collection<Transaccion> listaTransacciones;
+
 
     /**
      * Constructor de la clase Usuario
@@ -39,10 +39,9 @@ public class Usuario extends Persona{
 
         this.contrasena = contrasena;
         this.notificacion = notificacion;
-        this.listaMovimientos = new LinkedList<>();
+        this.listaTransacciones = mostrarTodosLosMovimientos();
         this.listaCuentas = new LinkedList<>();
         this.listaPresupuestos = new LinkedList<>();
-        this.listaTransacciones = new LinkedList<>();
         this.saldoTotal = getSaldoTotal();
     }
 
@@ -80,10 +79,6 @@ public class Usuario extends Persona{
         return total;
     }
 
-    public void setSaldoTotal(double saldoTotal) {
-        this.saldoTotal = saldoTotal;
-    }
-
 
     /**
      * Metodo que obtiene una notificacion
@@ -101,21 +96,9 @@ public class Usuario extends Persona{
         this.notificacion = notificacion;
     }
 
-    /**
-     * Metodo que obtiene los movimientos
-     * @return
-     */
-    public Collection<Movimiento> getListaMovimientos() {
-        return listaMovimientos;
-    }
 
-    /**
-     * Metodo que establece los movimientos
-     * @param listaMovimientos
-     */
-    public void setListaMovimientos(Collection<Movimiento> listaMovimientos) {
-        this.listaMovimientos = listaMovimientos;
-    }
+
+
 
     /**
      * Metodo que obtiene las cuentas
@@ -149,38 +132,19 @@ public class Usuario extends Persona{
         this.listaPresupuestos = listaPresupuestos;
     }
 
-    /**
-     * Metodo que obtiene las transacciones
-     * @return
-     */
-    public Collection<Transaccion> getListaTransacciones() {
-        return listaTransacciones;
-    }
-
-    /**
-     * Metodo que establece las transacciones
-     * @param listaTransacciones
-     */
-    public void setListaTransacciones(Collection<Transaccion> listaTransacciones) {
-        this.listaTransacciones = listaTransacciones;
-    }
-
-
-
 
     public void agregarCuenta(Cuenta cuenta) {
         listaCuentas.add(cuenta);
         System.out.println("Cuenta agregada: " + cuenta.getIdCuenta());
     }
 
-    public boolean eliminarCuenta(String idCuenta) {
+    public void eliminarCuenta(String idCuenta) {
         for (Cuenta cuenta : listaCuentas) {
             if (cuenta.getIdCuenta().equals(idCuenta)) {
                 listaCuentas.remove(cuenta);
-                return true;
+                System.out.println("Cuenta eliminada");
             }
         }
-        return false;
     }
 
 
@@ -252,7 +216,7 @@ public class Usuario extends Persona{
 
     }
 
-    public void crearPresupuesto(Presupuesto presupuesto){
+    public void agregarPresupuesto(Presupuesto presupuesto){
         listaPresupuestos.add(presupuesto);
         System.out.println("Presupuesto creado: " + presupuesto.getNombre());
     }
@@ -291,5 +255,37 @@ public class Usuario extends Persona{
         return (LinkedList<Transaccion>) listaTransacciones.stream().filter(t -> t.getTipoTransaccion()
                 .equals(tipo)).collect(Collectors.toList());
    }
+
+
+    public Cuenta buscarCuenta(String idCuenta) {
+        for (Cuenta cuenta : listaCuentas) {
+            if (cuenta.getIdCuenta().equals(idCuenta)) {
+                return cuenta;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Metodo que obtiene todas las transacciones de todas las cuentas
+     * del usuario que actualmente ha iniciado sesion
+     * @return (Una Collection con todas las transacciones de todas las cuentas del usuario actual)
+     */
+   public Collection<Transaccion> mostrarTodosLosMovimientos(){
+        Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
+        Collection<Transaccion> todasTransacciones = new LinkedList<>();
+
+        if (usuario != null){
+            for(Cuenta cuenta : usuario.getListaCuentas()){
+                Collection<Transaccion> transaccionesCuenta = cuenta.getListaTransacciones();
+                if (transaccionesCuenta != null){
+                    todasTransacciones.addAll(transaccionesCuenta);
+                }
+            }
+        }
+        return todasTransacciones;
+   }
+
+
 
 }

@@ -23,7 +23,7 @@ public class GestorCuentas {
         Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
         if (usuario != null) {
             Cuenta nuevaCuenta = new Cuenta(idCuenta, nombreBanco, numeroCuenta, tipoCuenta);
-            usuario.getListaCuentas().add(nuevaCuenta);
+            usuario.agregarCuenta(nuevaCuenta);
             BilleteraVirtual.getInstancia().getCuentas().add(nuevaCuenta);
         }
     }
@@ -34,7 +34,7 @@ public class GestorCuentas {
     public void eliminarCuenta(String idCuenta) {
         Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
         if (usuario != null) {
-            usuario.getListaCuentas().removeIf(cuenta -> cuenta.getIdCuenta().equals(idCuenta));
+            usuario.eliminarCuenta(idCuenta);
             BilleteraVirtual.getInstancia().getCuentas().removeIf(cuenta -> cuenta.getIdCuenta().equals(idCuenta));
         }
     }
@@ -91,7 +91,7 @@ public class GestorCuentas {
     }
 
     /**
-     * Metodo para obtener una cuenta por su ID
+     * Metodo para buscar una cuenta por su ID
      */
     public Cuenta obtenerCuenta(String idCuenta) {
         Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
@@ -104,4 +104,6 @@ public class GestorCuentas {
         }
         return null;
     }
+
+    
 }

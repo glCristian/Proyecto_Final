@@ -2,9 +2,16 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Movimiento;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Transaccion;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +55,7 @@ public class PantallaPrincipalUsuarioViewController {
     private Label Label_SaldoTotal;
 
     @FXML
-    private ListView<?> TableView_Movimientos;
+    private ListView<String> TableView_Movimientos;
 
     @FXML
     void onClick_MenuCuentas(ActionEvent event) {
@@ -97,6 +104,8 @@ public class PantallaPrincipalUsuarioViewController {
         assert Label_SaldoTotal != null : "fx:id=\"Label_SaldoTotal\" was not injected: check your FXML file 'pantallaPrincipalUsuario.fxml'.";
         assert TableView_Movimientos != null : "fx:id=\"TableView_Movimientos\" was not injected: check your FXML file 'pantallaPrincipalUsuario.fxml'.";
 
+
+        Label_SaldoTotal.setText(String.valueOf(GestorSesion.getInstancia().getUsuarioActual().getSaldoTotal()));
     }
 
 
@@ -107,6 +116,21 @@ public class PantallaPrincipalUsuarioViewController {
             AnchorPane_PantallaPrincipalUsuario.getChildren().setAll(vista);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void cargarMovimientos(){
+        Usuario usuarioActual = GestorSesion.getInstancia().getUsuarioActual();
+        if (usuarioActual != null){
+            Collection<Transaccion> transacciones = usuarioActual.mostrarTodosLosMovimientos();
+            ObservableList<String> items = FXCollections.observableArrayList();
+
+            for (Transaccion t : transacciones){
+                String descripcion = String.format("%s - $%.2f - %s",
+                        t.getTipoTransaccion(), t.getMonto(), t.getFecha());
+                items.add(descripcion);
+            }
+            TableView_Movimientos.setItems(items);
         }
     }
 

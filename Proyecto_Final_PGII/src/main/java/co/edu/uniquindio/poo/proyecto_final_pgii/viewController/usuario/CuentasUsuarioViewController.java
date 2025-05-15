@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.w3c.dom.events.MouseEvent;
 
 public class CuentasUsuarioViewController {
 
@@ -89,6 +91,27 @@ public class CuentasUsuarioViewController {
             AnchorPane_MenuCuentas.getChildren().setAll(vista);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void cargarCuentasUsuario(){
+        Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
+        if(usuario != null){
+            ObservableList<Cuenta> cuentas = FXCollections.observableArrayList(usuario.getListaCuentas());
+            ListView_Cuentas.setItems(cuentas);
+        }
+    }
+
+    private void mostrarDetalleCuentaSeleccionada(MouseEvent event){
+        Cuenta cuentaSeleccionada = ListView_Cuentas.getSelectionModel().getSelectedItem();
+        if (cuentaSeleccionada != null){
+            Label_BancoCuenta.setText(cuentaSeleccionada.getNombreBanco());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaSeleccionada.getSaldoTotal()));
+            Label_NumeroCuenta.setText(cuentaSeleccionada.getNumeroCuenta());
+        } else {
+            Label_BancoCuenta.setText("");
+            Label_SaldoCuenta.setText("");
+            Label_NumeroCuenta.setText("");
         }
     }
 }

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 public class Transaccion {
 
@@ -166,9 +167,6 @@ public class Transaccion {
     }
 
 
-    public void crearTransaccion(){
-
-    }
 
 
     public void mostrarTransaccion() {
@@ -191,5 +189,60 @@ public class Transaccion {
 
     public boolean esValida() {
         return monto > 0 && cuentaOrigen != null && cuentaDestino != null && tipoTransaccion != null;
+    }
+
+
+    /**
+     * Metodo que genera un ID de manera aleatoria
+     * @return idUnico
+     */
+    public static String generarIdUnico() {
+        return UUID.randomUUID().toString().substring(0, 8);
+    }
+
+
+
+    // ===============================
+    // MÉTODOS FACTORY PERSONALIZADOS
+    // ===============================
+
+    public static Transaccion crearRetiro(String cuentaOrigen, double monto, String descripcion, Categoria categoria) {
+        return new Transaccion(
+                generarIdUnico(),
+                LocalDateTime.now(),
+                monto,
+                descripcion,
+                cuentaOrigen,
+                null,
+                categoria,
+                TipoTransaccion.RETIRO
+        );
+    }
+
+    public static Transaccion crearDeposito(String cuentaDestino, double monto, String descripcion, Categoria categoria) {
+        return new Transaccion(
+                generarIdUnico(),
+                LocalDateTime.now(),
+                monto,
+                descripcion,
+                null,
+                cuentaDestino,
+                categoria,
+                TipoTransaccion.DEPOSITO
+        );
+    }
+
+    public static Transaccion crearTransferencia(String cuentaOrigen, String cuentaDestino,
+                                                 double monto, String descripcion, Categoria categoria) {
+        return new Transaccion(
+                generarIdUnico(),
+                LocalDateTime.now(),
+                monto,
+                descripcion,
+                cuentaOrigen,
+                cuentaDestino,
+                categoria,
+                TipoTransaccion.TRANSFERENCIA
+        );
     }
 }

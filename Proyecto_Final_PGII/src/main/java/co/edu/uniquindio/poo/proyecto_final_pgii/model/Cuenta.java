@@ -153,6 +153,14 @@ public class Cuenta {
         return saldoTotal;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Cuenta{" +
+                "idCuenta='" + idCuenta + '\'' +
+                ", nombreBanco='" + nombreBanco + '\'' +
+                ", numeroCuenta='" + numeroCuenta + '\'' +
+                ", saldoTotal=" + saldoTotal +
+                ", tipoCuenta=" + tipoCuenta +
+                '}';
+    }
 }

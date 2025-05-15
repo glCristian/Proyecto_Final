@@ -2,6 +2,8 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,7 +45,6 @@ public class PerfilViewController {
         assert TextField_AgregarEmailUsuario != null : "fx:id=\"TextField_AgregarEmailUsuario\" was not injected: check your FXML file 'perfilUsuario.fxml'.";
         assert TextField_AgregarNombreUsuario != null : "fx:id=\"TextField_AgregarNombreUsuario\" was not injected: check your FXML file 'perfilUsuario.fxml'.";
         assert TextField_AgregarNumeroTelefonoUsuario != null : "fx:id=\"TextField_AgregarNumeroTelefonoUsuario\" was not injected: check your FXML file 'perfilUsuario.fxml'.";
-
     }
 
 }
