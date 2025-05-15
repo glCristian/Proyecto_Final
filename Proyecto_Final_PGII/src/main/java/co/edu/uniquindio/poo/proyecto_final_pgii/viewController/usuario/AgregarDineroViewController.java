@@ -1,7 +1,11 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
+import java.util.UUID;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,7 +58,59 @@ public class AgregarDineroViewController {
 
     @FXML
     void onClick_AgregarDinero(ActionEvent event) {
+        Cuenta cuentaSeleccionada = DatosCompartidos.getInstancia().getCuentaSeleccionada();
 
+        if (cuentaSeleccionada == null){
+            System.out.println("No hay cuenta seleccionada");
+        }
+
+        String montoStr = TextField_MontoAgregarDinero.getText();
+        String descripcion = TextField_DescripcionAgragar.getText();
+        String cuentaOrigen = TextField_NumeroCuentaOrigenAgregar.getText();
+        String cuentsDestino = cuentaSeleccionada.getNumeroCuenta();
+        String categoria = TextField_CategoriaTransaccion.getText();
+        Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
+
+
+
+        if (montoStr.isBlank()|| descripcion.isBlank() || categoria.isBlank() || cuentaOrigen.isBlank()){
+            System.out.println("Todos los campos son obligatorios");
+            return;
+        }
+
+        double monto;
+        try {
+            monto = Double.parseDouble(montoStr);
+            if (monto <= 0){
+                System.out.println("El monto debe ser mayor a cero");
+                return;
+            }
+        } catch (NumberFormatException e){
+            System.out.println("Monto invalido");
+            return;
+        }
+
+        if (monto > cuentaSeleccionada.getSaldoTotal()){
+            System.out.println("Saldo insuficiente");
+            return;
+        }
+
+
+        cuentaSeleccionada.setSaldoTotal(cuentaSeleccionada.getSaldoTotal() + monto);
+        Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaSeleccionada.getSaldoTotal()));
+
+        Transaccion transaccion = new Transaccion(
+                UUID.randomUUID().toString(),
+                LocalDateTime.now(),
+                monto,
+                descripcion,
+                cuentaOrigen,
+                cuentsDestino,
+                categoria1,
+                TipoTransaccion.DEPOSITO
+        );
+        cuentaSeleccionada.getListaTransacciones().add(transaccion);
+        System.out.println("Dinero agregado con exito");
     }
 
     @FXML
@@ -84,6 +140,16 @@ public class AgregarDineroViewController {
         assert TextField_NumeroCuentaOrigenAgregar != null : "fx:id=\"TextField_NumeroCuentaOrigenAgregar\" was not injected: check your FXML file 'agregarDineroUsuario.fxml'.";
         assert TextField_CategoriaTransaccion != null : "fx:id=\"TextField_TipoTransaccion\" was not injected: check your FXML file 'agregarDineroUsuario.fxml'.";
 
+        cargarDatosCuenta();
+    }
+
+    public void cargarDatosCuenta(){
+        Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
+        if (cuenta != null){
+            Label_BancoCuenta.setText(cuenta.getNombreBanco());
+            Label_NumeroCuenta.setText(cuenta.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuenta.getSaldoTotal()));
+        }
     }
 
 }
