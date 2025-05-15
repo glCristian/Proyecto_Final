@@ -2,6 +2,9 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Cuenta;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +50,24 @@ public class ActualizarCuentaViewController {
 
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
+        Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
 
+        if (cuenta != null){
+            String nuevoBanco = TextField_AgregarBancoCuenta.getText();
+            String nuevoNumeroCuenta = TextField_AgregarNumeroCuenta.getText();
+
+            if (nuevoBanco != null && !nuevoBanco.isBlank()){
+                cuenta.setNombreBanco(nuevoBanco);
+            }
+
+            if (nuevoNumeroCuenta != null && !nuevoNumeroCuenta.isBlank()){
+                cuenta.setNumeroCuenta(nuevoNumeroCuenta);
+            }
+
+            Label_BancoCuenta.setText(cuenta.getNombreBanco());
+            Label_NumeroCuenta.setText(cuenta.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuenta.getSaldoTotal()));
+        }
     }
 
     @FXML

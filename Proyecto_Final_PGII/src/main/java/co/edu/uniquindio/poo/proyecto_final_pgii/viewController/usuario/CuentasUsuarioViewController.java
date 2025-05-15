@@ -52,9 +52,17 @@ public class CuentasUsuarioViewController {
     @FXML
     private ListView<Cuenta> ListView_Cuentas;
 
+    private Cuenta cuentaSeleccionada;
+
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/actualizarCuentaUsuario.fxml");
+        cuentaSeleccionada = ListView_Cuentas.getSelectionModel().getSelectedItem();
+        if (cuentaSeleccionada != null){
+            DatosCompartidos.getInstancia().setCuentaSeleccionada(cuentaSeleccionada);
+
+            cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/actualizarCuentaUsuario.fxml");
+        }
+
     }
 
     @FXML

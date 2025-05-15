@@ -11,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -83,8 +80,17 @@ public class AgregarCuentaViewController {
         TipoCuenta tipoCuenta = cmb_select_tipoCuenta.getSelectionModel().getSelectedItem();
         double saldoCuenta = 0;
 
+
         GestorCuentas.getInstancia().crearCuenta(idCuenta, bancoCuenta, numeroCuenta, tipoCuenta);
 
+        Cuenta cuentaAgregada = GestorCuentas.getInstancia().obtenerCuenta(idCuenta);
+
+        if(cuentaAgregada != null){
+            Label_BancoCuenta.setText(cuentaAgregada.getNombreBanco());
+            Label_NumeroCuenta.setText(cuentaAgregada.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaAgregada.getSaldoTotal()));
+
+        }
     }
 
     private void cargarComboBoxTipoCuenta() {

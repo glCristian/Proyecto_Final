@@ -2,6 +2,10 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Cuenta;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,7 +69,35 @@ public class EliminarCuentaViewController {
 
     @FXML
     void onClick_EliminarCuenta(ActionEvent event) {
+        String numeroCuenta = TextField_AgregarNumeroCuenta.getText();
 
+        Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
+
+        if (usuario != null && numeroCuenta != null && !numeroCuenta.isBlank()){
+            Cuenta cuentaEncontrada = null;
+
+            for (Cuenta cuenta : usuario.getListaCuentas()){
+                if (cuenta.getNumeroCuenta().equals(numeroCuenta)){
+                    cuentaEncontrada = cuenta;
+                    break;
+                }
+            }
+            if (cuentaEncontrada != null){
+                Label_BancoCuenta.setText(cuentaEncontrada.getNombreBanco());
+                Label_NumeroCuenta.setText(cuentaEncontrada.getNumeroCuenta());
+                Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaEncontrada.getSaldoTotal()));
+
+                usuario.getListaCuentas().remove(cuentaEncontrada);
+
+                Label_BancoCuenta.setText("");
+                Label_NumeroCuenta.setText("");
+                Label_SaldoCuenta.setText("");
+
+                System.out.println("Cuenta eliminada correctamente");
+            } else {
+                System.out.println("No se encontro la cuena con ese numero");
+            }
+        }
     }
 
     @FXML
