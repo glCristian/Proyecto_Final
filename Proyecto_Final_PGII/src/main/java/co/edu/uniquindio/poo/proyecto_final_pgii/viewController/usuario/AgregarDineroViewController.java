@@ -60,16 +60,12 @@ public class AgregarDineroViewController {
     @FXML
     void onClick_AtrasMenuTransaccion(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/proyecto_final_pgii/transaccionUsuario.fxml"));
-            Parent root = loader.load();
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
+            AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuAgregarDinero.getParent();
 
-            Stage currentStage = (Stage) Button_AtrasMenuTransaccion.getScene().getWindow();
-            currentStage.close();
-
-            newStage.show();
-
+            PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
+                    contenedorPrincipal,
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/transaccionUsuario.fxml"
+            );
         } catch (Exception e) {
             e.printStackTrace();
         }

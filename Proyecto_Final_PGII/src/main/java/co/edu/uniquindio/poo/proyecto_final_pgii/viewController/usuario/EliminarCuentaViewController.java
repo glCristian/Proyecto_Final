@@ -52,16 +52,12 @@ public class EliminarCuentaViewController {
     @FXML
     void onClick_AtrasMenuCuentas(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/proyecto_final_pgii/cuentasUsuario.fxml"));
-            Parent root = loader.load();
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
+            AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuEliminarCuenta.getParent();
 
-            Stage currentStage = (Stage) Button_AtrasMenuCuentas.getScene().getWindow();
-            currentStage.close();
-
-            newStage.show();
-
+            PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
+                    contenedorPrincipal,
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/cuentasUsuario.fxml"
+            );
         } catch (Exception e) {
             e.printStackTrace();
         }

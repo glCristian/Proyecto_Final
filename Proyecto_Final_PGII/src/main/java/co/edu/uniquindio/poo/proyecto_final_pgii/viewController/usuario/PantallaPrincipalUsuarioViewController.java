@@ -59,27 +59,27 @@ public class PantallaPrincipalUsuarioViewController {
 
     @FXML
     void onClick_MenuCuentas(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/cuentasUsuario.fxml");
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario,"/co/edu/uniquindio/poo/proyecto_final_pgii/cuentasUsuario.fxml");
     }
 
     @FXML
     void onClick_MenuMovimientos(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/movimientosUsuario.fxml");
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario,"/co/edu/uniquindio/poo/proyecto_final_pgii/movimientosUsuario.fxml");
     }
 
     @FXML
     void onClick_MenuPresupuesto(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/presupuestoUsuario.fxml");
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario,"/co/edu/uniquindio/poo/proyecto_final_pgii/presupuestoUsuario.fxml");
     }
 
     @FXML
     void onClick_MenuTransaccion(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/transaccionUsuario.fxml");
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario,"/co/edu/uniquindio/poo/proyecto_final_pgii/transaccionUsuario.fxml");
     }
 
     @FXML
     void onClick_PerfilUsuario(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/perfilUsuario.fxml");
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario,"/co/edu/uniquindio/poo/proyecto_final_pgii/perfilUsuario.fxml");
     }
 
     @FXML
@@ -109,15 +109,16 @@ public class PantallaPrincipalUsuarioViewController {
     }
 
 
-    protected void cargarVista(String nombreFXML) {
+    public static void cargarVistaEnPantallaPrincipal(AnchorPane contenedor, String nombreFXML) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));
+            FXMLLoader loader = new FXMLLoader(PantallaPrincipalUsuarioViewController.class.getResource(nombreFXML));
             Parent vista = loader.load();
-            AnchorPane_PantallaPrincipalUsuario.getChildren().setAll(vista);
+            contenedor.getChildren().setAll(vista);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     private void cargarMovimientos(){
         Usuario usuarioActual = GestorSesion.getInstancia().getUsuarioActual();
