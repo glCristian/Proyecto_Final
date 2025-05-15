@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -111,6 +112,7 @@ public class EnviarDineroViewController {
             System.out.println("Cuenta destino no encontrada");
             return;
         }
+
 
         cuentaOrigen.setSaldoTotal(cuentaOrigen.getSaldoTotal() - monto);
         Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaOrigen.getSaldoTotal()));

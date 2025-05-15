@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,7 +97,8 @@ public class AgregarDineroViewController {
         }
 
 
-        cuentaSeleccionada.setSaldoTotal(cuentaSeleccionada.getSaldoTotal() + monto);
+        GestorCuentas gestorCuentas = GestorCuentas.getInstancia();
+        gestorCuentas.depositarDinero(cuentaSeleccionada.getIdCuenta(), monto);
         Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaSeleccionada.getSaldoTotal()));
 
         Transaccion transaccion = new Transaccion(

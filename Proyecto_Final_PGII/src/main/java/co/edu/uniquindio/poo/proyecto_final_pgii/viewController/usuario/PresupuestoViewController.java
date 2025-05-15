@@ -3,6 +3,9 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Presupuesto;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +35,9 @@ public class PresupuestoViewController {
     private Button Button_ModificarPresupuesto;
 
     @FXML
-    private ListView<?> TableView_Presupuestos;
+    private ListView<Presupuesto> TableView_Presupuestos;
+
+    private Usuario usuarioActual;
 
     @FXML
     void onClick_CrearPresupuesto(ActionEvent event) {
@@ -69,6 +74,7 @@ public class PresupuestoViewController {
             e.printStackTrace();
         }
     }
+
 
 }
 
