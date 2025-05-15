@@ -89,6 +89,7 @@ public class CuentasUsuarioViewController {
 
         ListView_Cuentas.setItems(FXCollections.observableArrayList(GestorSesion.getInstancia().getUsuarioActual().getListaCuentas()));
 
+        actualizarListViewCuentas();
 
     }
 
@@ -120,6 +121,14 @@ public class CuentasUsuarioViewController {
             Label_BancoCuenta.setText("");
             Label_SaldoCuenta.setText("");
             Label_NumeroCuenta.setText("");
+        }
+    }
+
+    public void actualizarListViewCuentas (){
+        Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
+        if (usuario != null){
+            ObservableList<Cuenta> cuentasActualizadas = FXCollections.observableArrayList(usuario.getListaCuentas());
+            ListView_Cuentas.setItems(cuentasActualizadas);
         }
     }
 }
