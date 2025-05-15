@@ -3,6 +3,11 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Categoria;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Presupuesto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +53,36 @@ public class ActualizarPresupuestoViewController {
 
     @FXML
     void onClick_ActualizarPresupuesto(ActionEvent event) {
+        String id = TextField_AgregarIDPresupuesto.getText();
+        String nombre = TextField_AgregarNombrePresupuesto.getText();
+        String montoStr = TextField_AgregarMontoTotalPresupuesto.getText();
+        String nombreCategoria = TextField_AgregarCategoriaPresupuesto.getText();
 
+        if (id.isBlank() || nombre.isBlank() || montoStr.isBlank() || nombreCategoria.isBlank()) {
+            System.out.println("Todos los campos son obligatorios");
+            return;
+        }
+
+        double montoTotal;
+        try {
+            montoTotal = Double.parseDouble(montoStr);
+            if (montoTotal <= 0) {
+                System.out.println("El monto debe ser mayor a cero");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Monto inválido");
+            return;
+        }
+
+        Categoria categoria = new Categoria(java.util.UUID.randomUUID().toString(), nombreCategoria, "");
+        Presupuesto nuevoPresupuesto = new Presupuesto(id, nombre, montoTotal, 0, categoria);
+
+        GestorSesion.getInstancia().getUsuarioActual().getListaPresupuestos().add(nuevoPresupuesto);
+
+        Label_SaldoPresupuesto.setText(String.format("$ %.2f", montoTotal));
+
+        System.out.println("Presupuesto actualizado con exito");
     }
 
     @FXML

@@ -4,6 +4,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPerfiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,9 +36,21 @@ public class PerfilViewController {
     @FXML
     private TextField TextField_AgregarNumeroTelefonoUsuario;
 
+
     @FXML
     void onClick_ActualizarPerfil(ActionEvent event) {
+        GestorPerfiles gestorPerfiles = GestorPerfiles.getInstancia();
+        Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
 
+        if (usuario != null) {
+            String nuevoNombre = TextField_AgregarNombreUsuario.getText();
+            String nuevoEmail = TextField_AgregarEmailUsuario.getText();
+            String nuevoTelefono = TextField_AgregarNumeroTelefonoUsuario.getText();
+
+            gestorPerfiles.actualizarUsuario(nuevoNombre,  nuevoEmail, nuevoTelefono);
+
+            System.out.println("Perfil actualizado correctamente");
+        }
     }
 
     @FXML

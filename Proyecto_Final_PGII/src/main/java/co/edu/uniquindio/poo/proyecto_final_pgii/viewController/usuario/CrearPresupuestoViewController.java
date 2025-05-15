@@ -1,5 +1,9 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Categoria;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Presupuesto;
 import co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.PantallaPrincipalUsuarioViewController;
 
 import java.io.IOException;
@@ -64,6 +68,37 @@ public class CrearPresupuestoViewController {
 
     @FXML
     void onClick_CrearPresupuesto(ActionEvent event) {
+        String id = TextField_AgregarIDPresupuesto.getText();
+        String nombre = TextField_AgregarNombrePresupuesto.getText();
+        String montoTotalStr = TextField_AgregarMontoTotalPresupuesto.getText();
+        String montoGastadoStr = TextField_AgregarMontoGastadoPresupuesto.getText();
+        String nombreCategoria = TextField_AgregarCategoriaPresupuesto.getText();
+
+        if (id.isBlank() || nombre.isBlank() || montoTotalStr.isBlank() || nombreCategoria.isBlank() || montoGastadoStr.isBlank()) {
+            System.out.println("Todos los campos son obligatorios.");
+            return;
+        }
+
+        try {
+            double montoTotal = Double.parseDouble(montoTotalStr);
+            double montoGastado = Double.parseDouble(montoGastadoStr);
+
+            if (montoTotal <= 0 || montoGastado < 0 || montoGastado > montoTotal) {
+                System.out.println("Verifique los montos ingresados.");
+                return;
+            }
+
+            Categoria categoria = new Categoria(java.util.UUID.randomUUID().toString(), nombreCategoria, "");
+            Presupuesto presupuesto = new Presupuesto(id, nombre, montoTotal, 0, categoria );
+            presupuesto.setMontoGastado(montoGastado);
+
+            GestorSesion.getInstancia().getUsuarioActual().getListaPresupuestos().add(presupuesto);
+            Label_SaldoTotal.setText(String.format("$ %.2f", montoTotal));
+
+            System.out.println("Presupuesto creado con éxito.");
+        } catch (NumberFormatException e) {
+            System.out.println("Los montos deben ser números válidos.");
+        }
 
     }
 
@@ -79,6 +114,22 @@ public class CrearPresupuestoViewController {
         assert TextField_AgregarMontoTotalPresupuesto != null : "fx:id=\"TextField_AgregarMontoTotalPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
         assert TextField_AgregarNombrePresupuesto != null : "fx:id=\"TextField_AgregarNombrePresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
 
+        cargarSaldoTotal();
+    }
+
+    private void cargarSaldoTotal(){
+        TextField_AgregarMontoTotalPresupuesto.textProperty().addListener((obs, oldValue, newValue) -> {
+            try {
+                double valor = Double.parseDouble(newValue);
+                if (valor >= 0) {
+                    Label_SaldoTotal.setText(String.format("$ %.2f", valor));
+                } else {
+                    Label_SaldoTotal.setText("$ 0.00");
+                }
+            } catch (NumberFormatException e) {
+                Label_SaldoTotal.setText("$ 0.00");
+            }
+        });
     }
 
 }

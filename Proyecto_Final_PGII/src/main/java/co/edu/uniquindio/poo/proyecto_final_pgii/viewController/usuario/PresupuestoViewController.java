@@ -63,6 +63,7 @@ public class PresupuestoViewController {
         assert Button_ModificarPresupuesto != null : "fx:id=\"Button_ModificarPresupuesto\" was not injected: check your FXML file 'presupuestoUsuario.fxml'.";
         assert TableView_Presupuestos != null : "fx:id=\"TableView_Presupuestos\" was not injected: check your FXML file 'presupuestoUsuario.fxml'.";
 
+        cargarPresupuestos();
     }
 
     private void cargarVista(String nombreFXML) {
@@ -76,5 +77,11 @@ public class PresupuestoViewController {
     }
 
 
+    private void cargarPresupuestos(){
+        if (usuarioActual != null){
+            TableView_Presupuestos.getItems().clear();
+            TableView_Presupuestos.getItems().addAll(usuarioActual.getListaPresupuestos());
+        }
+    }
 }
 
