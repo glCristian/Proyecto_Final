@@ -47,7 +47,7 @@ public class PerfilViewController {
             String nuevoEmail = TextField_AgregarEmailUsuario.getText();
             String nuevoTelefono = TextField_AgregarNumeroTelefonoUsuario.getText();
 
-            gestorPerfiles.actualizarUsuario(nuevoNombre,  nuevoEmail, nuevoTelefono);
+            gestorPerfiles.actualizarUsuario(null, nuevoNombre,null,  nuevoEmail, nuevoTelefono, null, null);
 
             System.out.println("Perfil actualizado correctamente");
         }
