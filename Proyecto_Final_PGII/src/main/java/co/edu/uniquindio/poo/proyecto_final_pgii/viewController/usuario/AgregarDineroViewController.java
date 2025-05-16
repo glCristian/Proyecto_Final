@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,25 +60,14 @@ public class AgregarDineroViewController {
 
     @FXML
     void onClick_AgregarDinero(ActionEvent event) {
-        Cuenta cuentaSeleccionada = DatosCompartidos.getInstancia().getCuentaSeleccionada();
 
-        if (cuentaSeleccionada == null){
-            System.out.println("No hay cuenta seleccionada");
-        }
 
         String montoStr = TextField_MontoAgregarDinero.getText();
         String descripcion = TextField_DescripcionAgragar.getText();
-        String cuentaOrigen = TextField_NumeroCuentaOrigenAgregar.getText();
-        String cuentsDestino = cuentaSeleccionada.getNumeroCuenta();
+        String cuentaDestino = TextField_NumeroCuentaOrigenAgregar.getText();
         String categoria = TextField_CategoriaTransaccion.getText();
         Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
 
-
-
-        if (montoStr.isBlank()|| descripcion.isBlank() || categoria.isBlank() || cuentaOrigen.isBlank()){
-            System.out.println("Todos los campos son obligatorios");
-            return;
-        }
 
         double monto;
         try {
@@ -91,28 +81,10 @@ public class AgregarDineroViewController {
             return;
         }
 
-        if (monto > cuentaSeleccionada.getSaldoTotal()){
-            System.out.println("Saldo insuficiente");
-            return;
-        }
+        GestorTransacciones.getInstancia().realizarDeposito(cuentaDestino, monto, descripcion, categoria1);
 
+        System.out.println("Deposito realizado con exito");
 
-        GestorCuentas gestorCuentas = GestorCuentas.getInstancia();
-        gestorCuentas.depositarDinero(cuentaSeleccionada.getIdCuenta(), monto);
-        Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaSeleccionada.getSaldoTotal()));
-
-        Transaccion transaccion = new Transaccion(
-                UUID.randomUUID().toString(),
-                LocalDateTime.now(),
-                monto,
-                descripcion,
-                cuentaOrigen,
-                cuentsDestino,
-                categoria1,
-                TipoTransaccion.DEPOSITO
-        );
-        cuentaSeleccionada.getListaTransacciones().add(transaccion);
-        System.out.println("Dinero agregado con exito");
     }
 
     @FXML

@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,23 +73,20 @@ public class EnviarDineroViewController {
 
     @FXML
     void onClick_EnviarDinero(ActionEvent event) {
-        Cuenta cuentaOrigen = DatosCompartidos.getInstancia().getCuentaSeleccionada();
-        if (cuentaOrigen == null){
+
+        Cuenta cuentaSeleccionada = DatosCompartidos.getInstancia().getCuentaSeleccionada();
+
+        if (cuentaSeleccionada == null){
             System.out.println("No hay cuenta seleccionada");
+            return;
         }
 
+        String cuentaOrigen = cuentaSeleccionada.getNumeroCuenta();
         String numeroDestino = TextField_NumeroCuentaDestinoTransferencia.getText();
         String montoStr = TextField_MontoTransferencia.getText();
         String descripcion = TextField_DescripcionTransferencia.getText();
         String categoria = TextField_CategoriaTransaccion.getText();
         Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
-
-
-
-        if (numeroDestino.isBlank()|| montoStr.isBlank() || descripcion.isBlank() || categoria.isBlank()){
-            System.out.println("Todos los campos son obligatorios");
-            return;
-        }
 
         double monto;
         try {
@@ -102,35 +100,10 @@ public class EnviarDineroViewController {
             return;
         }
 
-        if (monto > cuentaOrigen.getSaldoTotal()){
-            System.out.println("Saldo insuficiente");
-            return;
-        }
+        GestorTransacciones.getInstancia().realizarTransferencia(cuentaOrigen, numeroDestino, monto, descripcion, categoria1);
 
-        Cuenta cuentaDestino = GestorSesion.getInstancia().getUsuarioActual().buscarCuenta(numeroDestino);
-        if (cuentaDestino == null){
-            System.out.println("Cuenta destino no encontrada");
-            return;
-        }
-
-
-        cuentaOrigen.setSaldoTotal(cuentaOrigen.getSaldoTotal() - monto);
-        Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaOrigen.getSaldoTotal()));
-
-        cuentaDestino.setSaldoTotal(cuentaDestino.getSaldoTotal() + monto);
-
-        Transaccion transaccion = new Transaccion(
-                UUID.randomUUID().toString(),
-                LocalDateTime.now(),
-                monto,
-                descripcion,
-                cuentaOrigen.getNumeroCuenta(),
-                cuentaDestino.getNumeroCuenta(),
-                categoria1,
-                TipoTransaccion.TRANSFERENCIA
-        );
-        cuentaOrigen.getListaTransacciones().add(transaccion);
         System.out.println("Transferencia realizada con exito");
+
     }
 
     @FXML

@@ -87,9 +87,9 @@ public class CuentasUsuarioViewController {
         assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";
         assert ListView_Cuentas != null : "fx:id=\"ListView_Cuentas\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";
 
-        ListView_Cuentas.setItems(FXCollections.observableArrayList(GestorSesion.getInstancia().getUsuarioActual().getListaCuentas()));
+        cargarCuentasUsuario();
 
-        actualizarListViewCuentas();
+        mostrarDetallesCuentaSelected();
 
     }
 
@@ -111,17 +111,17 @@ public class CuentasUsuarioViewController {
         }
     }
 
-    private void mostrarDetalleCuentaSeleccionada(MouseEvent event){
-        Cuenta cuentaSeleccionada = ListView_Cuentas.getSelectionModel().getSelectedItem();
-        if (cuentaSeleccionada != null){
-            Label_BancoCuenta.setText(cuentaSeleccionada.getNombreBanco());
-            Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaSeleccionada.getSaldoTotal()));
+
+    private void mostrarDetallesCuentaSelected(){
+        ListView_Cuentas.setOnMouseClicked(mouseEvent -> {
+            Cuenta cuentaSeleccionada = ListView_Cuentas.getSelectionModel().getSelectedItem();
+            if (cuentaSeleccionada != null)
+                Label_BancoCuenta.setText("Banco: " + cuentaSeleccionada.getNombreBanco());
             Label_NumeroCuenta.setText(cuentaSeleccionada.getNumeroCuenta());
-        } else {
-            Label_BancoCuenta.setText("");
-            Label_SaldoCuenta.setText("");
-            Label_NumeroCuenta.setText("");
-        }
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaSeleccionada.getSaldoTotal()));
+
+            DatosCompartidos.getInstancia().setCuentaSeleccionada(cuentaSeleccionada);
+        });
     }
 
     public void actualizarListViewCuentas (){

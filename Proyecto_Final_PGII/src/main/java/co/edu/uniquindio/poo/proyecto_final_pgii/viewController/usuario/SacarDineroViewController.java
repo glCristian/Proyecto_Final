@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,11 +87,6 @@ public class SacarDineroViewController {
         Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
         String numeroCuentaOrigen = cuentaSeleccionada.getNumeroCuenta();
 
-        if (montoTexto.isEmpty() || descripcion.isEmpty() || categoria.isEmpty()){
-            System.out.println("Todos los campos deben estar llenos");
-            return;
-        }
-
         double monto;
         try {
             monto = Double.parseDouble(montoTexto);
@@ -104,28 +100,12 @@ public class SacarDineroViewController {
             return;
         }
 
-
         if (cuentaSeleccionada.getSaldoTotal() < monto){
             System.out.println("Saldo insuficiente para realizar el retiro");
             return;
         }
 
-        cuentaSeleccionada.retirar(monto);
-
-        Transaccion transaccion = new Transaccion(
-                UUID.randomUUID().toString(),
-                LocalDateTime.now(),
-                monto,
-                descripcion,
-                numeroCuentaOrigen,
-                null,
-                categoria1,
-                TipoTransaccion.RETIRO
-        );
-
-        cuentaSeleccionada.getListaTransacciones().add(transaccion);
-        cuentaSeleccionada.setSaldoTotal(cuentaSeleccionada.getSaldoTotal() - monto);
-        Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaSeleccionada.getSaldoTotal()));
+        GestorTransacciones.getInstancia().realizarRetiro(numeroCuentaOrigen, monto, descripcion, categoria1);
 
         System.out.println("Dinero retirado exitosamente");
 

@@ -80,7 +80,7 @@ public class AgregarCuentaViewController {
 
         GestorCuentas.getInstancia().crearCuenta(idCuenta, bancoCuenta, numeroCuenta, tipoCuenta);
 
-        Cuenta cuentaAgregada = GestorCuentas.getInstancia().obtenerCuenta(idCuenta);
+        Cuenta cuentaAgregada = GestorCuentas.getInstancia().obtenerCuentaUsuario(idCuenta);
 
         if(cuentaAgregada != null){
             Label_BancoCuenta.setText(cuentaAgregada.getNombreBanco());

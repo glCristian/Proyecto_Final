@@ -5,10 +5,7 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.Movimiento;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.Transaccion;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -85,6 +82,7 @@ public class PantallaPrincipalUsuarioViewController {
     @FXML
     void onClick_CerrarSesionUsuario(ActionEvent event) {
         GestorSesion.getInstancia().cerrarSesion();
+        DatosCompartidos.getInstancia().setCuentaSeleccionada(null);
         try {
             App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/menuInicio.fxml", event);
         } catch (IOException e) {

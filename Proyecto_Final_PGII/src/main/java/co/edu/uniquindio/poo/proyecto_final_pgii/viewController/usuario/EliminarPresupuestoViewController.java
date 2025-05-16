@@ -88,11 +88,20 @@ public class EliminarPresupuestoViewController {
         TextField_AgregarIDPresupuesto.textProperty().addListener((obs, oldVal, newVal) -> {
             Presupuesto presupuesto = buscarPresupuesto(newVal);
             if (presupuesto != null) {
-                Label_SaldoPresupuesto.setText(String.format("$ %.2f", presupuesto.getMontoTotal()));
+                Label_SaldoPresupuesto.setText(String.format("$ %.2f", presupuesto.getMontoAsignado()));
             } else {
                 Label_SaldoPresupuesto.setText("$ 0.00");
             }
         });
+    }
+
+    public Presupuesto buscarPresupuesto(String id) {
+        for (Presupuesto presupuesto : GestorSesion.getInstancia().getUsuarioActual().getListaPresupuestos()) {
+            if (presupuesto.getIdPresupuesto().equals(id)) {
+                return presupuesto;
+            }
+        }
+        return null;
     }
 
 }

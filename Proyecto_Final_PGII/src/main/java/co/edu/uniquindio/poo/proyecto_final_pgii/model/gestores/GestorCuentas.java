@@ -60,40 +60,11 @@ public class GestorCuentas {
         }
     }
 
-    /**
-     * Metodo para realizar un depósito
-     */
-    public void depositarDinero(String idCuenta, double monto) {
-        Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
-        if (usuario != null) {
-            for (Cuenta cuenta : usuario.getListaCuentas()) {
-                if (cuenta.getIdCuenta().equals(idCuenta)) {
-                    cuenta.depositar(monto);
-                    break;
-                }
-            }
-        }
-    }
-
-    /**
-     * Metodo para realizar un retiro
-     */
-    public void retirarDinero(String idCuenta, double monto) {
-        Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
-        if (usuario != null) {
-            for (Cuenta cuenta : usuario.getListaCuentas()) {
-                if (cuenta.getIdCuenta().equals(idCuenta) && cuenta.getSaldoTotal() >= monto) {
-                    cuenta.retirar(monto);
-                    break;
-                }
-            }
-        }
-    }
 
     /**
      * Metodo para buscar una cuenta por su ID
      */
-    public Cuenta obtenerCuenta(String idCuenta) {
+    public Cuenta obtenerCuentaUsuario(String idCuenta) {
         Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
         if (usuario != null) {
             for (Cuenta cuenta : usuario.getListaCuentas()) {

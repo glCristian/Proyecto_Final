@@ -22,7 +22,7 @@ public class GestorPerfiles {
     }
 
     /**
-     * Metodo para autenticar un usuario o un admin
+     * Metodo para autenticar un usuario o un admin para que inicie sesion
      * @param email
      * @param contrasena
      * @return boolean

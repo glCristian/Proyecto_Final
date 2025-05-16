@@ -36,8 +36,11 @@ public class GestorTransacciones {
     }
 
 
-
-
+    /**
+     * Metodo para buscar una cuenta por su ID
+     * @param idCuenta
+     * @return cuenta
+     */
     public Cuenta buscarCuentaPorId(String idCuenta) {
         for (Persona persona : BilleteraVirtual.getInstancia().getPerfiles()) {
             if (persona instanceof Usuario usuario) {
@@ -53,9 +56,11 @@ public class GestorTransacciones {
 
 
     /**
-     * Metodo para realizar un depósito
+     * Metodo para realiza la accion del deposito a la cuenta de un usuario en la base de datos usuario
+     *
+     * WARNING: Metodo auxiliar, utilizado como complemento de otros metodos
      */
-    public boolean depositarDinero(String idCuenta, double monto) {
+    public boolean depositarDinero(String numeroCuentaa, double monto) {
         if (monto <= 0) {
             System.out.println("El monto debe ser mayor a cero.");
             return false;
@@ -64,8 +69,8 @@ public class GestorTransacciones {
         for (Persona persona : BilleteraVirtual.getInstancia().getPerfiles()) {
             if (persona instanceof Usuario usuario) {
                 for (Cuenta cuenta : usuario.getListaCuentas()) {
-                    if (cuenta.getIdCuenta().equals(idCuenta)) {
-                        cuenta.depositar(monto);
+                    if (cuenta.getNumeroCuenta().equals(numeroCuentaa)) {
+                        cuenta.depositar(monto); // deposita el monto a la cuenta
                         return true;
                     }
                 }
@@ -78,9 +83,11 @@ public class GestorTransacciones {
 
 
     /**
-     * Metodo para realizar un retiro
+     * Metodo para realizar la accion del retiro a la cuenta de un usuario en la base de datos usuario
+     *
+     * WARNING: Metodo auxiliar, utilizado como complemento de otros metodos
      */
-    public boolean retirarDinero(String idCuenta, double monto) {
+    public boolean retirarDinero(String numeroCuenta, double monto) {
         if (monto <= 0) {
             System.out.println("El monto debe ser mayor a cero.");
             return false;
@@ -89,9 +96,9 @@ public class GestorTransacciones {
         for (Persona persona : BilleteraVirtual.getInstancia().getPerfiles()) {
             if (persona instanceof Usuario usuario) {
                 for (Cuenta cuenta : usuario.getListaCuentas()) {
-                    if (cuenta.getIdCuenta().equals(idCuenta)) {
+                    if (cuenta.getNumeroCuenta().equals(numeroCuenta)) {
                         if (cuenta.getSaldoTotal() >= monto) {
-                            cuenta.retirar(monto);
+                            cuenta.retirar(monto); // retira el monto de la cuenta
                             return true;
                         } else {
                             System.out.println("Saldo insuficiente en la cuenta.");
@@ -107,7 +114,15 @@ public class GestorTransacciones {
     }
 
 
-
+    /**
+     * Realiza una transferencia entre dos cuentas, genera la transaccion y la registra
+     * @param idCuentaOrigen
+     * @param idCuentaDestino
+     * @param monto
+     * @param descripcion
+     * @param categoria
+     * @return
+     */
     public boolean realizarTransferencia(String idCuentaOrigen, String idCuentaDestino, double monto,
                                          String descripcion, Categoria categoria) {
         if (retirarDinero(idCuentaOrigen, monto) && depositarDinero(idCuentaDestino, monto)) {
@@ -118,6 +133,14 @@ public class GestorTransacciones {
         return false;
     }
 
+    /**
+     * Realiza un deposito a una cuenta, genera la transaccion y la registra
+     * @param idCuentaDestino
+     * @param monto
+     * @param descripcion
+     * @param categoria
+     * @return
+     */
     public boolean realizarDeposito(String idCuentaDestino, double monto, String descripcion, Categoria categoria) {
         if (depositarDinero(idCuentaDestino, monto)) {
             Transaccion t = Transaccion.crearDeposito(idCuentaDestino, monto, descripcion, categoria);
@@ -127,6 +150,15 @@ public class GestorTransacciones {
         return false;
     }
 
+
+    /**
+     * Realiza un retiro de una cuenta, genera la transaccion y la registra
+     * @param idCuentaOrigen
+     * @param monto
+     * @param descripcion
+     * @param categoria
+     * @return
+     */
     public boolean realizarRetiro(String idCuentaOrigen, double monto, String descripcion, Categoria categoria) {
         if (retirarDinero(idCuentaOrigen, monto)) {
             Transaccion t = Transaccion.crearRetiro(idCuentaOrigen, monto, descripcion, categoria);
@@ -136,27 +168,31 @@ public class GestorTransacciones {
         return false;
     }
 
-    private void registrarTransaccion(Transaccion t) {
-        if (t == null) return;
 
-        // Añadir a la cuenta origen si aplica
-        if (t.getCuentaOrigen() != null) {
-            Cuenta cuentaOrigen = buscarCuentaPorId(t.getCuentaOrigen());
+    /**
+     * Metodo generico para resgitrar una transaccion
+     * @param transaccion
+     */
+    private void registrarTransaccion(Transaccion transaccion) {
+        if (transaccion == null) return;
+
+        // Añadir a la cuenta origen si es necesario
+        if (transaccion.getCuentaOrigen() != null) {
+            Cuenta cuentaOrigen = buscarCuentaPorId(transaccion.getCuentaOrigen());
             if (cuentaOrigen != null) {
-                cuentaOrigen.getListaTransacciones().add(t);
+                cuentaOrigen.getListaTransacciones().add(transaccion);
             }
         }
 
-        // Añadir a la cuenta destino si aplica y es distinta
-        if (t.getCuentaDestino() != null && !t.getCuentaDestino().equals(t.getCuentaOrigen())) {
-            Cuenta cuentaDestino = buscarCuentaPorId(t.getCuentaDestino());
+        // Añadir a la cuenta destino si es necesario y es distinta a la de origen
+        if (transaccion.getCuentaDestino() != null && !transaccion.getCuentaDestino().equals(transaccion.getCuentaOrigen())) {
+            Cuenta cuentaDestino = buscarCuentaPorId(transaccion.getCuentaDestino());
             if (cuentaDestino != null) {
-                cuentaDestino.getListaTransacciones().add(t);
+                cuentaDestino.getListaTransacciones().add(transaccion);
             }
         }
 
-        // Registro global
-        BilleteraVirtual.getInstancia().getTransacciones().add(t);
+        BilleteraVirtual.getInstancia().getTransacciones().add(transaccion);
     }
 
 

@@ -1,10 +1,11 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.app;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPerfiles;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.print.PageRange;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,34 +23,78 @@ public class App extends Application {
         stage.show();
     }
 
-    private static void crearPerfilesPrueba() {
-        // Crear usuario de prueba
-        GestorPerfiles.getInstancia().crearUsuario(
-                "Carlos",
-                "López",
-                "carlos@email.com",
-                "3001234567",
-                "Calle 123",
-                "USR001",
-                "123456"
-        );
+private static void crearPerfilesPrueba() {
+    // Obtener instancias de los gestores
+    GestorPerfiles gestorPerfiles = GestorPerfiles.getInstancia();
+    GestorCuentas gestorCuentas = GestorCuentas.getInstancia();
+
+    // Crear usuarios de prueba
+    Usuario carlos = new Usuario(
+            "Carlos",
+            "López",
+            "carlos@email.com",
+            "3001234567",
+            "Calle 123",
+            "USR001",
+            "123456"
+    );
 
 
-        // Crear administrador de prueba
-        GestorPerfiles.getInstancia().crearAdministrador(
-                "Admin",
-                "Principal",
-                "admin@sistema.com",
-                "3009876543",
-                "Avenida Central",
-                "ADM001",
-                "admin123"
-        );
+    Usuario ana = new Usuario(
+            "Ana",
+            "Martínez",
+            "ana@email.com",
+            "3157894562",
+            "Avenida 456",
+            "USR002",
+            "654321"
+    );
 
-        System.out.println("Perfiles de prueba creados exitosamente");
-        System.out.println("Usuario: carlos@email.com / Contraseña: 123456");
-        System.out.println("Admin: admin@sistema.com / Contraseña: admin123");
-    }
+
+
+    // Crear administrador
+    gestorPerfiles.crearAdministrador(
+            "Admin",
+            "Principal",
+            "admin@sistema.com",
+            "3009876543",
+            "Avenida Central",
+            "ADM001",
+            "admin123"
+    );
+
+    // Crear cuentas para Usuario 1 (Carlos)
+    Cuenta carlos1 = new Cuenta("Cuenta Ahorros Carlos", "BBVA", "carlos1",TipoCuenta.AHORRO);
+    carlos.agregarCuenta(carlos1);
+    BilleteraVirtual.getInstancia().getCuentas().add(carlos1);
+
+    Cuenta carlos2 = new Cuenta("Cuenta Corriente Carlos", "Visa", "carlos2",TipoCuenta.CORRIENTE);
+    carlos.agregarCuenta(carlos2);
+    BilleteraVirtual.getInstancia().getCuentas().add(carlos2);
+
+
+    // Crear cuentas para Usuario 2 (Ana)
+    Cuenta ana1 = new Cuenta("Cuenta Ahorros Ana","Bancolombia", "ana1",TipoCuenta.AHORRO );
+    ana.agregarCuenta(ana1);
+    BilleteraVirtual.getInstancia().getCuentas().add(ana1);
+
+    Cuenta ana2 = new Cuenta("Cuenta Corriente Ana", "ScotiaBank" ,"ana2", TipoCuenta.CORRIENTE);
+    ana.agregarCuenta(ana2);
+    BilleteraVirtual.getInstancia().getCuentas().add(ana2);
+
+    BilleteraVirtual.getInstancia().getPerfiles().add(carlos);
+    BilleteraVirtual.getInstancia().getPerfiles().add(ana);
+
+
+    System.out.println("Perfiles y cuentas de prueba creados exitosamente");
+    System.out.println("Usuario 1: carlos@email.com / Contraseña: 123456");
+    System.out.println("Usuario 2: ana@email.com / Contraseña: 654321");
+    System.out.println("Admin: admin@sistema.com / Contraseña: admin123");
+
+
+    System.out.println(BilleteraVirtual.getInstancia().getCuentas());
+
+}
 
 
 
