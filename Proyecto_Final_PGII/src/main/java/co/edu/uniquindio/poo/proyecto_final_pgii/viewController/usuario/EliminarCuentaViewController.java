@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Cuenta;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
 import javafx.event.ActionEvent;
@@ -107,6 +108,16 @@ public class EliminarCuentaViewController {
         assert TextField_AgregarBancoCuenta != null : "fx:id=\"TextField_AgregarBancoCuenta\" was not injected: check your FXML file 'eliminarCuenta.fxml'.";
         assert TextField_AgregarNumeroCuenta != null : "fx:id=\"TextField_AgregarNumeroCuenta\" was not injected: check your FXML file 'eliminarCuenta.fxml'.";
 
+        cargarDatosCuenta();
+    }
+
+    public void cargarDatosCuenta(){
+        Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
+        if (cuenta != null){
+            Label_BancoCuenta.setText(cuenta.getNombreBanco());
+            Label_NumeroCuenta.setText(cuenta.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuenta.getSaldoTotal()));
+        }
     }
 
 }
