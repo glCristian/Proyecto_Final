@@ -58,10 +58,13 @@ public class CrearPresupuestoViewController {
     @FXML
     void onClick_AtrasMenuPresupuesto(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/proyecto_final_pgii/presupuestoUsuario.fxml"));
-            Parent vista = loader.load();
-            AnchorPane_MenuCrearPresupuesto.getChildren().setAll(vista);
-        } catch (IOException e) {
+            AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuCrearPresupuesto.getParent();
+
+            PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
+                    contenedorPrincipal,
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/presupuestoUsuario.fxml"
+            );
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

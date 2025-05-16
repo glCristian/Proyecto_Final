@@ -88,10 +88,13 @@ public class ActualizarPresupuestoViewController {
     @FXML
     void onClick_AtrasMenuPresupuesto(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/proyecto_final_pgii/presupuestoUsuario.fxml"));
-            Parent vista = loader.load();
-            AnchorPane_MenuActualizarPresupuesto.getChildren().setAll(vista);
-        } catch (IOException e) {
+            AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuActualizarPresupuesto.getParent();
+
+            PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
+                    contenedorPrincipal,
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/PresupuestoUsuario.fxml"
+            );
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

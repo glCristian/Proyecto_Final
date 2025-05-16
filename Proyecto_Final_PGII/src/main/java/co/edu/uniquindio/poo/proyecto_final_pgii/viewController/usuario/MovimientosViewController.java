@@ -2,6 +2,8 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Movimiento;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -19,10 +21,10 @@ public class MovimientosViewController {
     private AnchorPane AnchorPane_MenuMovimientos;
 
     @FXML
-    private ComboBox<?> ComboBox_CategoriaMovimientos;
+    private ComboBox<String> ComboBox_CategoriaMovimientos;
 
     @FXML
-    private ListView<?> TableView_Movimientos;
+    private ListView<Movimiento> TableView_Movimientos;
 
     @FXML
     void initialize() {

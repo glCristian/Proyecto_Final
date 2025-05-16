@@ -44,10 +44,13 @@ public class EliminarPresupuestoViewController {
     @FXML
     void onClick_AtrasMenuPresupuesto(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/poo/proyecto_final_pgii/presupuestoUsuario.fxml"));
-            Parent vista = loader.load();
-            AnchorPane_MenuEliminarPresupuesto.getChildren().setAll(vista);
-        } catch (IOException e) {
+            AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuEliminarPresupuesto.getParent();
+
+            PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
+                    contenedorPrincipal,
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/PresupuestoUsuario.fxml"
+            );
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -60,7 +63,7 @@ public class EliminarPresupuestoViewController {
             return;
         }
 
-        Presupuesto presupuesto = buscarPresupuestoPorID(id);
+        Presupuesto presupuesto = buscarPresupuesto(id);
         if (presupuesto != null) {
             GestorSesion.getInstancia().getUsuarioActual().getListaPresupuestos().remove(presupuesto);
             Label_SaldoPresupuesto.setText("$ 0.00");
@@ -83,7 +86,7 @@ public class EliminarPresupuestoViewController {
 
     private void cargarSaldoPresupuesto(){
         TextField_AgregarIDPresupuesto.textProperty().addListener((obs, oldVal, newVal) -> {
-            Presupuesto presupuesto = buscarPresupuestoPorId(newVal);
+            Presupuesto presupuesto = buscarPresupuesto(newVal);
             if (presupuesto != null) {
                 Label_SaldoPresupuesto.setText(String.format("$ %.2f", presupuesto.getMontoTotal()));
             } else {
