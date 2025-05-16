@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Presupuesto;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
 import javafx.event.ActionEvent;
@@ -37,7 +38,6 @@ public class PresupuestoViewController {
     @FXML
     private ListView<Presupuesto> TableView_Presupuestos;
 
-    private Usuario usuarioActual;
 
     @FXML
     void onClick_CrearPresupuesto(ActionEvent event) {
@@ -78,6 +78,8 @@ public class PresupuestoViewController {
 
 
     private void cargarPresupuestos(){
+        Usuario usuarioActual = GestorSesion.getInstancia().getUsuarioActual();
+
         if (usuarioActual != null){
             TableView_Presupuestos.getItems().clear();
             TableView_Presupuestos.getItems().addAll(usuarioActual.getListaPresupuestos());
