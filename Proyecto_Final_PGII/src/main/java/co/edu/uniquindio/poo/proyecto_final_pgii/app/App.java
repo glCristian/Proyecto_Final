@@ -64,21 +64,21 @@ private static void crearPerfilesPrueba() {
     );
 
     // Crear cuentas para Usuario 1 (Carlos)
-    Cuenta carlos1 = new Cuenta("Cuenta Ahorros Carlos", "BBVA", "carlos1",TipoCuenta.AHORRO);
+    Cuenta carlos1 = new Cuenta("Cuenta Ahorros Carlos", "BBVA", "1234 7896 6573",TipoCuenta.AHORRO);
     carlos.agregarCuenta(carlos1);
     BilleteraVirtual.getInstancia().getCuentas().add(carlos1);
 
-    Cuenta carlos2 = new Cuenta("Cuenta Corriente Carlos", "Visa", "carlos2",TipoCuenta.CORRIENTE);
+    Cuenta carlos2 = new Cuenta("Cuenta Corriente Carlos", "Visa", "1527 7893 8965",TipoCuenta.CORRIENTE);
     carlos.agregarCuenta(carlos2);
     BilleteraVirtual.getInstancia().getCuentas().add(carlos2);
 
 
     // Crear cuentas para Usuario 2 (Ana)
-    Cuenta ana1 = new Cuenta("Cuenta Ahorros Ana","Bancolombia", "ana1",TipoCuenta.AHORRO );
+    Cuenta ana1 = new Cuenta("Cuenta Ahorros Ana","Bancolombia", "1678 8956 8907",TipoCuenta.AHORRO );
     ana.agregarCuenta(ana1);
     BilleteraVirtual.getInstancia().getCuentas().add(ana1);
 
-    Cuenta ana2 = new Cuenta("Cuenta Corriente Ana", "ScotiaBank" ,"ana2", TipoCuenta.CORRIENTE);
+    Cuenta ana2 = new Cuenta("Cuenta Corriente Ana", "ScotiaBank" ,"4567 4589 3421", TipoCuenta.CORRIENTE);
     ana.agregarCuenta(ana2);
     BilleteraVirtual.getInstancia().getCuentas().add(ana2);
 
