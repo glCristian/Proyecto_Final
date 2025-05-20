@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="AnchorPane_MenuActualizarCuenta" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.ActualizarCuentaViewController">
+<AnchorPane fx:id="AnchorPane_MenuAgregarCuentas" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../../styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.AgregarCuentaViewController">
    <children>
       <Pane layoutX="211.0" layoutY="42.0" prefHeight="107.0" prefWidth="191.0" style="-fx-background-color: #0DA6C2; -fx-background-radius: 10;">
          <children>
@@ -30,10 +30,11 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="Button_ActualizarCuenta" layoutX="252.0" layoutY="397.0" mnemonicParsing="false" onAction="#onClick_ActualizarCuenta" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Actualizar Cuenta" textFill="LIGHTGRAY" />
-      <TextField fx:id="TextField_AgregarNumeroCuenta" layoutX="218.0" layoutY="325.0" prefHeight="25.0" prefWidth="178.0" promptText="Numero de Cuenta" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
-      <TextField fx:id="TextField_AgregarBancoCuenta" layoutX="218.0" layoutY="284.0" prefHeight="25.0" prefWidth="178.0" promptText="Banco" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
-      <Label layoutX="218.0" layoutY="250.0" prefHeight="15.0" prefWidth="132.0" text="+ Actualizar Cuenta" textFill="LIGHTGRAY">
+      <Button fx:id="Button_AnadirCuenta" layoutX="252.0" layoutY="397.0" mnemonicParsing="false" onAction="#onClick_anadirCuenta" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Añadir Cuenta" textFill="LIGHTGRAY" />
+      <TextField fx:id="TextField_IDdeLaCuenta" layoutX="218.0" layoutY="238.0" prefHeight="25.0" prefWidth="178.0" promptText="ID de la cuenta" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
+      <TextField fx:id="TextField_AgregarNumeroCuenta" layoutX="218.0" layoutY="315.0" prefHeight="25.0" prefWidth="178.0" promptText="Numero de Cuenta" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
+      <TextField fx:id="TextField_AgregarBancoCuenta" layoutX="218.0" layoutY="276.0" prefHeight="25.0" prefWidth="178.0" promptText="Banco" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
+      <Label layoutX="218.0" layoutY="216.0" prefHeight="15.0" prefWidth="132.0" text="+ Añadir Cuenta" textFill="LIGHTGRAY">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -43,5 +44,6 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Button>
+      <ComboBox fx:id="cmb_select_tipoCuenta" layoutX="218.0" layoutY="353.0" prefHeight="25.0" prefWidth="178.0" promptText="Tipo de cuenta" />
    </children>
 </AnchorPane>

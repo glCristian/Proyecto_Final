@@ -92,7 +92,7 @@ public class ActualizarPresupuestoViewController {
 
             PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
                     contenedorPrincipal,
-                    "/co/edu/uniquindio/poo/proyecto_final_pgii/PresupuestoUsuario.fxml"
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/presupuestoUsuario.fxml"
             );
         } catch (Exception e) {
             e.printStackTrace();

@@ -7,13 +7,8 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPerfiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import co.edu.uniquindio.poo.proyecto_final_pgii.app.App;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 
@@ -60,7 +55,7 @@ public class MenuInicioViewController {
                 }
             } else if (GestorSesion.getInstancia().esUsuario()) {
                 try {
-                    App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/pantallaPrincipalUsuario.fxml", event);
+                    App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/pantallaPrincipalUsuario.fxml", event);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

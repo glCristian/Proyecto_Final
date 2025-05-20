@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AnchorPane_MenuPerfil" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.PerfilViewController">
+<AnchorPane fx:id="AnchorPane_MenuPerfil" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.PerfilViewController">
    <children>
       <Label layoutX="26.0" layoutY="27.0" prefHeight="30.0" prefWidth="118.0" text="Mi Perfil" textFill="LIGHTGRAY">
          <font>
@@ -21,7 +21,7 @@
       <TextField fx:id="TextField_AgregarNumeroTelefonoUsuario" layoutX="219.0" layoutY="295.0" prefHeight="25.0" prefWidth="178.0" promptText="Numero de Telefono" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
       <ImageView fitHeight="120.0" fitWidth="100.0" layoutX="257.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../imagenes/user-svgrepo-comm.png" />
+            <Image url="@../../../../../../imagenes/user-svgrepo-comm.png" />
          </image>
       </ImageView>
    </children>

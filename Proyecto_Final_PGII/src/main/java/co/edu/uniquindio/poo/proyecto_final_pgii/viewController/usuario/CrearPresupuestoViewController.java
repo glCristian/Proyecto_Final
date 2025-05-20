@@ -1,24 +1,17 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Categoria;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Presupuesto;
-import co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.PantallaPrincipalUsuarioViewController;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class CrearPresupuestoViewController {
 
@@ -62,7 +55,7 @@ public class CrearPresupuestoViewController {
 
             PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
                     contenedorPrincipal,
-                    "/co/edu/uniquindio/poo/proyecto_final_pgii/presupuestoUsuario.fxml"
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/presupuestoUsuario.fxml"
             );
         } catch (Exception e) {
             e.printStackTrace();

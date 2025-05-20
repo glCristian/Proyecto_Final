@@ -77,7 +77,7 @@ public class ActualizarCuentaViewController {
 
             PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
                     contenedorPrincipal,
-                    "/co/edu/uniquindio/poo/proyecto_final_pgii/CuentasUsuario.fxml"
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/cuentasUsuario.fxml"
             );
         } catch (Exception e) {
             e.printStackTrace();

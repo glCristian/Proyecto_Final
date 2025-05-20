@@ -10,15 +10,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import org.w3c.dom.events.MouseEvent;
 
 public class CuentasUsuarioViewController {
 
@@ -60,19 +56,19 @@ public class CuentasUsuarioViewController {
         if (cuentaSeleccionada != null){
             DatosCompartidos.getInstancia().setCuentaSeleccionada(cuentaSeleccionada);
 
-            cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/actualizarCuentaUsuario.fxml");
+            cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/actualizarCuentaUsuario.fxml");
         }
 
     }
 
     @FXML
     void onClick_EliminarCuenta(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/eliminarCuenta.fxml");
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/eliminarCuenta.fxml");
     }
 
     @FXML
     void onClick_anadirCuenta(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/agregarCuenta.fxml");
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/agregarCuenta.fxml");
 
     }
 

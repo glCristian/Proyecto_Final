@@ -21,7 +21,7 @@
          <children>
             <ImageView fitHeight="22.0" fitWidth="107.0" layoutX="24.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../imagenes/logo1.png" />
+                  <Image url="@../../../../../../imagenes/logo1.png" />
                </image>
             </ImageView>
             <Button fx:id="Button_MenuCuentas" layoutX="41.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClick_MenuCuentas" style="-fx-background-color: #292757;" text="Cuentas" textFill="LIGHTGRAY">
@@ -51,27 +51,27 @@
             </Button>
             <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="60.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../imagenes/institution-credit-card-svgrepo-com.png" />
+                  <Image url="@../../../../../../imagenes/institution-credit-card-svgrepo-com.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="60.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../imagenes/arrows-horizontal-svgrepo-com.png" />
+                  <Image url="@../../../../../../imagenes/arrows-horizontal-svgrepo-com.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="56.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../imagenes/business-finance-corporate-5-svgrepo-com.png" />
+                  <Image url="@../../../../../../imagenes/business-finance-corporate-5-svgrepo-com.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="60.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../imagenes/file-backup-2-svgrepo-com.png" />
+                  <Image url="@../../../../../../imagenes/file-backup-2-svgrepo-com.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="60.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../imagenes/user-svgrepo-comm.png" />
+                  <Image url="@../../../../../../imagenes/user-svgrepo-comm.png" />
                </image>
             </ImageView>
             <Button fx:id="Button_CerrarSesionUsuario" layoutX="14.0" layoutY="447.0" mnemonicParsing="false" onAction="#onClick_CerrarSesionUsuario" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #292757;" text="Cerrar Sesion" textFill="#9327f0" underline="true">
@@ -81,7 +81,7 @@
             </Button>
             <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="58.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../imagenes/logout-svgrepo-com(2).png" />
+                  <Image url="@../../../../../../imagenes/logout-svgrepo-com(2).png" />
                </image>
             </ImageView>
          </children>

@@ -1,0 +1,73 @@
+package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
+
+public class GestionarCuentasViewController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane AnchorPane_MenuCuentas;
+
+    @FXML
+    private Button Button_ActualizarCuenta;
+
+    @FXML
+    private Button Button_AnadirCuenta;
+
+    @FXML
+    private Button Button_EliminarCuenta;
+
+    @FXML
+    private Label Label_BancoCuenta;
+
+    @FXML
+    private Label Label_NumeroCuenta;
+
+    @FXML
+    private Label Label_SaldoCuenta;
+
+    @FXML
+    private ListView<?> ListView_Cuentas;
+
+    @FXML
+    void onClick_ActualizarCuenta(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClick_EliminarCuenta(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClick_anadirCuenta(ActionEvent event) {
+
+    }
+
+    @FXML
+    void initialize() {
+        assert AnchorPane_MenuCuentas != null : "fx:id=\"AnchorPane_MenuCuentas\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
+        assert Button_ActualizarCuenta != null : "fx:id=\"Button_ActualizarCuenta\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
+        assert Button_AnadirCuenta != null : "fx:id=\"Button_AnadirCuenta\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
+        assert Button_EliminarCuenta != null : "fx:id=\"Button_EliminarCuenta\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
+        assert Label_BancoCuenta != null : "fx:id=\"Label_BancoCuenta\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
+        assert Label_NumeroCuenta != null : "fx:id=\"Label_NumeroCuenta\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
+        assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
+        assert ListView_Cuentas != null : "fx:id=\"ListView_Cuentas\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
+
+    }
+
+}
+

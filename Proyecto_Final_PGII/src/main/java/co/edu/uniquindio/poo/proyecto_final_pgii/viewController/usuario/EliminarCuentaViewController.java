@@ -9,14 +9,10 @@ import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class EliminarCuentaViewController {
 
@@ -57,7 +53,7 @@ public class EliminarCuentaViewController {
 
             PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
                     contenedorPrincipal,
-                    "/co/edu/uniquindio/poo/proyecto_final_pgii/cuentasUsuario.fxml"
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/cuentasUsuario.fxml"
             );
         } catch (Exception e) {
             e.printStackTrace();

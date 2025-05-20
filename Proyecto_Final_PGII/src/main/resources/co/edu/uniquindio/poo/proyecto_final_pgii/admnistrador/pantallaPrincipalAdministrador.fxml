@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="759.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador.PantallaPrincipalAdministradorViewController">
+   <left>
+      <Pane prefHeight="500.0" prefWidth="146.0" style="-fx-background-color: #292757;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="22.0" fitWidth="107.0" layoutX="24.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../imagenes/logo1.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="Button_MenuCuentas" layoutX="41.0" layoutY="115.0" mnemonicParsing="false" onAction="#onClick_MenuCuentas" style="-fx-background-color: #292757;" text="Cuentas" textFill="LIGHTGRAY">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="Button_MenuTransaccion" layoutX="30.0" layoutY="175.0" mnemonicParsing="false" onAction="#onClick_MenuTransaccion" style="-fx-background-color: #292757;" text="Transaccion" textFill="LIGHTGRAY">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="Button_MenuEstadisticas" layoutX="32.0" layoutY="247.0" mnemonicParsing="false" onAction="#onClick_MenuEstadisticas" style="-fx-background-color: #292757;" text="Estadisticas" textFill="LIGHTGRAY">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="Button_MenuUsuarios" layoutX="38.0" layoutY="316.0" mnemonicParsing="false" onAction="#onClick_MenuUsuarios" style="-fx-background-color: #292757;" text="Usuarios" textFill="LIGHTGRAY">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="60.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../imagenes/institution-credit-card-svgrepo-com.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="60.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../imagenes/arrows-horizontal-svgrepo-com.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="56.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../../statistics-graph-stats-analytics-business-data-svgrepo-com.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="55.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../../users-svgrepo-com.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="Button_CerrarSesionAdmin" layoutX="15.0" layoutY="438.0" mnemonicParsing="false" onAction="#onClick_CerrarSesionAdmin" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #292757;" text="Cerrar Sesion" textFill="#9327f0" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="58.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../imagenes/logout-svgrepo-com(2).png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <AnchorPane fx:id="AnchorPane_PantallaPrincipalAdministrador" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #262450FF;" BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="TableView_Usuarios" layoutX="101.0" layoutY="172.0" prefHeight="243.0" prefWidth="386.0" style="-fx-background-color: #292757; -fx-background-radius: 10;" />
+            <Label layoutX="253.0" layoutY="107.0" text="Usuarios" textFill="LIGHTGRAY">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="14.0" text="Bienvenido" textFill="LIGHTGRAY">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

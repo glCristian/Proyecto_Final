@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="AnchorPane_MenuMovimientos" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.MovimientosViewController">
+<AnchorPane fx:id="AnchorPane_MenuMovimientos" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../../styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.MovimientosViewController">
    <children>
       <Label layoutX="31.0" layoutY="26.0" prefHeight="30.0" prefWidth="141.0" text="Movimientos" textFill="LIGHTGRAY">
          <font>

@@ -8,12 +8,8 @@ import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class AgregarCuentaViewController {
 
@@ -61,7 +57,7 @@ public class AgregarCuentaViewController {
 
             PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
                     contenedorPrincipal,
-                    "/co/edu/uniquindio/poo/proyecto_final_pgii/cuentasUsuario.fxml"
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/cuentasUsuario.fxml"
             );
         } catch (Exception e) {
             e.printStackTrace();

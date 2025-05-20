@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,27 +55,27 @@ public class PantallaPrincipalUsuarioViewController {
 
     @FXML
     void onClick_MenuCuentas(ActionEvent event) {
-        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario,"/co/edu/uniquindio/poo/proyecto_final_pgii/cuentasUsuario.fxml");
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario, "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/cuentasUsuario.fxml");
     }
 
     @FXML
     void onClick_MenuMovimientos(ActionEvent event) {
-        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario,"/co/edu/uniquindio/poo/proyecto_final_pgii/movimientosUsuario.fxml");
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario, "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/movimientosUsuario.fxml");
     }
 
     @FXML
     void onClick_MenuPresupuesto(ActionEvent event) {
-        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario,"/co/edu/uniquindio/poo/proyecto_final_pgii/presupuestoUsuario.fxml");
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario, "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/presupuestoUsuario.fxml");
     }
 
     @FXML
     void onClick_MenuTransaccion(ActionEvent event) {
-        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario,"/co/edu/uniquindio/poo/proyecto_final_pgii/transaccionUsuario.fxml");
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario, "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/transaccionUsuario.fxml");
     }
 
     @FXML
     void onClick_PerfilUsuario(ActionEvent event) {
-        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario,"/co/edu/uniquindio/poo/proyecto_final_pgii/perfilUsuario.fxml");
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario, "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/perfilUsuario.fxml");
     }
 
     @FXML

@@ -50,17 +50,17 @@ public class TransaccionViewController {
 
     @FXML
     void onClick_AgregarDinero(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/agregarDineroUsuario.fxml");
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/agregarDineroUsuario.fxml");
     }
 
     @FXML
     void onClick_EnviarDinero(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/enviarDineroUsuario.fxml");
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/enviarDineroUsuario.fxml");
     }
 
     @FXML
     void onClick_RetirarDinero(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/sacarDineroUsuario.fxml");
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/sacarDineroUsuario.fxml");
     }
 
     @FXML

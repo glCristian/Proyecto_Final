@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="AnchorPane_MenuAgregarDinero" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.AgregarDineroViewController">
+<AnchorPane fx:id="AnchorPane_MenuEnviarDinero" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../../styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.EnviarDineroViewController">
    <children>
-      <Button fx:id="Button_AgregarDinero" layoutX="252.0" layoutY="434.0" mnemonicParsing="false" onAction="#onClick_AgregarDinero" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Agregar" textFill="LIGHTGRAY" />
-      <TextField fx:id="TextField_MontoAgregarDinero" layoutX="218.0" layoutY="262.0" prefHeight="25.0" prefWidth="178.0" promptText="Monto" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
-      <Label layoutX="218.0" layoutY="230.0" prefHeight="15.0" prefWidth="132.0" text="+ Agragar Dinero" textFill="LIGHTGRAY">
+      <Button fx:id="Button_EnviarDinero" layoutX="252.0" layoutY="440.0" mnemonicParsing="false" onAction="#onClick_EnviarDinero" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Enviar" textFill="LIGHTGRAY" />
+      <TextField fx:id="TextField_MontoTransferencia" layoutX="218.0" layoutY="263.0" prefHeight="25.0" prefWidth="178.0" promptText="Monto" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
+      <Label layoutX="218.0" layoutY="230.0" prefHeight="15.0" prefWidth="132.0" text="- Enviar Dinero" textFill="LIGHTGRAY">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -18,8 +18,8 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Button>
-      <TextField fx:id="TextField_NumeroCuentaOrigenAgregar" layoutX="218.0" layoutY="302.0" prefHeight="25.0" prefWidth="178.0" promptText="Numero Cuenta Destino" style="-fx-background-color: #33316B; -fx-background-radius: 8;" stylesheets="@../../../../../styles.css" />
-      <TextField fx:id="TextField_DescripcionAgragar" layoutX="218.0" layoutY="345.0" prefHeight="25.0" prefWidth="178.0" promptText="Descripcion" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
+      <TextField fx:id="TextField_NumeroCuentaDestinoTransferencia" layoutX="218.0" layoutY="305.0" prefHeight="25.0" prefWidth="178.0" promptText="Numero Cuenta Destino" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
+      <TextField fx:id="TextField_DescripcionTransferencia" layoutX="218.0" layoutY="345.0" prefHeight="25.0" prefWidth="178.0" promptText="Descripcion" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
       <Pane layoutX="211.0" layoutY="47.0" prefHeight="107.0" prefWidth="191.0" style="-fx-background-color: #0DA6C2; -fx-background-radius: 10;">
          <children>
             <Pane layoutX="-9.0" layoutY="10.0" prefHeight="117.0" prefWidth="209.0" style="-fx-background-color: #0e39c6; -fx-background-radius: 10;" />
@@ -44,6 +44,6 @@
             </Label>
          </children>
       </Pane>
-      <TextField fx:id="TextField_CategoriaTransaccion" layoutX="218.0" layoutY="386.0" prefHeight="25.0" prefWidth="178.0" promptText="Categoria" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
+      <TextField fx:id="TextField_CategoriaTransaccion" layoutX="218.0" layoutY="388.0" prefHeight="25.0" prefWidth="178.0" promptText="Categoria" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
    </children>
 </AnchorPane>

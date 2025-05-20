@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="AnchorPane_MenuCrearPresupuesto" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.CrearPresupuestoViewController">
+<AnchorPane fx:id="AnchorPane_MenuCrearPresupuesto" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../../styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.CrearPresupuestoViewController">
    <children>
       <Button fx:id="Button_CrearPresupuesto" layoutX="240.0" layoutY="420.0" mnemonicParsing="false" onAction="#onClick_CrearPresupuesto" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Crear Presupuesto" textFill="LIGHTGRAY" />
       <TextField fx:id="TextField_AgregarNombrePresupuesto" layoutX="218.0" layoutY="238.0" prefHeight="25.0" prefWidth="178.0" promptText="Nombre" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />

@@ -36,7 +36,7 @@
             </Label>
          </children>
       </Pane>
-      <ListView fx:id="TableView_CuentasTransaccion" layoutX="130.0" layoutY="228.0" prefHeight="154.0" prefWidth="355.0" style="-fx-background-color: #292757; -fx-background-radius: 10;" stylesheets="@../../../../../styles.css" />
+      <ListView fx:id="TableView_CuentasTransaccion" layoutX="130.0" layoutY="228.0" prefHeight="154.0" prefWidth="355.0" style="-fx-background-color: #292757; -fx-background-radius: 10;" stylesheets="@../../../../../../styles.css" />
       <Button fx:id="Button_RetirarDinero" layoutX="253.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClick_RetirarDinero" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Retirar Dinero" textFill="LIGHTGRAY" />
       <Button fx:id="Button_AgregarDinero" layoutX="376.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClick_AgregarDinero" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Agregar Dinero" textFill="LIGHTGRAY" />
    </children>

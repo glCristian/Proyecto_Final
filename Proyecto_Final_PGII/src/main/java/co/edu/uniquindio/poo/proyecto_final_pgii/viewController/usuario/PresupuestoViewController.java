@@ -41,18 +41,18 @@ public class PresupuestoViewController {
 
     @FXML
     void onClick_CrearPresupuesto(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/crearPresupuestoUsuario.fxml");
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/crearPresupuestoUsuario.fxml");
     }
 
     @FXML
     void onClick_EliminarPresupuesto(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/eliminarPresupuestoUsuario.fxml");
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/eliminarPresupuestoUsuario.fxml");
     }
 
 
     @FXML
     void onClick_ModificarPresupuesto(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/actualizarPresupuestoUsuario.fxml");
+        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/actualizarPresupuestoUsuario.fxml");
     }
 
     @FXML

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="AnchorPane_MenuSacarDinero" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.SacarDineroViewController">
+<AnchorPane fx:id="AnchorPane_MenuSacarDinero" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../../styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.SacarDineroViewController">
    <children>
       <Button fx:id="Button_SacarDinero" layoutX="252.0" layoutY="437.0" mnemonicParsing="false" onAction="#onClick_SacarDinero" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Sacar" textFill="LIGHTGRAY" />
       <TextField fx:id="TextField_MontoSacarDinero" layoutX="218.0" layoutY="269.0" prefHeight="25.0" prefWidth="178.0" promptText="Monto" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
