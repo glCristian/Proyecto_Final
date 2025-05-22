@@ -9,6 +9,9 @@ module co.edu.uniquindio.poo.proyecto_final_pgii {
     opens co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario to javafx.fxml;
     exports co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
+    opens co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador to javafx.fxml;
+    exports co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
+
     opens co.edu.uniquindio.poo.proyecto_final_pgii.app to javafx.fxml;
     exports co.edu.uniquindio.poo.proyecto_final_pgii.app;
 

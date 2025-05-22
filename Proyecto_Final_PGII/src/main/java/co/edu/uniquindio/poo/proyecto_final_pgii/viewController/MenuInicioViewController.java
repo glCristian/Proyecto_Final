@@ -49,7 +49,7 @@ public class MenuInicioViewController {
 
             if (GestorSesion.getInstancia().esAdministrador()) {
                 try {
-                    App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/menuAdministrador.fxml", event);
+                    App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/pantallaPrincipalAdministrador.fxml", event);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
