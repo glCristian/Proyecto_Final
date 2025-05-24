@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.poo.proyecto_final_pgii.app.App;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.PantallaPrincipalUsuarioViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,27 +47,33 @@ public class PantallaPrincipalAdministradorViewController {
 
     @FXML
     void onClick_CerrarSesionAdmin(ActionEvent event) {
-
+        GestorSesion.getInstancia().cerrarSesion();
+        DatosCompartidos.getInstancia().setCuentaSeleccionada(null);
+        try {
+            App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/menuInicio.fxml", event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void onClick_MenuCuentas(ActionEvent event) {
-
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalAdministrador,"/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/gestionarCuentas.fxml");
     }
 
     @FXML
     void onClick_MenuEstadisticas(ActionEvent event) {
-
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalAdministrador, "/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/estadisticas.fxml");
     }
 
     @FXML
     void onClick_MenuTransaccion(ActionEvent event) {
-
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalAdministrador, "/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/gestionarTransacciones.fxml");
     }
 
     @FXML
     void onClick_MenuUsuarios(ActionEvent event) {
-
+        cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalAdministrador, "/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/gestionarUsuarios.fxml");
     }
 
     @FXML
