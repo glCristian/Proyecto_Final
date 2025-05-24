@@ -55,7 +55,16 @@ public class AgregarCuentaViewController {
 
     @FXML
     void onClick_anadirCuenta(ActionEvent event) {
+        try {
+            AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuAgregarCuentas.getParent();
 
+            PantallaPrincipalAdministradorViewController.cargarVistaEnPantallaPrincipal(
+                    contenedorPrincipal,
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/gestionarCuentas.fxml"
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

@@ -45,7 +45,16 @@ public class CrearUsuarioViewController {
 
     @FXML
     void onClick_AtrasMenuUsuarios(ActionEvent event) {
+        try {
+            AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuCrearUsuario.getParent();
 
+            PantallaPrincipalAdministradorViewController.cargarVistaEnPantallaPrincipal(
+                    contenedorPrincipal,
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/gestionarUsuarios.fxml"
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

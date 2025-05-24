@@ -49,7 +49,16 @@ public class EnviarDineroViewController {
 
     @FXML
     void onClick_AtrasMenuTransaccion(ActionEvent event) {
+        try {
+            AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuEnviarDinero.getParent();
 
+            PantallaPrincipalAdministradorViewController.cargarVistaEnPantallaPrincipal(
+                    contenedorPrincipal,
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/gestionarTransacciones.fxml"
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

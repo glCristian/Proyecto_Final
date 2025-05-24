@@ -1,9 +1,14 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.PantallaPrincipalUsuarioViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -72,6 +77,16 @@ public class PantallaPrincipalAdministradorViewController {
         assert Button_MenuUsuarios != null : "fx:id=\"Button_MenuUsuarios\" was not injected: check your FXML file 'pantallaPrincipalAdministrador.fxml'.";
         assert TableView_Usuarios != null : "fx:id=\"TableView_Usuarios\" was not injected: check your FXML file 'pantallaPrincipalAdministrador.fxml'.";
 
+    }
+
+    public static void cargarVistaEnPantallaPrincipal(AnchorPane contenedor, String nombreFXML) {
+        try {
+            FXMLLoader loader = new FXMLLoader(PantallaPrincipalUsuarioViewController.class.getResource(nombreFXML));
+            Parent vista = loader.load();
+            contenedor.getChildren().setAll(vista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

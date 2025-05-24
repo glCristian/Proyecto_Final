@@ -37,7 +37,16 @@ public class GastosMasComunesViewController {
 
     @FXML
     void onClick_AtrasMenuEstadisticas(ActionEvent event) {
+        try {
+            AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuGastosMasComunes.getParent();
 
+            PantallaPrincipalAdministradorViewController.cargarVistaEnPantallaPrincipal(
+                    contenedorPrincipal,
+                    "/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/estadisticas.fxml"
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
