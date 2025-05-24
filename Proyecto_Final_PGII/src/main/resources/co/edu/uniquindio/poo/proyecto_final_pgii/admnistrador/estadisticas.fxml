@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AnchorPane_MenuEstadisticas" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador.EstadisticasViewController">
+   <children>
+      <Label layoutX="31.0" layoutY="26.0" prefHeight="30.0" prefWidth="141.0" text="Estadisticas" textFill="LIGHTGRAY">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="Button_GastosMasComunes" layoutX="229.0" layoutY="189.0" mnemonicParsing="false" onAction="#onClick_GastosMasComunes" prefHeight="25.0" prefWidth="155.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Gastos mas Comunes" textFill="LIGHTGRAY" />
+      <Button fx:id="Button_UsuariosConMasTransacciones" layoutX="200.0" layoutY="309.0" mnemonicParsing="false" onAction="#onClick_UsuariosConMasTransacciones" prefHeight="25.0" prefWidth="214.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Usuarios con mas Transacciones" textFill="LIGHTGRAY" />
+      <Button fx:id="Button_SaldoPromedioDeUsuarios" layoutX="218.0" layoutY="250.0" mnemonicParsing="false" onAction="#onClick_SaldoPromedioDeUsuarios" prefHeight="25.0" prefWidth="177.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Saldo Promedio de usuarios " textFill="LIGHTGRAY" />
+   </children>
+</AnchorPane>

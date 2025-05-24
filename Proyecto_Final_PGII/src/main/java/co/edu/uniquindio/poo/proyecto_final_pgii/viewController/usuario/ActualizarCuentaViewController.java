@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -46,7 +47,7 @@ public class ActualizarCuentaViewController {
     private TextField TextField_AgregarBancoCuenta;
 
     @FXML
-    private TextField TextField_AgregarNumeroCuenta;
+    private ComboBox<String> cmb_select_tipoCuenta;
 
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
@@ -54,7 +55,7 @@ public class ActualizarCuentaViewController {
 
         if (cuenta != null){
             String nuevoBanco = TextField_AgregarBancoCuenta.getText();
-            String nuevoNumeroCuenta = TextField_AgregarNumeroCuenta.getText();
+            String nuevoTipoCuenta = TextField_AgregarNumeroCuenta.getText();
 
             if (nuevoBanco != null && !nuevoBanco.isBlank()){
                 cuenta.setNombreBanco(nuevoBanco);
@@ -93,7 +94,7 @@ public class ActualizarCuentaViewController {
         assert Label_NumeroCuenta != null : "fx:id=\"Label_NumeroCuenta\" was not injected: check your FXML file 'actualizarCuentaUsuario.fxml'.";
         assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'actualizarCuentaUsuario.fxml'.";
         assert TextField_AgregarBancoCuenta != null : "fx:id=\"TextField_AgregarBancoCuenta\" was not injected: check your FXML file 'actualizarCuentaUsuario.fxml'.";
-        assert TextField_AgregarNumeroCuenta != null : "fx:id=\"TextField_AgregarNumeroCuenta\" was not injected: check your FXML file 'actualizarCuentaUsuario.fxml'.";
+        assert cmb_select_tipoCuenta != null : "fx:id=\"cmb_select_tipoCuenta\" was not injected: check your FXML file 'actualizarCuentaUsuario.fxml'.";
 
     }
 

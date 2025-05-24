@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AnchorPane_MenuSaldoPromedioUsuarios" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador.SaldoPromedioUsuariosViewController">
+   <children>
+      <Button fx:id="Button_AtrasMenuEstadisticas" mnemonicParsing="false" onAction="#onClick_AtrasMenuEstadisticas" prefHeight="71.0" prefWidth="65.0" style="-fx-background-color: #262450;" text="￩" textFill="#9327f0">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Button>
+      <LineChart fx:id="LineChart_SaldoPromedioUsuarios" layoutX="65.0" layoutY="71.0" prefHeight="377.0" prefWidth="483.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <TextField fx:id="TextField_insertarFechaInicioFechaFin" layoutX="105.0" layoutY="46.0" prefHeight="25.0" prefWidth="242.0" promptText="Insertar fecha inicio-fecha fin" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
+      <Button fx:id="Button_ExportarPDF" layoutX="174.0" layoutY="451.0" mnemonicParsing="false" onAction="#onClick_ExportarPDF" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Exportar PDF" textFill="LIGHTGRAY" />
+      <Button fx:id="Button_ExportarCSV" layoutX="329.0" layoutY="451.0" mnemonicParsing="false" onAction="#onClick_ExportarCSV" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Exportar CSV" textFill="LIGHTGRAY" />
+   </children>
+</AnchorPane>

@@ -63,7 +63,7 @@ public class CuentasUsuarioViewController {
 
     @FXML
     void onClick_EliminarCuenta(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/eliminarCuenta.fxml");
+
     }
 
     @FXML

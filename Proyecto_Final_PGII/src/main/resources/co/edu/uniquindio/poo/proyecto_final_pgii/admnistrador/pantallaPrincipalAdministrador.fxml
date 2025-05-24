@@ -59,12 +59,12 @@
                   <Image url="@../../../../../../../../../../../users-svgrepo-com.png" />
                </image>
             </ImageView>
-            <Button fx:id="Button_CerrarSesionAdmin" layoutX="15.0" layoutY="438.0" mnemonicParsing="false" onAction="#onClick_CerrarSesionAdmin" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #292757;" text="Cerrar Sesion" textFill="#9327f0" underline="true">
+            <Button fx:id="Button_CerrarSesionAdmin" layoutX="15.0" layoutY="422.0" mnemonicParsing="false" onAction="#onClick_CerrarSesionAdmin" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #292757;" text="Cerrar Sesion" textFill="#9327f0" underline="true">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="58.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="58.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../imagenes/logout-svgrepo-com(2).png" />
                </image>

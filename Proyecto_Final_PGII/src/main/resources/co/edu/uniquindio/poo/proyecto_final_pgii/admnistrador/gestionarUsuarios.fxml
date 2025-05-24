@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AnchorPane_MenuGestionarUsuarios" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador.GestionarUsuariosViewController">
+   <children>
+      <Label layoutX="31.0" layoutY="26.0" prefHeight="30.0" prefWidth="141.0" text="Usuarios" textFill="LIGHTGRAY">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="Button_CrearUsuario" layoutX="114.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClick_CrearUsuario" prefHeight="25.0" prefWidth="119.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Crear Usuario" textFill="LIGHTGRAY" />
+      <ListView fx:id="TableView_Usuarios" layoutX="114.0" layoutY="119.0" prefHeight="199.0" prefWidth="387.0" style="-fx-background-color: #292757; -fx-background-radius: 10;" stylesheets="@../../../../../../styles.css" />
+      <Button fx:id="Button_ActulizarUsuario" layoutX="247.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClick_ActualizarUsuario" prefHeight="25.0" prefWidth="119.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Actualizar Usuario" textFill="LIGHTGRAY" />
+      <Button fx:id="Button_EliminarUsuario" layoutX="382.0" layoutY="398.0" mnemonicParsing="false" onAction="#onClick_EliminarUsuario" prefHeight="25.0" prefWidth="119.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Eliminar Usuario" textFill="LIGHTGRAY" />
+   </children>
+</AnchorPane>
