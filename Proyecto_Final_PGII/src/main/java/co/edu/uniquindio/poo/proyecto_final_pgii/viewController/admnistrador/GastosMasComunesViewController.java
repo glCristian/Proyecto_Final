@@ -2,6 +2,8 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorReportes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
@@ -35,6 +37,8 @@ public class GastosMasComunesViewController {
     @FXML
     private TextField TextField_insertarFechaInicioFechaFin;
 
+    private GestorReportes gestorReportes;
+
     @FXML
     void onClick_AtrasMenuEstadisticas(ActionEvent event) {
         try {
@@ -51,12 +55,12 @@ public class GastosMasComunesViewController {
 
     @FXML
     void onClick_ExportarCSV(ActionEvent event) {
-
+        generarReporteGastosComunes("CSV");
     }
 
     @FXML
     void onClick_ExportarPDF(ActionEvent event) {
-
+        generarReporteGastosComunes("PDF");
     }
 
     @FXML
@@ -68,7 +72,10 @@ public class GastosMasComunesViewController {
         assert PieChart_GastosMasComunes != null : "fx:id=\"PieChart_GastosMasComunes\" was not injected: check your FXML file 'gastosMasComunes.fxml'.";
         assert TextField_insertarFechaInicioFechaFin != null : "fx:id=\"TextField_insertarFechaInicioFechaFin\" was not injected: check your FXML file 'gastosMasComunes.fxml'.";
 
+
     }
 
+
 }
+
 

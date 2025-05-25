@@ -8,8 +8,19 @@ import java.util.UUID;
 public class GestorTransacciones {
 
     private static GestorTransacciones instancia;
+    private SujetoTransacciones sujetoNotificaciones;
+    private CalculadoraComisiones calculadoraComisiones;
 
-    private GestorTransacciones(){}
+    private GestorTransacciones() {
+        super();
+        this.sujetoNotificaciones = new SujetoTransacciones();
+        this.calculadoraComisiones = new CalculadoraComisiones(new SinComision());
+
+        // Configurar observadores por defecto
+        configurarObservadoresPorDefecto();
+    }
+
+
 
     public static GestorTransacciones getInstancia(){
         if(instancia == null){
@@ -115,25 +126,6 @@ public class GestorTransacciones {
 
 
     /**
-     * Realiza una transferencia entre dos cuentas, genera la transaccion y la registra
-     * @param idCuentaOrigen
-     * @param idCuentaDestino
-     * @param monto
-     * @param descripcion
-     * @param categoria
-     * @return
-     */
-    public boolean realizarTransferencia(String idCuentaOrigen, String idCuentaDestino, double monto,
-                                         String descripcion, Categoria categoria) {
-        if (retirarDinero(idCuentaOrigen, monto) && depositarDinero(idCuentaDestino, monto)) {
-            Transaccion t = Transaccion.crearTransferencia(idCuentaOrigen, idCuentaDestino, monto, descripcion, categoria);
-            registrarTransaccion(t);
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Realiza un deposito a una cuenta, genera la transaccion y la registra
      * @param idCuentaDestino
      * @param monto
@@ -193,6 +185,53 @@ public class GestorTransacciones {
         }
 
         BilleteraVirtual.getInstancia().getTransacciones().add(transaccion);
+    }
+
+
+
+
+
+
+
+
+    public boolean realizarTransferencia(String idCuentaOrigen, String idCuentaDestino,
+                                         double monto, String descripcion, Categoria categoria) {
+
+        // Realizar la transferencia original
+        boolean exito = realizarTransferencia(idCuentaOrigen, idCuentaDestino, monto, descripcion, categoria);
+
+        if (exito) {
+            // Crear transacción para notificaciones
+            Transaccion transaccion = Transaccion.crearTransferencia(
+                    idCuentaOrigen, idCuentaDestino, monto, descripcion, categoria);
+
+            // Calcular comisión
+            double comision = calculadoraComisiones.calcular(transaccion);
+            if (comision > 0) {
+                System.out.println(" Comisión aplicada: $" + comision +
+                        " (" + calculadoraComisiones.getEstrategiaActual() + ")");
+            }
+
+            // Notificar a observadores
+            sujetoNotificaciones.notificarObservadores(transaccion, "TRANSFERENCIA_COMPLETADA");
+        }
+
+        return exito;
+    }
+
+
+    public void agregarObservador(ObservadorTransacciones observador) {
+        sujetoNotificaciones.agregarObservador(observador);
+    }
+
+    public void setEstrategiaComision(EstrategiaComision estrategia) {
+        calculadoraComisiones.setEstrategia(estrategia);
+    }
+
+    private void configurarObservadoresPorDefecto() {
+        // Agregar observadores básicos
+        sujetoNotificaciones.agregarObservador(new RegistradorAuditoria());
+        sujetoNotificaciones.agregarObservador(new ControladorLimites());
     }
 
 
