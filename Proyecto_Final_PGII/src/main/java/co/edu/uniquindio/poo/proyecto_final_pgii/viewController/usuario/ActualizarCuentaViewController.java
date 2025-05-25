@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Cuenta;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.TipoCuenta;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +49,7 @@ public class ActualizarCuentaViewController {
     private TextField TextField_AgregarBancoCuenta;
 
     @FXML
-    private ComboBox<String> cmb_select_tipoCuenta;
+    private ComboBox<TipoCuenta> cmb_select_tipoCuenta;
 
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
@@ -55,14 +57,14 @@ public class ActualizarCuentaViewController {
 
         if (cuenta != null){
             String nuevoBanco = TextField_AgregarBancoCuenta.getText();
-            String nuevoTipoCuenta = TextField_AgregarNumeroCuenta.getText();
+            TipoCuenta nuevoTipoCuenta = cmb_select_tipoCuenta.getValue();
 
             if (nuevoBanco != null && !nuevoBanco.isBlank()){
                 cuenta.setNombreBanco(nuevoBanco);
             }
 
-            if (nuevoNumeroCuenta != null && !nuevoNumeroCuenta.isBlank()){
-                cuenta.setNumeroCuenta(nuevoNumeroCuenta);
+            if(nuevoTipoCuenta != null){
+                cuenta.setTipoCuenta(nuevoTipoCuenta);
             }
 
             Label_BancoCuenta.setText(cuenta.getNombreBanco());
@@ -85,6 +87,11 @@ public class ActualizarCuentaViewController {
         }
     }
 
+    private void cargarComboBoxTipoCuenta() {
+        cmb_select_tipoCuenta.setItems(FXCollections.observableArrayList(TipoCuenta.values()));
+        cmb_select_tipoCuenta.getSelectionModel().selectFirst();
+    }
+
     @FXML
     void initialize() {
         assert AnchorPane_MenuActualizarCuenta != null : "fx:id=\"AnchorPane_MenuActualizarCuenta\" was not injected: check your FXML file 'actualizarCuentaUsuario.fxml'.";
@@ -95,6 +102,9 @@ public class ActualizarCuentaViewController {
         assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'actualizarCuentaUsuario.fxml'.";
         assert TextField_AgregarBancoCuenta != null : "fx:id=\"TextField_AgregarBancoCuenta\" was not injected: check your FXML file 'actualizarCuentaUsuario.fxml'.";
         assert cmb_select_tipoCuenta != null : "fx:id=\"cmb_select_tipoCuenta\" was not injected: check your FXML file 'actualizarCuentaUsuario.fxml'.";
+
+        cargarComboBoxTipoCuenta();
+
 
     }
 

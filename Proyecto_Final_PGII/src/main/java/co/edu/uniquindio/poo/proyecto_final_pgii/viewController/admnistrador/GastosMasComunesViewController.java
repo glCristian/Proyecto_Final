@@ -55,12 +55,12 @@ public class GastosMasComunesViewController {
 
     @FXML
     void onClick_ExportarCSV(ActionEvent event) {
-        generarReporteGastosComunes("CSV");
+        System.out.println(GestorReportes.getInstancia().generarReporteGastosMasComunes("CSV"));
     }
 
     @FXML
     void onClick_ExportarPDF(ActionEvent event) {
-        generarReporteGastosComunes("PDF");
+        System.out.println(GestorReportes.getInstancia().generarReporteGastosMasComunes("PDF"));
     }
 
     @FXML

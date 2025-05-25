@@ -74,6 +74,7 @@ private static void crearPerfilesPrueba() {
 
 
     // Crear cuentas para Usuario 2 (Ana)
+
     Cuenta ana1 = new Cuenta("Cuenta Ahorros Ana","Bancolombia", "1678 8956 8907",TipoCuenta.AHORRO );
     ana.agregarCuenta(ana1);
     BilleteraVirtual.getInstancia().getCuentas().add(ana1);

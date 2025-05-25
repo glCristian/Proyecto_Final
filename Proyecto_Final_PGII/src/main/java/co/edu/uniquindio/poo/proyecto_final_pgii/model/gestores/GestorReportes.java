@@ -101,7 +101,7 @@ public class GestorReportes {
             case "CSV":
                 return new AdaptadorReporteCSV();
             case "PDF":
-                return new AdaptadorReportePDF();
+                return new ReportePDF();
             default:
                 return null;
         }

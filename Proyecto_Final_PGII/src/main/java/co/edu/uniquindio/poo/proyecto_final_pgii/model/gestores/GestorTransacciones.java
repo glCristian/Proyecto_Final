@@ -193,30 +193,35 @@ public class GestorTransacciones {
 
 
 
-
     public boolean realizarTransferencia(String idCuentaOrigen, String idCuentaDestino,
-                                         double monto, String descripcion, Categoria categoria) {
+                                  double monto, String descripcion, Categoria categoria) {
+        if (retirarDinero(idCuentaOrigen, monto)) {
+            if (depositarDinero(idCuentaDestino, monto)) {
 
-        // Realizar la transferencia original
-        boolean exito = realizarTransferencia(idCuentaOrigen, idCuentaDestino, monto, descripcion, categoria);
+                // Crear transacción
+                Transaccion transaccion = Transaccion.crearTransferencia(
+                        idCuentaOrigen, idCuentaDestino, monto, descripcion, categoria);
 
-        if (exito) {
-            // Crear transacción para notificaciones
-            Transaccion transaccion = Transaccion.crearTransferencia(
-                    idCuentaOrigen, idCuentaDestino, monto, descripcion, categoria);
+                // Registrar transacción
+                registrarTransaccion(transaccion);
 
-            // Calcular comisión
-            double comision = calculadoraComisiones.calcular(transaccion);
-            if (comision > 0) {
-                System.out.println(" Comisión aplicada: $" + comision +
-                        " (" + calculadoraComisiones.getEstrategiaActual() + ")");
+                // Calcular comisión
+                double comision = calculadoraComisiones.calcular(transaccion);
+                if (comision > 0) {
+                    System.out.println(" Comisión aplicada: $" + comision +
+                            " (" + calculadoraComisiones.getEstrategiaActual() + ")");
+                }
+
+                // Notificar observadores
+                sujetoNotificaciones.notificarObservadores(transaccion, "TRANSFERENCIA_COMPLETADA");
+
+                return true;
+            } else {
+                // Si falla el depósito, se revierte el retiro
+                depositarDinero(idCuentaOrigen, monto);
             }
-
-            // Notificar a observadores
-            sujetoNotificaciones.notificarObservadores(transaccion, "TRANSFERENCIA_COMPLETADA");
         }
-
-        return exito;
+        return false;
     }
 
 
