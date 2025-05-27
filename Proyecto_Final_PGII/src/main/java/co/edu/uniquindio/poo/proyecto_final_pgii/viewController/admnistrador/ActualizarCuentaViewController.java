@@ -48,6 +48,8 @@ public class ActualizarCuentaViewController {
     @FXML
     private ComboBox<TipoCuenta> cmb_select_tipoCuenta;
 
+    private Cuenta cuentaSeleccionada;
+
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
         Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
@@ -96,11 +98,29 @@ public class ActualizarCuentaViewController {
         assert cmb_select_tipoCuenta != null : "fx:id=\"cmb_select_tipoCuenta\" was not injected: check your FXML file 'actualizarCuentaAdmin.fxml'.";
 
         cargarComboBoxTipoCuenta();
+        mostrarDatosCuentaSeleccionada();
+
     }
 
     private void cargarComboBoxTipoCuenta() {
         cmb_select_tipoCuenta.setItems(FXCollections.observableArrayList(TipoCuenta.values()));
         cmb_select_tipoCuenta.getSelectionModel().selectFirst();
     }
+
+    private void mostrarDatosCuentaSeleccionada(){
+        Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
+
+        if (cuenta != null) {
+            // Mostrar en labels
+            Label_BancoCuenta.setText(cuenta.getNombreBanco());
+            Label_NumeroCuenta.setText(cuenta.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuenta.getSaldoTotal()));
+
+            // Mostrar en campos de edición
+            TextField_AgregarBancoCuenta.setText(cuenta.getNombreBanco());
+            cmb_select_tipoCuenta.setValue(cuenta.getTipoCuenta());
+        }
+    }
+
 
 }

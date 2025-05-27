@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 /**
  * Clase que representa a un administrador del sistema
@@ -10,6 +11,7 @@ public class Administrador extends Persona{
 
     private String contrasena;
     private String idAministrador;
+    private Collection<Cuenta> listaCuentasAdmin;
 
 
 
@@ -51,9 +53,21 @@ public class Administrador extends Persona{
         this.idAministrador = idAministrador;
     }
 
+    /**
+     * Metodo que obtiene las cuentas de un admin
+     * @return
+     */
+    public Collection<Cuenta> getListaCuentasAdmin() {
+        return listaCuentasAdmin;
+    }
 
-
-
+    /**
+     * Metodo que establece las cuentas de un admin
+     * @param listaCuentasAdmin
+     */
+    public void setListaCuentasAdmin(Collection<Cuenta> listaCuentasAdmin) {
+        this.listaCuentasAdmin = listaCuentasAdmin;
+    }
 
     //-------------------------------------Gestion de transacciones------------------//
 

@@ -2,13 +2,16 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.app.App;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 import co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.PantallaPrincipalUsuarioViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,6 +90,7 @@ public class PantallaPrincipalAdministradorViewController {
         assert Button_MenuUsuarios != null : "fx:id=\"Button_MenuUsuarios\" was not injected: check your FXML file 'pantallaPrincipalAdministrador.fxml'.";
         assert TableView_Usuarios != null : "fx:id=\"TableView_Usuarios\" was not injected: check your FXML file 'pantallaPrincipalAdministrador.fxml'.";
 
+        cargarUsuariosEnListView();
     }
 
     public static void cargarVistaEnPantallaPrincipal(AnchorPane contenedor, String nombreFXML) {
@@ -97,6 +101,23 @@ public class PantallaPrincipalAdministradorViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void cargarUsuariosEnListView() {
+        // Obtener todos los perfiles registrados
+        Collection<Persona> perfiles = BilleteraVirtual.getInstancia().getPerfiles();
+
+        // Filtrar solo los usuarios
+        List<Usuario> usuarios = perfiles.stream()
+                .filter(p -> p instanceof Usuario)
+                .map(p -> (Usuario) p)
+                .collect(Collectors.toList());
+
+        // Convertir a ObservableList para JavaFX
+        ObservableList<Usuario> observableUsuarios = FXCollections.observableArrayList(usuarios);
+
+        // Asignar la lista al ListView
+        TableView_Usuarios.setItems(observableUsuarios);
     }
 
 }

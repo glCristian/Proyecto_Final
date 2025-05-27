@@ -69,23 +69,29 @@ public class AgregarCuentaViewController {
 
     @FXML
     void onClick_anadirCuenta(ActionEvent event) {
-
         String idCuenta = TextField_IDdeLaCuenta.getText();
         String bancoCuenta = TextField_AgregarBancoCuenta.getText();
         String numeroCuenta = TextField_AgregarNumeroCuenta.getText();
         TipoCuenta tipoCuenta = cmb_select_tipoCuenta.getSelectionModel().getSelectedItem();
         double saldoCuenta = 0;
 
+        if(idCuenta.isEmpty() || bancoCuenta.isEmpty() || numeroCuenta.isEmpty() || tipoCuenta == null){
+            // podrías agregar un label para mensajes de error si lo deseas
+            System.out.println("Por favor llena todos los campos");
+            return;
+        }
 
         GestorCuentas.getInstancia().crearCuenta(idCuenta, bancoCuenta, numeroCuenta, tipoCuenta);
 
-        Cuenta cuentaAgregada = GestorCuentas.getInstancia().obtenerCuentaUsuario(idCuenta);
+        Cuenta cuentaAgregada = GestorCuentas.getInstancia().obtenerCuentaAdmin(idCuenta);
 
         if(cuentaAgregada != null){
             Label_BancoCuenta.setText(cuentaAgregada.getNombreBanco());
             Label_NumeroCuenta.setText(cuentaAgregada.getNumeroCuenta());
             Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaAgregada.getSaldoTotal()));
-
+            System.out.println("Cuenta creada");
+        } else {
+            System.out.println("No se pudo crear la cuenta");
         }
     }
 

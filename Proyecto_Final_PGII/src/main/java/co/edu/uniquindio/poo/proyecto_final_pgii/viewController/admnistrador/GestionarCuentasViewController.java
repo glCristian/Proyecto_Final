@@ -54,7 +54,12 @@ public class GestionarCuentasViewController {
 
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
-        cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/actualizarCuentaAdmin.fxml");
+        cuentaSeleccionada = ListView_Cuentas.getSelectionModel().getSelectedItem();
+        if (cuentaSeleccionada != null){
+            DatosCompartidos.getInstancia().setCuentaSeleccionada(cuentaSeleccionada);
+
+            cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/actualizarCuentaAdmin.fxml");
+        }
     }
 
 
@@ -85,6 +90,7 @@ public class GestionarCuentasViewController {
         assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
         assert ListView_Cuentas != null : "fx:id=\"ListView_Cuentas\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
 
+        mostrarDatos();
         cargarCuentas();
     }
 
@@ -101,6 +107,26 @@ public class GestionarCuentasViewController {
     public void cargarCuentas(){
         ObservableList<Cuenta> cuentas = FXCollections.observableArrayList(BilleteraVirtual.getInstancia().getCuentas());
         ListView_Cuentas.setItems(cuentas);
+    }
+
+    public void mostrarDatos(){
+        ListView_Cuentas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            cuentaSeleccionada = newSelection;
+            mostrarDatosCuentaSeleccionada();
+        });
+    }
+
+    private void mostrarDatosCuentaSeleccionada() {
+        if (cuentaSeleccionada != null) {
+            Label_BancoCuenta.setText(cuentaSeleccionada.getNombreBanco());
+            Label_NumeroCuenta.setText(cuentaSeleccionada.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("%.2f", cuentaSeleccionada.getSaldoTotal()));
+        } else {
+            // Si no hay cuenta seleccionada, limpiar labels
+            Label_BancoCuenta.setText("");
+            Label_NumeroCuenta.setText("");
+            Label_SaldoCuenta.setText("");
+        }
     }
 
     public void actualizarListViewCuentas (){

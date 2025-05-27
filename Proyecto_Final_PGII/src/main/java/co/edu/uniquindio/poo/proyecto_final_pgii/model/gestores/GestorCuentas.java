@@ -115,4 +115,20 @@ public class GestorCuentas {
 
 
 
+    /**
+     * Metodo para buscar una cuenta por su ID
+     */
+    public Cuenta obtenerCuentaAdmin(String idCuenta) {
+        Administrador admin = GestorSesion.getInstancia().getAdministradorActual();
+        if (admin != null) {
+            for (Cuenta cuenta : admin.getListaCuentasAdmin()) {
+                if (cuenta.getIdCuenta().equals(idCuenta)) {
+                    return cuenta;
+                }
+            }
+        }
+        return null;
+    }
+
+
 }
