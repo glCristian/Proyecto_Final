@@ -3,6 +3,12 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.UUID;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Categoria;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Cuenta;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -64,7 +70,40 @@ public class RetirarDineroViewController {
 
     @FXML
     void onClick_SacarDinero(ActionEvent event) {
+        Cuenta cuentaSeleccionada = DatosCompartidos.getInstancia().getCuentaSeleccionada();
 
+        if (cuentaSeleccionada == null){
+            System.out.println("No hay cuenta seleccionada");
+            return;
+        }
+
+        String montoTexto = TextField_MontoSacarDinero.getText();
+        String descripcion = TextField_DescripcionSacar.getText();
+        String categoria = TextField_CategoriaTransaccion.getText();
+        Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
+        String numeroCuentaOrigen = cuentaSeleccionada.getNumeroCuenta();
+
+        double monto;
+        try {
+            monto = Double.parseDouble(montoTexto);
+        } catch (NumberFormatException e){
+            System.out.println("El monto debe ser un numero valido");
+            return;
+        }
+
+        if (monto <= 0){
+            System.out.println("El monto debe ser mayor a cero");
+            return;
+        }
+
+        if (cuentaSeleccionada.getSaldoTotal() < monto){
+            System.out.println("Saldo insuficiente para realizar el retiro");
+            return;
+        }
+
+        GestorTransacciones.getInstancia().realizarRetiro(numeroCuentaOrigen, monto, descripcion, categoria1);
+
+        System.out.println("Dinero retirado exitosamente");
     }
 
     @FXML
@@ -80,6 +119,19 @@ public class RetirarDineroViewController {
         assert TextField_MontoSacarDinero != null : "fx:id=\"TextField_MontoSacarDinero\" was not injected: check your FXML file 'retirarDinero.fxml'.";
         assert TextField_NumeroCuentaDestinoSacar != null : "fx:id=\"TextField_NumeroCuentaDestinoSacar\" was not injected: check your FXML file 'retirarDinero.fxml'.";
 
+        cargarDatosCuenta();
+    }
+
+    /**
+     * Carga y muestra los datos de la cuenta seleccionada en los labels
+     */
+    public void cargarDatosCuenta(){
+        Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
+        if (cuenta != null){
+            Label_BancoCuenta.setText(cuenta.getNombreBanco());
+            Label_NumeroCuenta.setText(cuenta.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuenta.getSaldoTotal()));
+        }
     }
 
 }

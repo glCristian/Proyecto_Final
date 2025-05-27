@@ -126,7 +126,10 @@ public class EnviarDineroViewController {
         assert TextField_MontoTransferencia != null : "fx:id=\"TextField_MontoTransferencia\" was not injected: check your FXML file 'enviarDineroUsuario.fxml'.";
         assert TextField_NumeroCuentaDestinoTransferencia != null : "fx:id=\"TextField_NumeroCuentaDestinoTransferencia\" was not injected: check your FXML file 'enviarDineroUsuario.fxml'.";
         assert TextField_CategoriaTransaccion != null : "fx:id=\"TextField_TipoTransaccion\" was not injected: check your FXML file 'enviarDineroUsuario.fxml'.";
+
+        cargarDatosCuenta();
     }
+
 
     /**
      * Carga los datos de la cuenta seleccionada en los labels de la interfaz grafica

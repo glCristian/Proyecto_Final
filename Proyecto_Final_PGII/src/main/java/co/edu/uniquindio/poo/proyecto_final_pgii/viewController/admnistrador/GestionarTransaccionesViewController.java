@@ -3,6 +3,10 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Cuenta;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,7 +46,7 @@ public class GestionarTransaccionesViewController {
     private Label Label_SaldoCuenta;
 
     @FXML
-    private ListView<?> TableView_CuentasTransaccion;
+    private ListView<Cuenta> TableView_CuentasTransaccion;
 
     @FXML
     void onClick_AgregarDinero(ActionEvent event) {
@@ -70,6 +74,9 @@ public class GestionarTransaccionesViewController {
         assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'gestionarTransacciones.fxml'.";
         assert TableView_CuentasTransaccion != null : "fx:id=\"TableView_CuentasTransaccion\" was not injected: check your FXML file 'gestionarTransacciones.fxml'.";
 
+        cargarCuentas();
+        configurarSeleccionCuenta();
+
     }
 
 
@@ -81,6 +88,33 @@ public class GestionarTransaccionesViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * carga las cuentas del usuario actual en la listViw para su selecciom
+     */
+    private void cargarCuentas(){
+        TableView_CuentasTransaccion.setItems(
+                javafx.collections.FXCollections.observableArrayList(
+                        GestorSesion.getInstancia().getUsuarioActual().getListaCuentas()
+                )
+        );
+    }
+
+    /**
+     * Configura el comportamiento al seleccionar una cuenta en la lista
+     */
+    private void configurarSeleccionCuenta(){
+        TableView_CuentasTransaccion.setOnMouseClicked(mouseEvent -> {
+            Cuenta cuentaSeleccionada = TableView_CuentasTransaccion.getSelectionModel().getSelectedItem();
+            if (cuentaSeleccionada != null)
+                Label_BancoCuenta.setText(cuentaSeleccionada.getNombreBanco());
+            Label_NumeroCuenta.setText(cuentaSeleccionada.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaSeleccionada.getSaldoTotal()));
+
+            DatosCompartidos.getInstancia().setCuentaSeleccionada(cuentaSeleccionada);
+        });
     }
 
 }

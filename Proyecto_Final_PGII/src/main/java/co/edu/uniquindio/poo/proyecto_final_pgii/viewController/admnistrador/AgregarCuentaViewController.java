@@ -2,6 +2,11 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Cuenta;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.TipoCuenta;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -46,15 +51,10 @@ public class AgregarCuentaViewController {
     private TextField TextField_IDdeLaCuenta;
 
     @FXML
-    private ComboBox<?> cmb_select_tipoCuenta;
+    private ComboBox<TipoCuenta> cmb_select_tipoCuenta;
 
     @FXML
     void onClick_AtrasMenuCuentas(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onClick_anadirCuenta(ActionEvent event) {
         try {
             AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuAgregarCuentas.getParent();
 
@@ -64,6 +64,28 @@ public class AgregarCuentaViewController {
             );
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void onClick_anadirCuenta(ActionEvent event) {
+
+        String idCuenta = TextField_IDdeLaCuenta.getText();
+        String bancoCuenta = TextField_AgregarBancoCuenta.getText();
+        String numeroCuenta = TextField_AgregarNumeroCuenta.getText();
+        TipoCuenta tipoCuenta = cmb_select_tipoCuenta.getSelectionModel().getSelectedItem();
+        double saldoCuenta = 0;
+
+
+        GestorCuentas.getInstancia().crearCuenta(idCuenta, bancoCuenta, numeroCuenta, tipoCuenta);
+
+        Cuenta cuentaAgregada = GestorCuentas.getInstancia().obtenerCuentaUsuario(idCuenta);
+
+        if(cuentaAgregada != null){
+            Label_BancoCuenta.setText(cuentaAgregada.getNombreBanco());
+            Label_NumeroCuenta.setText(cuentaAgregada.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaAgregada.getSaldoTotal()));
+
         }
     }
 
@@ -80,6 +102,16 @@ public class AgregarCuentaViewController {
         assert TextField_IDdeLaCuenta != null : "fx:id=\"TextField_IDdeLaCuenta\" was not injected: check your FXML file 'agregarCuentaAdmin.fxml'.";
         assert cmb_select_tipoCuenta != null : "fx:id=\"cmb_select_tipoCuenta\" was not injected: check your FXML file 'agregarCuentaAdmin.fxml'.";
 
+        cargarComboBoxTipoCuenta();
+    }
+
+
+    /**
+     * Carga las opciones del comboBox con los valores del enum TipoCuenta
+     */
+    private void cargarComboBoxTipoCuenta() {
+        cmb_select_tipoCuenta.setItems(FXCollections.observableArrayList(TipoCuenta.values()));
+        cmb_select_tipoCuenta.getSelectionModel().selectFirst();
     }
 
 }

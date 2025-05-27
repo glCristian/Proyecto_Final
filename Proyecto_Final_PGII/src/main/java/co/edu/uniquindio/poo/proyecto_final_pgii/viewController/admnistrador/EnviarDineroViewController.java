@@ -2,6 +2,12 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.UUID;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Categoria;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Cuenta;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -63,7 +69,35 @@ public class EnviarDineroViewController {
 
     @FXML
     void onClick_EnviarDinero(ActionEvent event) {
+        Cuenta cuentaSeleccionada = DatosCompartidos.getInstancia().getCuentaSeleccionada();
 
+        if (cuentaSeleccionada == null){
+            System.out.println("No hay cuenta seleccionada");
+            return;
+        }
+
+        String cuentaOrigen = cuentaSeleccionada.getNumeroCuenta();
+        String numeroDestino = TextField_NumeroCuentaDestinoTransferencia.getText();
+        String montoStr = TextField_MontoTransferencia.getText();
+        String descripcion = TextField_DescripcionTransferencia.getText();
+        String categoria = TextField_CategoriaTransaccion.getText();
+        Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
+
+        double monto;
+        try {
+            monto = Double.parseDouble(montoStr);
+            if (monto <= 0){
+                System.out.println("El monto debe ser mayor a cero");
+                return;
+            }
+        } catch (NumberFormatException e){
+            System.out.println("Monto invalido");
+            return;
+        }
+
+        GestorTransacciones.getInstancia().realizarTransferencia(cuentaOrigen, numeroDestino, monto, descripcion, categoria1);
+
+        System.out.println("Transferencia realizada con exito");
     }
 
     @FXML
@@ -79,6 +113,19 @@ public class EnviarDineroViewController {
         assert TextField_MontoTransferencia != null : "fx:id=\"TextField_MontoTransferencia\" was not injected: check your FXML file 'enviarDinero.fxml'.";
         assert TextField_NumeroCuentaDestinoTransferencia != null : "fx:id=\"TextField_NumeroCuentaDestinoTransferencia\" was not injected: check your FXML file 'enviarDinero.fxml'.";
 
+        cargarDatosCuenta();
+    }
+
+    /**
+     * Carga los datos de la cuenta seleccionada en los labels de la interfaz grafica
+     */
+    public void cargarDatosCuenta(){
+        Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
+        if (cuenta != null){
+            Label_BancoCuenta.setText(cuenta.getNombreBanco());
+            Label_NumeroCuenta.setText(cuenta.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuenta.getSaldoTotal()));
+        }
     }
 
 }

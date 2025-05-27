@@ -2,6 +2,12 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.UUID;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Categoria;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Cuenta;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -49,8 +55,30 @@ public class AgregarDineroViewController {
 
     @FXML
     void onClick_AgregarDinero(ActionEvent event) {
+        String montoStr = TextField_MontoAgregarDinero.getText();
+        String descripcion = TextField_DescripcionAgregar.getText();
+        String cuentaDestino = TextField_NumeroCuentaOrigenAgregar.getText();
+        String categoria = TextField_CategoriaTransaccion.getText();
+        Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
 
+
+        double monto;
+        try {
+            monto = Double.parseDouble(montoStr);
+            if (monto <= 0){
+                System.out.println("El monto debe ser mayor a cero");
+                return;
+            }
+        } catch (NumberFormatException e){
+            System.out.println("Monto invalido");
+            return;
+        }
+
+        GestorTransacciones.getInstancia().realizarDeposito(cuentaDestino, monto, descripcion, categoria1);
+
+        System.out.println("Deposito realizado con exito");
     }
+
 
     @FXML
     void onClick_AtrasMenuTransaccion(ActionEvent event) {
@@ -79,6 +107,19 @@ public class AgregarDineroViewController {
         assert TextField_MontoAgregarDinero != null : "fx:id=\"TextField_MontoAgregarDinero\" was not injected: check your FXML file 'agregarDinero.fxml'.";
         assert TextField_NumeroCuentaOrigenAgregar != null : "fx:id=\"TextField_NumeroCuentaOrigenAgregar\" was not injected: check your FXML file 'agregarDinero.fxml'.";
 
+        cargarDatosCuenta();
+    }
+
+    /**
+     * Carga los datos de la cuenta seleccionada en los labels correspondientes
+     */
+    public void cargarDatosCuenta(){
+        Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
+        if (cuenta != null){
+            Label_BancoCuenta.setText(cuenta.getNombreBanco());
+            Label_NumeroCuenta.setText(cuenta.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuenta.getSaldoTotal()));
+        }
     }
 
 }
