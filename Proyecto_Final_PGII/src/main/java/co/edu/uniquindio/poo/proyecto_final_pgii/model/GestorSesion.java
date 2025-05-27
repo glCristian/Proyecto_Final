@@ -49,6 +49,13 @@ public class GestorSesion {
         return perfilActual != null;
     }
 
+    /**
+     * estblece el usuario actual
+     * @param perfilActual
+     */
+    public void setPerfilActual(Persona perfilActual) {
+        this.perfilActual = perfilActual;
+    }
 
     /**
      * Verifica si el perfil actual es un usuario.

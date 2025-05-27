@@ -177,7 +177,7 @@ public class BilleteraVirtualFacade {
      * @param email
      * @return
      */
-    private Usuario buscarUsuarioPorEmail(String email) {
+    public Usuario buscarUsuarioPorEmail(String email) {
         for (Persona persona : BilleteraVirtual.getInstancia().getPerfiles()) {
             if (persona instanceof Usuario usuario && usuario.getEmail().equals(email)) {
                 return usuario;

@@ -51,12 +51,12 @@
             </ImageView>
             <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="56.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../../statistics-graph-stats-analytics-business-data-svgrepo-com.png" />
+                  <Image url="@../../../../../../imagenes/statistics-graph-stats-analytics-business-data-svgrepo-com.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="55.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../../users-svgrepo-com.png" />
+                  <Image url="@../../../../../../imagenes/users-svgrepo-com.png" />
                </image>
             </ImageView>
             <Button fx:id="Button_CerrarSesionAdmin" layoutX="15.0" layoutY="422.0" mnemonicParsing="false" onAction="#onClick_CerrarSesionAdmin" prefHeight="27.0" prefWidth="116.0" style="-fx-background-color: #292757;" text="Cerrar Sesion" textFill="#9327f0" underline="true">
