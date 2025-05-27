@@ -6,12 +6,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Clase singleton para gestionar las transacciones de la billetera virtual
+ * permitiendo crear, consultar y eliminar transacciones asociadas al usuario actual
+ */
 public class GestorTransacciones {
 
     private static GestorTransacciones instancia;
     private SujetoTransacciones sujetoNotificaciones;
     private CalculadoraComisiones calculadoraComisiones;
 
+    /**
+     * Cosntructor privado de la clase GestorTransacciones
+     */
     private GestorTransacciones() {
         super();
         this.sujetoNotificaciones = new SujetoTransacciones();
@@ -22,7 +29,10 @@ public class GestorTransacciones {
     }
 
 
-
+    /**
+     * Metodo que retorna la instancia unica de gestorTransacciones, creando una nueva si no existe
+     * @return
+     */
     public static GestorTransacciones getInstancia(){
         if(instancia == null){
             instancia = new GestorTransacciones();
@@ -189,11 +199,15 @@ public class GestorTransacciones {
     }
 
 
-
-
-
-
-
+    /**
+     * Metodo que realiza una transferencia
+     * @param idCuentaOrigen
+     * @param idCuentaDestino
+     * @param monto
+     * @param descripcion
+     * @param categoria
+     * @return
+     */
     public boolean realizarTransferencia(String idCuentaOrigen, String idCuentaDestino,
                                   double monto, String descripcion, Categoria categoria) {
         if (retirarDinero(idCuentaOrigen, monto)) {

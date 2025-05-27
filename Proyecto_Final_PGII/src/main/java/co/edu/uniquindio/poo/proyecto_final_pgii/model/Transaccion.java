@@ -3,6 +3,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
+/**
+ * Representa una transaccion financiera
+ */
 public class Transaccion {
 
     private String idTransaccion;
@@ -167,8 +170,9 @@ public class Transaccion {
     }
 
 
-
-
+    /**
+     * Muestra por consola los detalles completos de la transaccion
+     */
     public void mostrarTransaccion() {
         System.out.println("ID Transacción: " + idTransaccion);
         System.out.println("Fecha: " + fecha);
@@ -180,6 +184,13 @@ public class Transaccion {
         System.out.println("Tipo de Transacción: " + tipoTransaccion.name());
     }
 
+    /**
+     * Actualiza datos clave de la transaccion
+     * @param descripcion
+     * @param monto
+     * @param cuentaDestino
+     * @param categoria
+     */
     public void actualizarTransaccion(String descripcion, double monto, String cuentaDestino, Categoria categoria) {
         this.descripcion = descripcion;
         this.monto = monto;
@@ -187,6 +198,10 @@ public class Transaccion {
         this.categoria = categoria;
     }
 
+    /**
+     * Verifica si la transaccion es valida
+     * @return
+     */
     public boolean esValida() {
         return monto > 0 && cuentaOrigen != null && cuentaDestino != null && tipoTransaccion != null;
     }
@@ -206,6 +221,14 @@ public class Transaccion {
     // MÉTODOS FACTORY PERSONALIZADOS
     // ===============================
 
+    /**
+     * Crea una transaccion de tipo retiro
+     * @param cuentaOrigen
+     * @param monto
+     * @param descripcion
+     * @param categoria
+     * @return
+     */
     public static Transaccion crearRetiro(String cuentaOrigen, double monto, String descripcion, Categoria categoria) {
         return new Transaccion(
                 generarIdUnico(),
@@ -219,6 +242,14 @@ public class Transaccion {
         );
     }
 
+    /**
+     * Crea una transaccion de tipo deposito
+     * @param cuentaDestino
+     * @param monto
+     * @param descripcion
+     * @param categoria
+     * @return
+     */
     public static Transaccion crearDeposito(String cuentaDestino, double monto, String descripcion, Categoria categoria) {
         return new Transaccion(
                 generarIdUnico(),
@@ -232,6 +263,15 @@ public class Transaccion {
         );
     }
 
+    /**
+     * Crea una transaccion de tipo transferencia
+     * @param cuentaOrigen
+     * @param cuentaDestino
+     * @param monto
+     * @param descripcion
+     * @param categoria
+     * @return
+     */
     public static Transaccion crearTransferencia(String cuentaOrigen, String cuentaDestino,
                                                  double monto, String descripcion, Categoria categoria) {
         return new Transaccion(

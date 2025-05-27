@@ -2,6 +2,10 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
 
+/**
+ * Comando que representa una transferencia de dinero entre dos cuentas
+ * Implementa el patron command permitiendo ejecutar y deshacer la transferencia
+ */
 public class ComandoTransferencia implements Comando{
 
     private String cuentaOrigen;
@@ -11,6 +15,14 @@ public class ComandoTransferencia implements Comando{
     private Categoria categoria;
     private boolean ejecutado;
 
+    /**
+     * Constructor de la clase ComandoTransferencia
+     * @param cuentaOrigen
+     * @param cuentaDestino
+     * @param monto
+     * @param descripcion
+     * @param categoria
+     */
     public ComandoTransferencia(String cuentaOrigen, String cuentaDestino,
                                 double monto, String descripcion, Categoria categoria) {
         this.cuentaOrigen = cuentaOrigen;
@@ -21,6 +33,11 @@ public class ComandoTransferencia implements Comando{
         this.ejecutado = false;
     }
 
+
+    /**
+     * Metodo que ejecuta la transferencia realizando el movimiento de dinero desde la cuenta origen
+     * a la cuenta destino usando el gestorTrnasacciones
+     */
     @Override
     public void ejecutar() {
         if (!ejecutado) {
@@ -33,6 +50,10 @@ public class ComandoTransferencia implements Comando{
         }
     }
 
+    /**
+     * Metodo que deshace la transferencia realizando una transferencia inversa desde la cuenta destino
+     * hacia la cuenta origen para revertir el movimiento anterior
+     */
     @Override
     public void deshacer() {
         if (ejecutado) {
@@ -47,6 +68,10 @@ public class ComandoTransferencia implements Comando{
         }
     }
 
+    /**
+     * Metodo que devuelve una descripcion de la transferencia indicando el monto, cuenta origen y destino
+     * @return
+     */
     @Override
     public String getDescripcion() {
         return "Transferencia de $" + monto + " de " + cuentaOrigen + " a " + cuentaDestino;

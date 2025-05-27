@@ -2,12 +2,24 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 
+/**
+ * Clase singleton encargada de gestionar las operaciones relacionadas con cuentas bancarias
+ * dentro del sistema de la billetera virtual
+ */
 public class GestorCuentas {
+
     private static GestorCuentas instancia;
 
+    /**
+     * Constructor privado de la clase GestorCuentas
+     */
     private GestorCuentas() {
     }
 
+    /**
+     * Metodo que retorna la instancia unica de gestorCuentas, creando una nueva si no existe
+     * @return
+     */
     public static GestorCuentas getInstancia() {
         if (instancia == null) {
             instancia = new GestorCuentas();
@@ -77,6 +89,11 @@ public class GestorCuentas {
     }
 
 
+    /**
+     * Metodo que elimina una cuenta especifica de cualquier usuario del sistema,
+     * de la lista global de cuentas y sus transacciones aosicadas
+     * @param cuenta
+     */
     public void eliminarCuentagenerico(Cuenta cuenta) {
         if (cuenta == null) return;
 

@@ -1,8 +1,11 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
-
 import java.util.Date;
 
+/**
+ * Clase que representa una notificacion en el sistema
+ * Las notificaciones permiten informar al usuario sobre eventos importantes
+ */
 public class Notificacion {
 
     private String idNotificacion;
@@ -89,8 +92,10 @@ public class Notificacion {
         this.tipo = tipo;
     }
 
-
-
+    /**
+     * Devuelve una representacion en texto de la notificacion
+     * @return
+     */
     public String mostrarNotificacion() {
         return "Notificación ID: " + idNotificacion + "\nMensaje: " + mensaje + "\nFecha: " + fecha + "\nTipo: " + tipo;
     }

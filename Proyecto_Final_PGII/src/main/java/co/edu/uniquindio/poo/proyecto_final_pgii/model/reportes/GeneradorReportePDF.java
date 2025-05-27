@@ -19,9 +19,21 @@ import com.lowagie.text.Element;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.PdfPTable;
 
+/**
+ * Clase responsable de generar un reporte PDF
+ * Se utiliza la libreria openPDF para la creacion del documento
+ */
 public class GeneradorReportePDF {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
+    /**
+     * Genera un archivo PDF en memoria que contiene el reporte
+     * @param gastos
+     * @param top5
+     * @param contador
+     * @return
+     * @throws DocumentException
+     */
     public byte[] crearPDF(List<Transaccion> gastos, List<Map.Entry<String, Double>> top5, Map<String, Integer> contador) throws DocumentException {
         Document document = new Document();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -71,6 +83,15 @@ public class GeneradorReportePDF {
         return baos.toByteArray();
     }
 
+    /**
+     * Genera un archivo PDF en una ruta especifica del sistema de archivos
+     * @param gastos
+     * @param top5
+     * @param contador
+     * @param rutaArchivo
+     * @throws IOException
+     * @throws DocumentException
+     */
     public void crearPDFenArchivo(List<Transaccion> gastos, List<Map.Entry<String, Double>> top5, Map<String, Integer> contador, String rutaArchivo) throws IOException, DocumentException {
         byte[] pdfBytes = crearPDF(gastos, top5, contador);
         try (FileOutputStream fos = new FileOutputStream(rutaArchivo)) {

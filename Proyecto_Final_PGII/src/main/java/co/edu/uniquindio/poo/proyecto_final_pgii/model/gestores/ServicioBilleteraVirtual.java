@@ -2,11 +2,18 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 
+/**
+ * Clase de servicio que actua como fachada intermediaria entre la interfaz de usuario y la logica interna de la billetera virtual
+ * Utiliza patrones como facade, command, strategy, observer, adapter para delegar operaciones complejas de manera simplificada
+ */
 public class ServicioBilleteraVirtual {
     private BilleteraVirtualFacade facade;
     private GestorComandos gestorComandos;
     private GestorTransacciones gestorTransacciones;
 
+    /**
+     * Constructor de la clase ServicioBilleteraVirtual
+     */
     public ServicioBilleteraVirtual() {
         this.facade = new BilleteraVirtualFacade();
         this.gestorComandos = GestorComandos.getInstancia();

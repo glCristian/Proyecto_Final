@@ -1,6 +1,8 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
-
+/**
+ * Clase que representa un presupuesto dentro del sistema
+ */
 public class Presupuesto {
 
     private String idPresupuesto;
@@ -8,12 +10,10 @@ public class Presupuesto {
     private double montoAsignado;
     private double montoGastado;
     private Categoria categoria;
-
     /**
      * Constructor de la clase Presupuesto
      * @param idPresupuesto
      * @param nombre
-     * @param montoTotal
      * @param montoGastado
      * @param categoria
      */
@@ -107,15 +107,29 @@ public class Presupuesto {
     }
 
 
+    /**
+     * Actualiza el monto asigando del presupuesto
+     * @param montoNuevo
+     */
     public void actualizarPresupuesto(double montoNuevo){
         this.montoAsignado = montoNuevo;
         System.out.println("Presupuesto actualizado a " + montoNuevo);
     }
 
+
+    /**
+     * Consulta el estado actual del presupuesto
+     * @return
+     */
     public String consultarEstado(){
         return "Presupuesto: " + nombre + "\nMonto Asignado: " + montoAsignado + "\nMonto Gastado: " + montoGastado;
     }
 
+
+    /**
+     * Agrega un monto de gasto al presupuesto y actualiza el valor total gastado
+      * @param monto
+     */
     public void agregarGasto(double monto) {
         montoGastado += monto;
         System.out.println("Gasto agregado de " + monto + " al presupuesto " + nombre);

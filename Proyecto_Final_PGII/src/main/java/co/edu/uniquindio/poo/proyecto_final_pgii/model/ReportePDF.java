@@ -3,10 +3,15 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 import java.util.List;
 
 /**
- * Implementacion directa para reportes PDF
+ * Implementacion de la interfaz ReporteExportable para generar reportes en formato PDF
  */
 public class ReportePDF implements ReporteExportable{
 
+    /**
+     * Genera un reporte en formato PDF con la informacion de las transacciones (simulado como texto)
+     * @param transacciones
+     * @return
+     */
     @Override
     public String generarReporte(List<Transaccion> transacciones) {
         StringBuilder pdf = new StringBuilder();
@@ -24,6 +29,10 @@ public class ReportePDF implements ReporteExportable{
         return pdf.toString();
     }
 
+    /**
+     * Retorna el formato de archivo que representa esta implemetacion
+     * @return
+     */
     @Override
     public String getFormatoArchivo() {
         return "PDF";

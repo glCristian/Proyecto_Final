@@ -1,9 +1,11 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
-
 import java.util.Collection;
 import java.util.LinkedList;
 
+/**
+ * Clase que representa un movimiento compuesto por un conjunto de transacciones
+ */
 public class Movimiento {
 
     private String idMovimiento;

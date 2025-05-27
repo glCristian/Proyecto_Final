@@ -1,5 +1,8 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
+/**
+ * Clase que representa una persona con informacion basica
+ */
 public class Persona {
 
     private String nombres;
@@ -107,7 +110,6 @@ public class Persona {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
 
     public void actualizarDatos(){
 

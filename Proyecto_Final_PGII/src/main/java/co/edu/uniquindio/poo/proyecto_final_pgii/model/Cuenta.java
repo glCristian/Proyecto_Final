@@ -1,9 +1,11 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
-
 import java.util.Collection;
 import java.util.LinkedList;
 
+/**
+ * Representa una cuenta bancaria con su informacion basica
+ */
 public class Cuenta {
 
     private String idCuenta;
@@ -127,6 +129,10 @@ public class Cuenta {
     }
 
 
+    /**
+     * Deposita un monto en la cuenta, incrementando el saldo total
+     * @param monto
+     */
     public void depositar(double monto) {
         if (monto > 0) {
             saldoTotal += monto;
@@ -136,6 +142,12 @@ public class Cuenta {
         }
     }
 
+
+    /**
+     * Retira un monto de la cuenta su hay saldo suficiente
+     * @param monto
+     * @return
+     */
     public boolean retirar(double monto) {
         if (saldoTotal >= monto) {
             saldoTotal -= monto;
@@ -147,8 +159,10 @@ public class Cuenta {
     }
 
 
-
-
+    /**
+     * Consulta el saldo actual disponible en la cuenta
+     * @return
+     */
     public double consultarSaldo() {
         return saldoTotal;
     }

@@ -1,15 +1,14 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.UUID;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
+/**
+ * Clase que representa a un usuario del sistema, extiende de persona
+ */
 public class Usuario extends Persona{
 
     private String idUsuario;
@@ -98,8 +97,6 @@ public class Usuario extends Persona{
 
 
 
-
-
     /**
      * Metodo que obtiene las cuentas
      * @return
@@ -133,11 +130,19 @@ public class Usuario extends Persona{
     }
 
 
+    /**
+     * Agrega una cuenta a la lista de cuentas del usuario
+     * @param cuenta
+     */
     public void agregarCuenta(Cuenta cuenta) {
         listaCuentas.add(cuenta);
         System.out.println("Cuenta agregada: " + cuenta.getIdCuenta());
     }
 
+    /**
+     * Elimina una cuenta de la lista segun su ID
+     * @param idCuenta
+     */
     public void eliminarCuenta(String idCuenta) {
         for (Cuenta cuenta : listaCuentas) {
             if (cuenta.getIdCuenta().equals(idCuenta)) {
@@ -147,8 +152,10 @@ public class Usuario extends Persona{
         }
     }
 
-
-
+    /**
+     * Consulta y devuelve todas las cuentas del usuario
+     * @return
+     */
     public Collection<Cuenta> consultarCuentas() {
         return listaCuentas;
     }
@@ -170,6 +177,10 @@ public class Usuario extends Persona{
     }
 
 
+    /**
+     * Realiza un deposito de dinero en una cuenta si esta pertence al usuario
+     * registra la transaccion en la lista de transacciones
+     */
     public boolean agregarDinero(Cuenta cuenta, double monto) {
         if (listaCuentas.contains(cuenta)) {
             cuenta.depositar(monto);
@@ -186,9 +197,10 @@ public class Usuario extends Persona{
         }
     }
 
-
-
-
+    /**
+     * Retira dinero de una cuenta si hay saldo suficiente
+     * registra la transaccion en la lista de transacciones
+     */
     public boolean retirarDinero(Cuenta cuenta, double monto) {
         if (cuenta.retirar(monto)) {
 
@@ -203,7 +215,13 @@ public class Usuario extends Persona{
         }
     }
 
-
+    /**
+     * Tranfiere dinero entre dos cuentas si la cuenta origen tiene saldo suficiente
+     * registra la transaccion de transferencia
+     * @param cuentaOrigen
+     * @param cuentaDestino
+     * @param monto
+     */
     public void transferirDinero(Cuenta cuentaOrigen, Cuenta cuentaDestino, double monto){
         if (cuentaOrigen.retirar(monto)) {
             cuentaDestino.depositar(monto);
@@ -216,12 +234,21 @@ public class Usuario extends Persona{
 
     }
 
+    /**
+     * Agrega un presupuesto a la lista de presupuestos del usuario
+     * @param presupuesto
+     */
     public void agregarPresupuesto(Presupuesto presupuesto){
         listaPresupuestos.add(presupuesto);
         System.out.println("Presupuesto creado: " + presupuesto.getNombre());
     }
 
-
+    /**
+     * Modifica un presupuesto existente identificado por su ID
+     * actualiza el monto asignado del presupuesto
+     * @param id
+     * @param nuevoPresupuesto
+     */
     public void modificarPresupuesto(String id, Presupuesto nuevoPresupuesto) {
         for (Presupuesto presupuesto : listaPresupuestos) {
             if (presupuesto.getIdPresupuesto().equals(id)) {
@@ -231,18 +258,27 @@ public class Usuario extends Persona{
         }
     }
 
-
+    /**
+     * Elimina un presupuesto de la lista por su ID
+     * @param idPresupuesto
+     */
     public void eliminarPresupuesto(String idPresupuesto) {
         listaPresupuestos.removeIf(p -> p.getIdPresupuesto().equals(idPresupuesto));
         System.out.println("Presupuesto eliminado.");
     }
 
-
-
+    /**
+     * Consulta todos los movimientos o transacciones del usuario
+     * @return
+     */
     public Collection<Transaccion> consultarTransacciones() {
         return listaTransacciones;
     }
 
+    /**
+     * Consulta el saldo total disponible sumando el saldo de todas las cuentas del usuario
+     * @return
+     */
     public double consultarSaldo() {
         double saldoTotal = 0;
         for (Cuenta cuenta : listaCuentas) {
@@ -251,12 +287,21 @@ public class Usuario extends Persona{
         return saldoTotal;
     }
 
+    /**
+     * Filtra las transacciones del usuario por el tipo de transaccion especificado
+     * @param tipo
+     * @return
+     */
    public LinkedList<Transaccion> fitrarPorTipoTransaccion(TipoTransaccion tipo) {
         return (LinkedList<Transaccion>) listaTransacciones.stream().filter(t -> t.getTipoTransaccion()
                 .equals(tipo)).collect(Collectors.toList());
    }
 
-
+    /**
+     * Busca una cuenta dentro de la lista de cuentas del usuario dado un ID
+     * @param idCuenta
+     * @return
+     */
     public Cuenta buscarCuenta(String idCuenta) {
         for (Cuenta cuenta : listaCuentas) {
             if (cuenta.getIdCuenta().equals(idCuenta)) {

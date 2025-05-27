@@ -1,8 +1,11 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
-
 import java.time.LocalDateTime;
 
+/**
+ * Clase que representa a un administrador del sistema
+ * Hereda de la clase PERSONA y permite gestionar operaciones de admistracion
+ */
 public class Administrador extends Persona{
 
     private String contrasena;

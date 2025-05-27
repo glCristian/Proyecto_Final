@@ -3,6 +3,9 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 import java.util.Collection;
 import java.util.LinkedList;
 
+/**
+ * Clase que represenra una categoria
+ */
 public class Categoria {
 
     private String idCategoria;
@@ -73,6 +76,12 @@ public class Categoria {
     }
 
 
+    /**
+     * Metodo que crea una nueva categoria y la agrega a la lista interna
+     * @param idCategoria
+     * @param nombre
+     * @param descripcion
+     */
     public void crearCategoria(String idCategoria, String nombre, String descripcion) {
         Categoria nuevaCategoria = new Categoria(idCategoria, nombre, descripcion);
         listaCategorias.add(nuevaCategoria);
@@ -80,12 +89,23 @@ public class Categoria {
     }
 
 
+    /**
+     * Metodo que actualiza el nombre y la descripcion de la categoria actual
+     * @param nombre
+     * @param descripcion
+     */
     public void actualizarCategoria(String nombre, String descripcion){
         this.nombre = nombre;
         this.descripcion = descripcion;
         System.out.println("Categoría actualizada: " + nombre);
     }
 
+
+    /**
+     * Metodo que elimina una categoria de la lista interna segun su ID
+     * @param idCategoria
+     * @return
+     */
     public boolean eliminarCategoria(String idCategoria) {
         for (Categoria categoria : listaCategorias) {
             if (categoria.getIdCategoria().equals(idCategoria)) {
@@ -98,6 +118,10 @@ public class Categoria {
         return false;
     }
 
+    /**
+     * representacion en string de la categoria, que devuelve su nombre
+     * @return
+     */
     @Override
     public String toString() {
         return nombre;

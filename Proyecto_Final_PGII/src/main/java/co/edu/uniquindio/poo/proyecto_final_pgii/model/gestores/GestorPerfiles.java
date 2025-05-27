@@ -4,16 +4,24 @@ import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 
 
 /**
- * Clase para la gestión de perfiles tanto de usuarrios como de administradores
+ * Clase Singleton para la gestión de perfiles de usuarios y administradores
+ * Permite autenticacion, creacion, actualizacion y eliminacion de perfiles
  */
 public class GestorPerfiles {
 
     private static GestorPerfiles instancia;
 
-
+    /**
+     * Constructor privado de la clase GestorPerfiles
+     */
     private GestorPerfiles() {
     }
 
+
+    /**
+     * Metodo que retorna la instancia unica de gestorPerfiles, creando una nueva si no existe
+     * @return
+     */
     public static GestorPerfiles getInstancia() {
         if (instancia == null) {
             instancia = new GestorPerfiles();

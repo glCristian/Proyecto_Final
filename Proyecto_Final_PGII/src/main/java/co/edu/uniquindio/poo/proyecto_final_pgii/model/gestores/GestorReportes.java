@@ -9,13 +9,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Clase Singleton encargada de generar reportes a partir de los datos almacenados en la billetera virtual
+ * permite obtener transacciones, cuentas y usuarios filtrador por distintos criterios
+ */
 public class GestorReportes {
 
     private static GestorReportes instancia;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-    private GestorReportes() {}
+    /**
+     * Constructor privado de la clase GestorReportes
+     */
+    private GestorReportes() {
+    }
 
+    /**
+     * Metodo que retorna la instancia unica de gestorReportes, creando una nueva si no existe
+     * @return
+     */
     public static GestorReportes getInstancia() {
         if (instancia == null) {
             instancia = new GestorReportes();
@@ -23,6 +35,12 @@ public class GestorReportes {
         return instancia;
     }
 
+
+    /**
+     * Metodo que recolecta y estructura los datos necesarios para generar el reporte.
+     * Agrupa las transacciones por categoria y calcula los montos y porcentajes correspondientes a cada una
+     * @return
+     */
     private Map<String, Object> obtenerDatosReporte() {
         Map<String, Object> datos = new HashMap<>();
 
@@ -68,6 +86,13 @@ public class GestorReportes {
         return datos;
     }
 
+
+    /**
+     * Genera un reporte en formato PDF con la informacion de gastos mas comunes por categoria
+     * @param formato
+     * @param rutaDestino
+     * @throws IOException
+     */
     public void generarReporteGastosMasComunes(String formato, String rutaDestino) throws IOException {
         if ("PDF".equals(formato)) {
             GeneradorReportePDF generador = new GeneradorReportePDF();
