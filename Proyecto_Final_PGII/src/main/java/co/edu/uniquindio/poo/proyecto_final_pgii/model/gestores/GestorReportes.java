@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.reportes.GeneradorReportePDF;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -145,46 +146,65 @@ public class GestorReportes {
     /**
      * Generar reporte de gastos en formato PDF
      */
+//    private String generarReporteGastosPDF(List<Transaccion> gastos,
+//                                           List<Map.Entry<String, Double>> top5,
+//                                           Map<String, Integer> contador) {
+//        StringBuilder pdf = new StringBuilder();
+//
+//        // Encabezado principal
+//        pdf.append("═".repeat(80)).append("\n");
+//        pdf.append("                 REPORTE DE GASTOS MÁS COMUNES \n");
+//        pdf.append("═".repeat(80)).append("\n");
+//        pdf.append("Fecha de generación: ").append(LocalDateTime.now().format(formatter)).append("\n");
+//        pdf.append("Total de gastos analizados: ").append(gastos.size()).append("\n");
+//        pdf.append("Tipos incluidos: Retiros y Transferencias\n");
+//        pdf.append("Sistema: Billetera Virtual con Patrones de Diseño\n");
+//        pdf.append("═".repeat(80)).append("\n\n");
+//
+//        // Ranking de categorías más comunes
+//        pdf.append("🏆 RANKING DE CATEGORÍAS MÁS COMUNES:\n");
+//        pdf.append("═".repeat(80)).append("\n");
+//
+//        String[] medallas = {"🥇", "🥈", "🥉", "🏅", "🏅"};
+//
+//        for (int i = 0; i < top5.size(); i++) {
+//            Map.Entry<String, Double> entry = top5.get(i);
+//            String categoria = entry.getKey();
+//            double monto = entry.getValue();
+//            int numTransacciones = contador.get(categoria);
+//            double promedio = monto / numTransacciones;
+//
+//            pdf.append(String.format("%s PUESTO #%d - %s\n",
+//                    medallas[i], i + 1, categoria.toUpperCase()));
+//            pdf.append(String.format("  Total gastado: $%,.2f\n", monto));
+//            pdf.append(String.format("   Transacciones: %d\n", numTransacciones));
+//            pdf.append(String.format("   Promedio: $%,.2f\n", promedio));
+//            pdf.append("   ").append("─".repeat(60)).append("\n");
+//        }
+//
+//        pdf.append("\n").append("═".repeat(80)).append("\n");
+//
+//        return pdf.toString();
+//    }
+
+
+
     private String generarReporteGastosPDF(List<Transaccion> gastos,
                                            List<Map.Entry<String, Double>> top5,
                                            Map<String, Integer> contador) {
-        StringBuilder pdf = new StringBuilder();
-
-        // Encabezado principal
-        pdf.append("═".repeat(80)).append("\n");
-        pdf.append("                 REPORTE DE GASTOS MÁS COMUNES \n");
-        pdf.append("═".repeat(80)).append("\n");
-        pdf.append("Fecha de generación: ").append(LocalDateTime.now().format(formatter)).append("\n");
-        pdf.append("Total de gastos analizados: ").append(gastos.size()).append("\n");
-        pdf.append("Tipos incluidos: Retiros y Transferencias\n");
-        pdf.append("Sistema: Billetera Virtual con Patrones de Diseño\n");
-        pdf.append("═".repeat(80)).append("\n\n");
-
-        // Ranking de categorías más comunes
-        pdf.append("🏆 RANKING DE CATEGORÍAS MÁS COMUNES:\n");
-        pdf.append("═".repeat(80)).append("\n");
-
-        String[] medallas = {"🥇", "🥈", "🥉", "🏅", "🏅"};
-
-        for (int i = 0; i < top5.size(); i++) {
-            Map.Entry<String, Double> entry = top5.get(i);
-            String categoria = entry.getKey();
-            double monto = entry.getValue();
-            int numTransacciones = contador.get(categoria);
-            double promedio = monto / numTransacciones;
-
-            pdf.append(String.format("%s PUESTO #%d - %s\n",
-                    medallas[i], i + 1, categoria.toUpperCase()));
-            pdf.append(String.format("  Total gastado: $%,.2f\n", monto));
-            pdf.append(String.format("   Transacciones: %d\n", numTransacciones));
-            pdf.append(String.format("   Promedio: $%,.2f\n", promedio));
-            pdf.append("   ").append("─".repeat(60)).append("\n");
+        try {
+            String ruta = "reporte_gastos.pdf";
+            GeneradorReportePDF generadorPDF = new GeneradorReportePDF();
+            generadorPDF.crearPDFenArchivo(gastos, top5, contador, ruta);
+            return "Reporte PDF generado exitosamente en: " + ruta;
+        } catch (Exception e) {
+            return "Error al generar PDF: " + e.getMessage();
         }
-
-        pdf.append("\n").append("═".repeat(80)).append("\n");
-
-        return pdf.toString();
     }
+
+
+
+
 
     // Métodos auxiliares
     private String crearReporteError(String formato, String mensajeError) {
