@@ -15,6 +15,7 @@ public class DatosCompartidos {
 
     private static  DatosCompartidos instancia;
     private Cuenta cuentaSeleccionada;
+    private Usuario usuarioSeleccionado;
 
     private DatosCompartidos(){
     }
@@ -24,6 +25,15 @@ public class DatosCompartidos {
             instancia = new DatosCompartidos();
         }
         return instancia;
+    }
+
+    public Usuario getUsuarioSeleccionado(){
+        return usuarioSeleccionado;
+    }
+
+
+    public void setUsuarioSeleccionado(Usuario usuarioSeleccionado){
+        this.usuarioSeleccionado = usuarioSeleccionado;
     }
 
     public Cuenta getCuentaSeleccionada(){

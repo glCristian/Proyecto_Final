@@ -76,5 +76,26 @@ public class GestorCuentas {
         return null;
     }
 
-    
+
+    public void eliminarCuentagenerico(Cuenta cuenta) {
+        if (cuenta == null) return;
+
+        // 1. Eliminar de la lista de cuentas del usuario que la contiene
+        for (Persona persona : BilleteraVirtual.getInstancia().getPerfiles()) {
+            if (persona instanceof Usuario usuario) {
+                usuario.getListaCuentas().removeIf(c -> c.getIdCuenta().equals(cuenta.getIdCuenta()));
+            }
+        }
+
+        // 2. Eliminar de la lista global (si existe)
+        BilleteraVirtual.getInstancia().getCuentas().removeIf(c -> c.getIdCuenta().equals(cuenta.getIdCuenta()));
+
+        // 3. (Opcional) Eliminar transacciones relacionadas
+        BilleteraVirtual.getInstancia().getTransacciones().removeIf(
+                t -> cuenta.getIdCuenta().equals(t.getCuentaOrigen()) || cuenta.getIdCuenta().equals(t.getCuentaDestino())
+        );
+    }
+
+
+
 }

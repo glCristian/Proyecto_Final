@@ -3,6 +3,12 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.BilleteraVirtual;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,15 +48,25 @@ public class GestionarCuentasViewController {
     private Label Label_SaldoCuenta;
 
     @FXML
-    private ListView<?> ListView_Cuentas;
+    private ListView<Cuenta> ListView_Cuentas;
+
+    private Cuenta cuentaSeleccionada;
 
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/actualizarCuentaAdmin.fxml");
     }
 
+
+
+
     @FXML
     void onClick_EliminarCuenta(ActionEvent event) {
+        cuentaSeleccionada = ListView_Cuentas.getSelectionModel().getSelectedItem();
+        if (cuentaSeleccionada != null){
+            GestorCuentas.getInstancia().eliminarCuentagenerico(cuentaSeleccionada);
+            actualizarListViewCuentas();
+        }
     }
 
     @FXML
@@ -69,6 +85,7 @@ public class GestionarCuentasViewController {
         assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
         assert ListView_Cuentas != null : "fx:id=\"ListView_Cuentas\" was not injected: check your FXML file 'gestionarCuentas.fxml'.";
 
+        cargarCuentas();
     }
 
     private void cargarVista(String nombreFXML) {
@@ -81,5 +98,15 @@ public class GestionarCuentasViewController {
         }
     }
 
+    public void cargarCuentas(){
+        ObservableList<Cuenta> cuentas = FXCollections.observableArrayList(BilleteraVirtual.getInstancia().getCuentas());
+        ListView_Cuentas.setItems(cuentas);
+    }
+
+    public void actualizarListViewCuentas (){
+            ObservableList<Cuenta> cuentasActualizadas = FXCollections.observableArrayList(BilleteraVirtual.getInstancia().getCuentas());
+            ListView_Cuentas.setItems(cuentasActualizadas);
+
+    }
 }
 

@@ -48,6 +48,10 @@ public class GestionarUsuariosViewController {
 
     @FXML
     void onClick_ActualizarUsuario(ActionEvent event) {
+        usuarioSeleccionado = TableView_Usuarios.getSelectionModel().getSelectedItem();
+
+        DatosCompartidos.getInstancia().setUsuarioSeleccionado(usuarioSeleccionado);
+
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/admnistrador/actualizarUsuario.fxml");
     }
 
@@ -58,7 +62,11 @@ public class GestionarUsuariosViewController {
 
     @FXML
     void onClick_EliminarUsuario(ActionEvent event) {
-
+        usuarioSeleccionado = TableView_Usuarios.getSelectionModel().getSelectedItem();
+        if (usuarioSeleccionado != null){
+            GestorPerfiles.getInstancia().eliminarPerfil(usuarioSeleccionado.getIdUsuario());
+            actualizarTableViewUsuarios();
+        }
     }
 
     @FXML
