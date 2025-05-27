@@ -95,7 +95,9 @@ public class Usuario extends Persona{
         this.notificacion = notificacion;
     }
 
-
+    public Collection<Transaccion> getListaTransacciones() {
+        return listaTransacciones;
+    }
 
     /**
      * Metodo que obtiene las cuentas

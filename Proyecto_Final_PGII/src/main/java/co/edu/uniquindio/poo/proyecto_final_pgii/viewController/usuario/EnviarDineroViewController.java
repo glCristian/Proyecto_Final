@@ -80,7 +80,7 @@ public class EnviarDineroViewController {
 
         Cuenta cuentaSeleccionada = DatosCompartidos.getInstancia().getCuentaSeleccionada();
 
-        if (cuentaSeleccionada == null){
+        if (cuentaSeleccionada == null) {
             System.out.println("No hay cuenta seleccionada");
             return;
         }
@@ -95,11 +95,11 @@ public class EnviarDineroViewController {
         double monto;
         try {
             monto = Double.parseDouble(montoStr);
-            if (monto <= 0){
+            if (monto <= 0) {
                 System.out.println("El monto debe ser mayor a cero");
                 return;
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Monto invalido");
             return;
         }

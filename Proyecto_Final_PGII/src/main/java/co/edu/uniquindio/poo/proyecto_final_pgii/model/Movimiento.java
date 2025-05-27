@@ -52,5 +52,8 @@ public class Movimiento {
         this.listaTransacciones = listaTransacciones;
     }
 
+    public void agregarTransaccion(Transaccion transaccion) {
+        this.listaTransacciones.add(transaccion);
+    }
 
 }

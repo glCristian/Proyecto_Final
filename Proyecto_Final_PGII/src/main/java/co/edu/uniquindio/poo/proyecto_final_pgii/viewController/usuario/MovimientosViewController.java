@@ -1,14 +1,17 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
 import java.net.URL;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.Movimiento;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.Transaccion;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPerfiles;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -29,7 +32,7 @@ public class MovimientosViewController {
     private ComboBox<String> ComboBox_CategoriaMovimientos;
 
     @FXML
-    private ListView<Movimiento> TableView_Movimientos;
+    private ListView<Transaccion> TableView_Movimientos;
 
     Usuario usuarioActual = GestorSesion.getInstancia().getUsuarioActual();
 
@@ -44,9 +47,15 @@ public class MovimientosViewController {
         ComboBox_CategoriaMovimientos.getItems().addAll("Todos ", "Envios " , "Depositos " , "Retiros ");
         ComboBox_CategoriaMovimientos.setValue("Todos ");
 
+        cargarTransacciones();
+
         //ComboBox_CategoriaMovimientos.setOnAction(event -> filtrarMovimientos());
 
+    }
 
+    public void cargarTransacciones(){
+        ObservableList<Transaccion> movimientos = FXCollections.observableArrayList(usuarioActual.getListaTransacciones());
+        TableView_Movimientos.setItems(movimientos);
     }
 
 

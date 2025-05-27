@@ -285,4 +285,18 @@ public class Transaccion {
                 TipoTransaccion.TRANSFERENCIA
         );
     }
+
+    @Override
+    public String toString() {
+        return "Transaccion{" +
+                "idTransaccion='" + idTransaccion + '\'' +
+                ", fecha=" + fecha +
+                ", monto=" + monto +
+                ", descripcion='" + descripcion + '\'' +
+                ", cuentaOrigen='" + cuentaOrigen + '\'' +
+                ", cuentaDestino='" + cuentaDestino + '\'' +
+                ", categoria=" + categoria.getNombre() +
+                ", tipoTransaccion=" + tipoTransaccion +
+                '}';
+    }
 }
