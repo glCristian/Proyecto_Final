@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCuentas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -63,7 +64,11 @@ public class CuentasUsuarioViewController {
 
     @FXML
     void onClick_EliminarCuenta(ActionEvent event) {
-
+        cuentaSeleccionada = ListView_Cuentas.getSelectionModel().getSelectedItem();
+        if (cuentaSeleccionada != null){
+            GestorSesion.getInstancia().getUsuarioActual().eliminarCuenta(cuentaSeleccionada.getIdCuenta());
+            actualizarListViewCuentas();
+        }
     }
 
     @FXML
