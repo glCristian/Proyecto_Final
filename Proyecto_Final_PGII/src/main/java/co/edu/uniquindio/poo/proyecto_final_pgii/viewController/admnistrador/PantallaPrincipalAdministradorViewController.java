@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.poo.proyecto_final_pgii.app.App;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
 import co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.PantallaPrincipalUsuarioViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,7 +44,7 @@ public class PantallaPrincipalAdministradorViewController {
     private Button Button_MenuUsuarios;
 
     @FXML
-    private ListView<?> TableView_Usuarios;
+    private ListView<Usuario> TableView_Usuarios;
 
     @FXML
     void onClick_CerrarSesionAdmin(ActionEvent event) {
