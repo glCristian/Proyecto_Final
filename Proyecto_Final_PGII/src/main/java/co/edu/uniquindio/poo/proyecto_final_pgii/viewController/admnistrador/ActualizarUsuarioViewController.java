@@ -2,6 +2,11 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPerfiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,7 +44,19 @@ public class ActualizarUsuarioViewController {
 
     @FXML
     void onClick_ActualizarUsuario(ActionEvent event) {
+        GestorPerfiles gestorPerfiles = GestorPerfiles.getInstancia();
+        Usuario usuario = DatosCompartidos.getInstancia().getUsuarioSeleccionado();
 
+        if (usuario != null) {
+            String nuevoNombre = TextField_AgregarNombreUsuario1.getText();
+            String nuevoEmail = TextField_AgregarEmailUsuario.getText();
+            String nuevoTelefono = TextField_AgregarNumeroTelefonoUsuario.getText();
+            String nuevaDireccion = TextField_AgregarDireccionUsuario.getText();
+
+            gestorPerfiles.actualizarUsuario(usuario.getIdUsuario(), nuevoNombre,null,  nuevoEmail, nuevoTelefono, nuevaDireccion, null);
+
+            System.out.println("Perfil actualizado correctamente");
+        }
     }
 
     @FXML

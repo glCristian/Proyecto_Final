@@ -2,8 +2,14 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.BilleteraVirtual;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.UsuarioBuilder;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.ServicioBilleteraVirtual;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -44,6 +50,11 @@ public class CrearUsuarioViewController {
     private TextField TextField_AgregarNumeroTelefonoUsuario;
 
     @FXML
+    private TextField TextField_AgregarContrasenaUsuario;
+
+    private ServicioBilleteraVirtual servicio;
+
+    @FXML
     void onClick_AtrasMenuUsuarios(ActionEvent event) {
         try {
             AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuCrearUsuario.getParent();
@@ -59,6 +70,56 @@ public class CrearUsuarioViewController {
 
     @FXML
     void onClick_CrearUsuario(ActionEvent event) {
+        try {
+        String nombre = TextField_AgregarNombreUsuario1.getText();
+        String apellido = TextField_AgregarApellidosUsuario.getText();
+        String email = TextField_AgregarEmailUsuario.getText();
+        String telefono = TextField_AgregarNumeroTelefonoUsuario.getText();
+        String direccion = TextField_AgregarDireccionUsuario.getText();
+        String idUsuario = TextField_AgregarIDUsuario.getText();
+        String contrasena = TextField_AgregarContrasenaUsuario.getText();
+
+        if (nombre.isBlank() || apellido.isBlank() || email.isBlank() || telefono.isBlank()
+        || direccion.isBlank() || idUsuario.isBlank() || contrasena.isBlank()) {
+            System.out.println("Todos los campos son obligatorios.");
+            return;
+        }
+
+        if (!email.contains("@")) {
+            mostrarAlerta("Error", "Email inválido");
+            return;
+        }
+
+        if (contrasena.length() < 6) {
+            mostrarAlerta("Error", "La contraseña debe tener al menos 6 caracteres");
+            return;
+        }
+
+        Usuario usuarioComplejo = new UsuarioBuilder()
+                .setNombres(nombre)
+                .setApellidos(apellido)
+                .setEmail(email)
+                .setTelefono(telefono)
+                .setDireccion(direccion)
+                .setIdUsuario(idUsuario)
+                .setContrasena(contrasena)
+                .build();
+
+        BilleteraVirtual.getInstancia().getPerfiles().add(usuarioComplejo);
+
+        if (servicio == null) {
+            servicio = new ServicioBilleteraVirtual();
+        }
+        servicio.agregarNotificacionEmail(email);
+
+        servicio.configurarComisiones("ESCALONADA", 0);
+
+        System.out.println("Se Creó exitosamente el Usuario " + usuarioComplejo.getNombres());
+
+        } catch (Exception e) {
+            mostrarAlerta("Error", "Error creando usuario: " + e.getMessage());
+            e.printStackTrace();
+        }
 
     }
 
@@ -74,6 +135,26 @@ public class CrearUsuarioViewController {
         assert TextField_AgregarNombreUsuario1 != null : "fx:id=\"TextField_AgregarNombreUsuario1\" was not injected: check your FXML file 'crearUsuario.fxml'.";
         assert TextField_AgregarNumeroTelefonoUsuario != null : "fx:id=\"TextField_AgregarNumeroTelefonoUsuario\" was not injected: check your FXML file 'crearUsuario.fxml'.";
 
+        servicio = new ServicioBilleteraVirtual();
     }
 
+
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void limpiarFormulario() {
+        TextField_AgregarNombreUsuario1.clear();
+        TextField_AgregarApellidosUsuario.clear();
+        TextField_AgregarEmailUsuario.clear();
+        TextField_AgregarNumeroTelefonoUsuario.clear();
+        TextField_AgregarDireccionUsuario.clear();
+        TextField_AgregarIDUsuario.clear();
+        TextField_AgregarContrasenaUsuario.clear();
+
+    }
 }

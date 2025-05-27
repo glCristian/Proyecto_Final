@@ -2,7 +2,17 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.BilleteraVirtual;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.Persona;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPerfiles;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +42,9 @@ public class GestionarUsuariosViewController {
     private Button Button_EliminarUsuario;
 
     @FXML
-    private ListView<?> TableView_Usuarios;
+    private ListView<Usuario> TableView_Usuarios;
+
+    private Usuario usuarioSeleccionado;
 
     @FXML
     void onClick_ActualizarUsuario(ActionEvent event) {
@@ -57,6 +69,7 @@ public class GestionarUsuariosViewController {
         assert Button_EliminarUsuario != null : "fx:id=\"Button_EliminarUsuario\" was not injected: check your FXML file 'gestionarUsuarios.fxml'.";
         assert TableView_Usuarios != null : "fx:id=\"TableView_Usuarios\" was not injected: check your FXML file 'gestionarUsuarios.fxml'.";
 
+        cargarUsuarios();
     }
 
     private void cargarVista(String nombreFXML) {
@@ -69,4 +82,24 @@ public class GestionarUsuariosViewController {
         }
     }
 
+    private void cargarUsuarios() {
+        List<Usuario> listaUsuarios = BilleteraVirtual.getInstancia().getPerfiles().stream()
+                .filter(p -> p instanceof Usuario)
+                .map(p -> (Usuario) p)
+                .toList();
+
+        ObservableList<Usuario> usuarios = FXCollections.observableArrayList(listaUsuarios);
+        TableView_Usuarios.setItems(usuarios);
+    }
+
+
+    public void actualizarTableViewUsuarios(){
+        List<Usuario> listaUsuariosActualizados = BilleteraVirtual.getInstancia().getPerfiles().stream()
+                .filter(p -> p instanceof Usuario)
+                .map(p -> (Usuario) p)
+                .toList();
+
+        ObservableList<Usuario> usuariosActualizados = FXCollections.observableArrayList(listaUsuariosActualizados);
+        TableView_Usuarios.setItems(usuariosActualizados);
+    }
 }

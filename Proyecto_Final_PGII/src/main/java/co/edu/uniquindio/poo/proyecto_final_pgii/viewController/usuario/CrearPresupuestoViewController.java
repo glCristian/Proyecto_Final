@@ -49,7 +49,7 @@ public class CrearPresupuestoViewController {
     private TextField TextField_AgregarNombrePresupuesto;
 
     @FXML
-    void onClick_AtrasMenuPresupuesto(ActionEvent event) {
+    public void onClick_AtrasMenuPresupuesto(ActionEvent event) {
         try {
             AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuCrearPresupuesto.getParent();
 
@@ -63,7 +63,7 @@ public class CrearPresupuestoViewController {
     }
 
     @FXML
-    void onClick_CrearPresupuesto(ActionEvent event) {
+     public void onClick_CrearPresupuesto(ActionEvent event) {
         String id = TextField_AgregarIDPresupuesto.getText();
         String nombre = TextField_AgregarNombrePresupuesto.getText();
         String montoTotalStr = TextField_AgregarMontoTotalPresupuesto.getText();
@@ -99,7 +99,7 @@ public class CrearPresupuestoViewController {
     }
 
     @FXML
-    void initialize() {
+    public void initialize() {
         assert AnchorPane_MenuCrearPresupuesto != null : "fx:id=\"AnchorPane_MenuCrearPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
         assert Button_AtrasMenuPresupuesto != null : "fx:id=\"Button_AtrasMenuPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
         assert Button_CrearPresupuesto != null : "fx:id=\"Button_CrearPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
