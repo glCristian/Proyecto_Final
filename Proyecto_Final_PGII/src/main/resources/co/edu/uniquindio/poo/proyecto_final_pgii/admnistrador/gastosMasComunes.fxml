@@ -15,7 +15,6 @@
       </Button>
       <PieChart fx:id="PieChart_GastosMasComunes" layoutX="84.0" layoutY="85.0" prefHeight="331.0" prefWidth="443.0" />
       <Button fx:id="Button_ExportarPDF" layoutX="166.0" layoutY="428.0" mnemonicParsing="false" onAction="#onClick_ExportarPDF" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Exportar PDF" textFill="LIGHTGRAY" />
-      <Button fx:id="Button_ExportarCSV" layoutX="319.0" layoutY="428.0" mnemonicParsing="false" onAction="#onClick_ExportarCSV" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Exportar CSV" textFill="LIGHTGRAY" />
       <TextField fx:id="TextField_insertarFechaInicioFechaFin" layoutX="84.0" layoutY="49.0" prefHeight="25.0" prefWidth="242.0" promptText="Insertar fecha inicio-fecha fin" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
    </children>
 </AnchorPane>

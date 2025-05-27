@@ -3,6 +3,7 @@ module co.edu.uniquindio.poo.proyecto_final_pgii {
     requires javafx.fxml;
     requires java.xml;
     requires com.github.librepdf.openpdf;
+    requires java.desktop;
 
     opens co.edu.uniquindio.poo.proyecto_final_pgii.viewController to javafx.fxml;
     exports co.edu.uniquindio.poo.proyecto_final_pgii.viewController;

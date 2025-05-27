@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -10,6 +12,8 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+
+import javax.swing.*;
 
 public class GastosMasComunesViewController {
 
@@ -53,14 +57,29 @@ public class GastosMasComunesViewController {
         }
     }
 
-    @FXML
-    void onClick_ExportarCSV(ActionEvent event) {
-        System.out.println(GestorReportes.getInstancia().generarReporteGastosMasComunes("CSV"));
-    }
 
     @FXML
-    void onClick_ExportarPDF(ActionEvent event) {
-        System.out.println(GestorReportes.getInstancia().generarReporteGastosMasComunes("PDF"));
+    void onClick_ExportarPDF(ActionEvent event) throws IOException {
+        javafx.stage.FileChooser fileChooser = new javafx.stage.FileChooser();
+        fileChooser.setTitle("Selecciona la ubicación para guardar el PDF");
+        fileChooser.getExtensionFilters().add(
+                new javafx.stage.FileChooser.ExtensionFilter("Archivo PDF (*.pdf)", "*.pdf")
+        );
+        // Sugerir nombre por defecto
+        fileChooser.setInitialFileName("reporte_gastos.pdf");
+
+        // Obtener la ventana actual de JavaFX
+        javafx.stage.Window stage = AnchorPane_MenuGastosMasComunes.getScene().getWindow();
+        File fileToSave = fileChooser.showSaveDialog(stage);
+
+        if (fileToSave != null) {
+            String ruta = fileToSave.getAbsolutePath();
+            // Asegura la extensión .pdf
+            if (!ruta.toLowerCase().endsWith(".pdf")) {
+                ruta += ".pdf";
+            }
+            GestorReportes.getInstancia().generarReporteGastosMasComunes("PDF", ruta);
+        }
     }
 
     @FXML

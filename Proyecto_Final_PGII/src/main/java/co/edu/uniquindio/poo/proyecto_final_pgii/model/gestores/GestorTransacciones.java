@@ -3,6 +3,7 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class GestorTransacciones {
@@ -237,6 +238,10 @@ public class GestorTransacciones {
         // Agregar observadores básicos
         sujetoNotificaciones.agregarObservador(new RegistradorAuditoria());
         sujetoNotificaciones.agregarObservador(new ControladorLimites());
+    }
+
+    public List<Transaccion> obtenerTodasTransacciones() {
+        return BilleteraVirtual.getInstancia().getTransacciones().stream().toList();
     }
 
 

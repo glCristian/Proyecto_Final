@@ -124,11 +124,9 @@ public class BilleteraVirtualFacade {
 
             // Usar patrón Adapter para generar el reporte
             ReporteExportable generador;
-            if ("CSV".equalsIgnoreCase(formato)) {
-                generador = new AdaptadorReporteCSV();
-            } else if ("PDF".equalsIgnoreCase(formato)) {
+            if ("PDF".equalsIgnoreCase(formato)) {
                 generador = new ReportePDF();
-            } else {
+            }  else {
                 return "Formato no soportado";
             }
 
