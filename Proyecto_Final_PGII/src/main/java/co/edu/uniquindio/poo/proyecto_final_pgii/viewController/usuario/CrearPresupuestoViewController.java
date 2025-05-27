@@ -50,6 +50,11 @@ public class CrearPresupuestoViewController {
     @FXML
     private TextField TextField_AgregarNombrePresupuesto;
 
+    /**
+     * Maneja el evento del boton atras
+     * retornando a la vista anterior del menu de presupuestos
+     * @param event
+     */
     @FXML
     public void onClick_AtrasMenuPresupuesto(ActionEvent event) {
         try {
@@ -64,6 +69,11 @@ public class CrearPresupuestoViewController {
         }
     }
 
+    /**
+     * Maneja el evento del boton crear presupuesto
+     * valida los campos del formulario, crea un objeto presupuesto y lo registra mediante el gestorPresupuestos
+     * @param event
+     */
     @FXML
     public void onClick_CrearPresupuesto(ActionEvent event) {
         String id = TextField_AgregarIDPresupuesto.getText();
@@ -96,6 +106,10 @@ public class CrearPresupuestoViewController {
         }
     }
 
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados
+     */
     @FXML
     public void initialize() {
         assert AnchorPane_MenuCrearPresupuesto != null : "fx:id=\"AnchorPane_MenuCrearPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
@@ -111,6 +125,9 @@ public class CrearPresupuestoViewController {
         cargarSaldoTotal();
     }
 
+    /**
+     * Asocia un liestener al campo del monto total para actualizar el saldo mostrado dinamicamente
+     */
     private void cargarSaldoTotal(){
         TextField_AgregarMontoTotalPresupuesto.textProperty().addListener((obs, oldValue, newValue) -> {
             try {

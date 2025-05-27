@@ -53,31 +53,55 @@ public class PantallaPrincipalUsuarioViewController {
     @FXML
     private ListView<String> TableView_Movimientos;
 
+    /**
+     * Carga la vista de cuentas del usuario
+     * @param event
+     */
     @FXML
     void onClick_MenuCuentas(ActionEvent event) {
         cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario, "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/cuentasUsuario.fxml");
     }
 
+    /**
+     * Carga la vista de movimientos del usuario
+     * @param event
+     */
     @FXML
     void onClick_MenuMovimientos(ActionEvent event) {
         cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario, "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/movimientosUsuario.fxml");
     }
 
+    /**
+     * Carga la vista de presupuestos del usuario
+     * @param event
+     */
     @FXML
     void onClick_MenuPresupuesto(ActionEvent event) {
         cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario, "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/presupuestoUsuario.fxml");
     }
 
+    /**
+     * Carga la vista de transaccion del usuario
+     * @param event
+     */
     @FXML
     void onClick_MenuTransaccion(ActionEvent event) {
         cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario, "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/transaccionUsuario.fxml");
     }
 
+    /**
+     * Carga la vista de prefil del usuario
+     * @param event
+     */
     @FXML
     void onClick_PerfilUsuario(ActionEvent event) {
         cargarVistaEnPantallaPrincipal(AnchorPane_PantallaPrincipalUsuario, "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/perfilUsuario.fxml");
     }
 
+    /**
+     * Cierra la sesion del usuario y redirige al menu de inicio
+     * @param event
+     */
     @FXML
     void onClick_CerrarSesionUsuario(ActionEvent event) {
         GestorSesion.getInstancia().cerrarSesion();
@@ -89,6 +113,10 @@ public class PantallaPrincipalUsuarioViewController {
         }
     }
 
+    /**
+     * Inicializa la vista principla del usuario
+     * carga el saldo total actual del usuario
+     */
     @FXML
     void initialize() {
         assert AnchorPane_PantallaPrincipalUsuario != null : "fx:id=\"AnchorPane_PantallaPrincipalUsuario\" was not injected: check your FXML file 'pantallaPrincipalUsuario.fxml'.";
@@ -106,6 +134,11 @@ public class PantallaPrincipalUsuarioViewController {
     }
 
 
+    /**
+     * Carga una vista dentro del contener principal de la pantalla
+     * @param contenedor
+     * @param nombreFXML
+     */
     public static void cargarVistaEnPantallaPrincipal(AnchorPane contenedor, String nombreFXML) {
         try {
             FXMLLoader loader = new FXMLLoader(PantallaPrincipalUsuarioViewController.class.getResource(nombreFXML));
@@ -117,6 +150,9 @@ public class PantallaPrincipalUsuarioViewController {
     }
 
 
+    /**
+     * Carga y muestra los movimientos del usuario actual en la lista
+     */
     private void cargarMovimientos(){
         Usuario usuarioActual = GestorSesion.getInstancia().getUsuarioActual();
         if (usuarioActual != null){

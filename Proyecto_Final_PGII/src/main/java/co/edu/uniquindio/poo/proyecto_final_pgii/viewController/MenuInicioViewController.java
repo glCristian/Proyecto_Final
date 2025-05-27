@@ -33,6 +33,10 @@ public class MenuInicioViewController {
     @FXML
     private TextField TextField_IngresarEmail;
 
+    /**
+     * Maneja el eento de incio de sesion
+     * @param event
+     */
     @FXML
     void onClick_IniciarSesion(ActionEvent event) {
         String email = TextField_IngresarEmail.getText();
@@ -65,7 +69,10 @@ public class MenuInicioViewController {
         }
     }
 
-
+    /**
+     * Maneja el evento para ir a la pantala de registro
+     * @param event
+     */
     @FXML
     void onClick_Registrarse(ActionEvent event) {
         try {
@@ -76,15 +83,16 @@ public class MenuInicioViewController {
     }
 
 
-
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados
+     */
     @FXML
     void initialize() {
         assert Button_IniciarSesion != null : "fx:id=\"Button_IniciarSesion\" was not injected: check your FXML file 'menuInicio.fxml'.";
         assert Button_Registrarse != null : "fx:id=\"Button_Registrarse\" was not injected: check your FXML file 'menuInicio.fxml'.";
         assert TextField_IngresarContrasenia != null : "fx:id=\"TextField_IngresarContrasenia\" was not injected: check your FXML file 'menuInicio.fxml'.";
         assert TextField_IngresarEmail != null : "fx:id=\"TextField_IngresarEmail\" was not injected: check your FXML file 'menuInicio.fxml'.";
-
-
 
     }
 

@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+
 public class ActualizarCuentaViewController {
 
     @FXML
@@ -51,6 +52,11 @@ public class ActualizarCuentaViewController {
     @FXML
     private ComboBox<TipoCuenta> cmb_select_tipoCuenta;
 
+    /**
+     * Maneja el evento de hacer click en el boton de actualizar cuenta
+     * actualiza el banco y el tipo de cuenta si han modificado los campos correspondientes
+     * @param event
+     */
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
         Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
@@ -73,6 +79,10 @@ public class ActualizarCuentaViewController {
         }
     }
 
+    /**
+     * Maneja el evento de hacer click en el boton de regresar al menu de cuentas
+     * carga la vista de cuentas del usuario en el contener principal
+     */
     @FXML
     void onClick_AtrasMenuCuentas(ActionEvent event) {
         try {
@@ -87,11 +97,18 @@ public class ActualizarCuentaViewController {
         }
     }
 
+    /**
+     * Carga las opciones del comboBox con los tipos de cuentas disponibles
+     */
     private void cargarComboBoxTipoCuenta() {
         cmb_select_tipoCuenta.setItems(FXCollections.observableArrayList(TipoCuenta.values()));
         cmb_select_tipoCuenta.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados y carga el comboBox
+     */
     @FXML
     void initialize() {
         assert AnchorPane_MenuActualizarCuenta != null : "fx:id=\"AnchorPane_MenuActualizarCuenta\" was not injected: check your FXML file 'actualizarCuentaUsuario.fxml'.";

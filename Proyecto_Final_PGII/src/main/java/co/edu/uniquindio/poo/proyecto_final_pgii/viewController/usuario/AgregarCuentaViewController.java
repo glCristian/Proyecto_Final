@@ -50,6 +50,10 @@ public class AgregarCuentaViewController {
     @FXML
     private TextField TextField_AgregarBancoCuenta;
 
+    /**
+     * Regresa a la vusta del menu de cuentas del usuario
+     * @param event
+     */
     @FXML
     void onClick_AtrasMenuCuentas(ActionEvent event) {
         try {
@@ -65,6 +69,11 @@ public class AgregarCuentaViewController {
     }
 
 
+    /**
+     * Crea una nueva cuenta con los datos ingresador en los campos de texto
+     * y actualiza los labels con los datos de la cuenta creada
+     * @param event
+     */
     @FXML
     void onClick_anadirCuenta(ActionEvent event) {
         String idCuenta = TextField_IDdeLaCuenta.getText();
@@ -86,11 +95,18 @@ public class AgregarCuentaViewController {
         }
     }
 
+    /**
+     * Carga las opciones del comboBox con los valores del enum TipoCuenta
+     */
     private void cargarComboBoxTipoCuenta() {
         cmb_select_tipoCuenta.setItems(FXCollections.observableArrayList(TipoCuenta.values()));
         cmb_select_tipoCuenta.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Inicializa la interfaz al cargar la vusta, asegurando que todos los elementosFXML
+     * esten correctamene vinculados y cargando los valores del comboBbox
+     */
     @FXML
     void initialize() {
         assert AnchorPane_MenuAgregarCuentas != null : "fx:id=\"AnchorPane_MenuAgregarCuentas\" was not injected: check your FXML file 'agregarCuenta.fxml'.";

@@ -51,6 +51,11 @@ public class CuentasUsuarioViewController {
 
     private Cuenta cuentaSeleccionada;
 
+    /**
+     * Accion al hacer click en el boton de actualizar cuenta
+     * abre la vista para editar la cuenta seleccionada
+     * @param event
+     */
     @FXML
     void onClick_ActualizarCuenta(ActionEvent event) {
         cuentaSeleccionada = ListView_Cuentas.getSelectionModel().getSelectedItem();
@@ -62,6 +67,11 @@ public class CuentasUsuarioViewController {
 
     }
 
+    /**
+     * Accion al hacer click en el boton de eliminar cuenta
+     * elimina la cuneta seleccionada del usuario actual
+     * @param event
+     */
     @FXML
     void onClick_EliminarCuenta(ActionEvent event) {
         cuentaSeleccionada = ListView_Cuentas.getSelectionModel().getSelectedItem();
@@ -71,12 +81,22 @@ public class CuentasUsuarioViewController {
         }
     }
 
+    /**
+     * Accion al hacer click en el boton de añadir cuenta
+     * abre la vusta para crear una nueva cuenta
+     * @param event
+     */
     @FXML
     void onClick_anadirCuenta(ActionEvent event) {
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/agregarCuenta.fxml");
 
     }
 
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados e inicializa la lista de cuenta y
+     * configura el comportamiento al selccionar una cuenta
+     */
     @FXML
     void initialize() {
         assert AnchorPane_MenuCuentas != null : "fx:id=\"AnchorPane_MenuCuentas\" was not injected: check your FXML file 'cuentasUsuario.fxml'.";
@@ -94,6 +114,10 @@ public class CuentasUsuarioViewController {
 
     }
 
+    /**
+     * Carga una vista FXML dentro del anchorPane menuCuentas
+     * @param nombreFXML
+     */
     private void cargarVista(String nombreFXML) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));
@@ -104,6 +128,9 @@ public class CuentasUsuarioViewController {
         }
     }
 
+    /**
+     * Carga las cuentas asociadas al usuaruo actual y las muestra en la listView
+     */
     private void cargarCuentasUsuario(){
         Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
         if(usuario != null){
@@ -113,6 +140,10 @@ public class CuentasUsuarioViewController {
     }
 
 
+    /**
+     * Muestra los detalles de la cuenta seleccionada en los labels
+     * tambien guarda la cuenta seleccionada en datosCompartidos
+     */
     private void mostrarDetallesCuentaSelected(){
         ListView_Cuentas.setOnMouseClicked(mouseEvent -> {
             Cuenta cuentaSeleccionada = ListView_Cuentas.getSelectionModel().getSelectedItem();
@@ -125,6 +156,9 @@ public class CuentasUsuarioViewController {
         });
     }
 
+    /**
+     * Actualiza la listView con las cuentas actuales del usuario
+     */
     public void actualizarListViewCuentas (){
         Usuario usuario = GestorSesion.getInstancia().getUsuarioActual();
         if (usuario != null){

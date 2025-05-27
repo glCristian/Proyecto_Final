@@ -51,6 +51,11 @@ public class EnviarDineroViewController {
     @FXML
     private TextField TextField_CategoriaTransaccion;
 
+    /**
+     * Regresa a la pantalla anterior del menu de transacciones
+     * se ejecuta al hacer click en el boton atras
+     * @param event
+     */
     @FXML
     void onClick_AtrasMenuTransaccion(ActionEvent event) {
         try {
@@ -65,6 +70,11 @@ public class EnviarDineroViewController {
         }
     }
 
+    /**
+     * Ejecuta la logica para realizar una transferencia de dinero entre cuentas
+     * verifica monto, cuenta destino y realiza la transaccion si es valida
+     * @param event
+     */
     @FXML
     void onClick_EnviarDinero(ActionEvent event) {
 
@@ -100,6 +110,10 @@ public class EnviarDineroViewController {
 
     }
 
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados
+     */
     @FXML
     void initialize() {
         assert AnchorPane_MenuEnviarDinero != null : "fx:id=\"AnchorPane_MenuEnviarDinero\" was not injected: check your FXML file 'enviarDineroUsuario.fxml'.";
@@ -114,6 +128,9 @@ public class EnviarDineroViewController {
         assert TextField_CategoriaTransaccion != null : "fx:id=\"TextField_TipoTransaccion\" was not injected: check your FXML file 'enviarDineroUsuario.fxml'.";
     }
 
+    /**
+     * Carga los datos de la cuenta seleccionada en los labels de la interfaz grafica
+     */
     public void cargarDatosCuenta(){
         Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
         if (cuenta != null){

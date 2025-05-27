@@ -48,21 +48,37 @@ public class TransaccionViewController {
     @FXML
     private ListView<Cuenta> TableView_CuentasTransaccion;
 
+    /**
+     * Evento que carga la vista para agregar dinero a la cuenta seleccionada
+     * @param event
+     */
     @FXML
     void onClick_AgregarDinero(ActionEvent event) {
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/agregarDineroUsuario.fxml");
     }
 
+    /**
+     * Evento que carga la vista para enviar dinero desde la cuenta seleccionada
+     * @param event
+     */
     @FXML
     void onClick_EnviarDinero(ActionEvent event) {
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/enviarDineroUsuario.fxml");
     }
 
+    /**
+     * Evento que carga la vista para retirar dinero de la cuenta seleccionada
+     * @param event
+     */
     @FXML
     void onClick_RetirarDinero(ActionEvent event) {
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/sacarDineroUsuario.fxml");
     }
 
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados
+     */
     @FXML
     void initialize() {
         assert AnchorPane_MenuTransaccion != null : "fx:id=\"AnchorPane_MenuTransaccion\" was not injected: check your FXML file 'transaccionUsuario.fxml'.";
@@ -78,6 +94,10 @@ public class TransaccionViewController {
         configurarSeleccionCuenta();
     }
 
+    /**
+     * Carga la vista especificada dentro del anchopane principal
+     * @param nombreFXML
+     */
     private void cargarVista(String nombreFXML) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));
@@ -88,6 +108,9 @@ public class TransaccionViewController {
         }
     }
 
+    /**
+     * carga las cuentas del usuario actual en la listViw para su selecciom
+     */
     private void cargarCuentas(){
         TableView_CuentasTransaccion.setItems(
                 javafx.collections.FXCollections.observableArrayList(
@@ -96,6 +119,9 @@ public class TransaccionViewController {
         );
     }
 
+    /**
+     * Configura el comportamiento al seleccionar una cuenta en la lista
+     */
     private void configurarSeleccionCuenta(){
         TableView_CuentasTransaccion.setOnMouseClicked(mouseEvent -> {
             Cuenta cuentaSeleccionada = TableView_CuentasTransaccion.getSelectionModel().getSelectedItem();

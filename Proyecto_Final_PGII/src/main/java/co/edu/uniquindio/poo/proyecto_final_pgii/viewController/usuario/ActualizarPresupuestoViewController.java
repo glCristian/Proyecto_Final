@@ -38,6 +38,11 @@ public class ActualizarPresupuestoViewController {
     @FXML
     private TextField TextField_AgregarCategoriaPresupuesto;
 
+    /**
+     * Metodo que se ejecura al hacer click en el boton actualiza presupuesto
+     * valida los datos, actualiza el presupuesto seleccionado y muestra el nuevo saldo
+     * @param event
+     */
     @FXML
     void onClick_ActualizarPresupuesto(ActionEvent event) {
         String id = DatosCompartidos.getInstancia().getPresupuestoSeleccionado().getIdPresupuesto();
@@ -82,16 +87,28 @@ public class ActualizarPresupuestoViewController {
         }
     }
 
+    /**
+     * Metodo que se ejecuta al hacer click en el boton atras
+     * retorna a la vista del menu de presupuestos
+     * @param event
+     */
     @FXML
     void onClick_AtrasMenuPresupuesto(ActionEvent event) {
         volverAMenuPresupuesto();
     }
 
+    /**
+     * inicializa la vista con valores por defecto
+     */
     @FXML
     void initialize() {
         Label_SaldoPresupuesto.setText("$ 0.00");
     }
 
+    /**
+     * Actualiza el label de saldo en la interfaz con base en los datos del presupuesto
+     * @param presupuesto
+     */
     private void actualizarSaldoPresupuesto(Presupuesto presupuesto) {
         if (presupuesto != null) {
             double saldo = presupuesto.getMontoAsignado() - presupuesto.getMontoGastado();
@@ -99,12 +116,18 @@ public class ActualizarPresupuestoViewController {
         }
     }
 
+    /**
+     * Limpia los campos del texto del formulario
+     */
     private void limpiarCampos() {
         TextField_AgregarNombrePresupuesto.clear();
         TextField_AgregarMontoTotalPresupuesto.clear();
         TextField_AgregarCategoriaPresupuesto.clear();
     }
 
+    /**
+     * Carga la vusta del menu de presupuesto en el contenedor principal
+     */
     private void volverAMenuPresupuesto() {
         try {
             AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuActualizarPresupuesto.getParent();
@@ -118,6 +141,10 @@ public class ActualizarPresupuestoViewController {
         }
     }
 
+    /**
+     * Muestra una alerta emergente con un mensaje determinado
+     * @param mensaje
+     */
     private void mostrarAlerta(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Validación");

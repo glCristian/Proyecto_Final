@@ -52,9 +52,13 @@ public class AgregarDineroViewController {
     private TextField TextField_CategoriaTransaccion;
 
 
+    /**
+     * Maneja el evento de click en el boton de agregarDinero
+     * Valida los datps ingresador y realiza la opetacion de deposito
+     * @param event
+     */
     @FXML
     void onClick_AgregarDinero(ActionEvent event) {
-
 
         String montoStr = TextField_MontoAgregarDinero.getText();
         String descripcion = TextField_DescripcionAgragar.getText();
@@ -81,6 +85,11 @@ public class AgregarDineroViewController {
 
     }
 
+    /**
+     * Maneja el evento de click en el boton de atras
+     * Navega el regreso al menu de transacciones del usuario
+     * @param event
+     */
     @FXML
     void onClick_AtrasMenuTransaccion(ActionEvent event) {
         try {
@@ -95,6 +104,10 @@ public class AgregarDineroViewController {
         }
     }
 
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados
+     */
     @FXML
     void initialize() {
         assert AnchorPane_MenuAgregarDinero != null : "fx:id=\"AnchorPane_MenuAgregarDinero\" was not injected: check your FXML file 'agregarDineroUsuario.fxml'.";
@@ -111,6 +124,9 @@ public class AgregarDineroViewController {
         cargarDatosCuenta();
     }
 
+    /**
+     * Carga los datos de la cuenta seleccionada en los labels correspondientes
+     */
     public void cargarDatosCuenta(){
         Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
         if (cuenta != null){

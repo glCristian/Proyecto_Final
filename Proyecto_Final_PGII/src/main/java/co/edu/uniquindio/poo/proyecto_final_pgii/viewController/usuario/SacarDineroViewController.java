@@ -51,7 +51,11 @@ public class SacarDineroViewController {
     @FXML
     private TextField TextField_CategoriaTransaccion;
 
-
+    /**
+     * Evento que maneja el boton para regresar al menu principal de transacciones
+     * carga la vista principal de transacciones
+     * @param event
+     */
     @FXML
     void onClick_AtrasMenuTransaccion(ActionEvent event) {
         try {
@@ -66,6 +70,12 @@ public class SacarDineroViewController {
         }
     }
 
+    /**
+     * Evento que maneja el boton para realizar el retiro de dinero
+     * valida que exista una cuenta seleccionado, que el monto ingresado sea valido y suficiente
+     * crea la categoria y realiza el retiro mediante el gestor de transacciones
+     * @param event
+     */
     @FXML
     void onClick_SacarDinero(ActionEvent event) {
         Cuenta cuentaSeleccionada = DatosCompartidos.getInstancia().getCuentaSeleccionada();
@@ -105,6 +115,10 @@ public class SacarDineroViewController {
 
     }
 
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados
+     */
     @FXML
     void initialize() {
         assert AnchorPane_MenuSacarDinero != null : "fx:id=\"AnchorPane_MenuSacarDinero\" was not injected: check your FXML file 'sacarDineroUsuario.fxml'.";
@@ -121,6 +135,9 @@ public class SacarDineroViewController {
         cargarDatosCuenta();
     }
 
+    /**
+     * Carga y muestra los datos de la cuenta seleccionada en los labels
+     */
     public void cargarDatosCuenta(){
         Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
         if (cuenta != null){

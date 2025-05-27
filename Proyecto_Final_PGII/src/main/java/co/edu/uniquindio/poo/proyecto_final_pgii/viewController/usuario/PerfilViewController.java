@@ -37,6 +37,11 @@ public class PerfilViewController {
     private TextField TextField_AgregarNumeroTelefonoUsuario;
 
 
+    /**
+     * Maneja el evento de click sobre el boton actualizar perfil
+     * obtiene los valores de los campos de texto y actualiza el perfil del usuario actual
+     * @param event
+     */
     @FXML
     void onClick_ActualizarPerfil(ActionEvent event) {
         GestorPerfiles gestorPerfiles = GestorPerfiles.getInstancia();
@@ -53,6 +58,10 @@ public class PerfilViewController {
         }
     }
 
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados
+     */
     @FXML
     void initialize() {
         assert AnchorPane_MenuPerfil != null : "fx:id=\"AnchorPane_MenuPerfil\" was not injected: check your FXML file 'perfilUsuario.fxml'.";

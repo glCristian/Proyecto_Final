@@ -40,18 +40,32 @@ public class PresupuestoViewController {
     @FXML
     private ListView<Presupuesto> TableView_Presupuestos;
 
-
+    /**
+     * Maneja el evento de click en el boton para crear un nuevo presupuesto
+     * carga la vista xcorrespontiente para crear presupuestos
+     * @param event
+     */
     @FXML
     void onClick_CrearPresupuesto(ActionEvent event) {
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/crearPresupuestoUsuario.fxml");
     }
 
+    /**
+     *  Maneja el evento de click en el boton para eliminar un presupuesto
+     *  carga la vista correspontiente para eliminar presupuestos
+     * @param event
+     */
     @FXML
     void onClick_EliminarPresupuesto(ActionEvent event) {
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/eliminarPresupuestoUsuario.fxml");
     }
 
 
+    /**
+     * Maneja el evento de click en el boton de modificar un presupuesto seleccionado
+     * guarda el presupuesto seleccionado en un objeto compartido y cargala vista de actualizacion
+     * @param event
+     */
     @FXML
     void onClick_ModificarPresupuesto(ActionEvent event) {
 
@@ -59,6 +73,10 @@ public class PresupuestoViewController {
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/actualizarPresupuestoUsuario.fxml");
     }
 
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados
+     */
     @FXML
     void initialize() {
         assert AnchorPane_MenuPresupuesto != null : "fx:id=\"AnchorPane_MenuPresupuesto\" was not injected: check your FXML file 'presupuestoUsuario.fxml'.";
@@ -70,6 +88,10 @@ public class PresupuestoViewController {
         cargarPresupuestos();
     }
 
+    /**
+     * Metodo para cargar una nueva vista dentro del anchoPane
+     * @param nombreFXML
+     */
     private void cargarVista(String nombreFXML) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));
@@ -80,7 +102,9 @@ public class PresupuestoViewController {
         }
     }
 
-
+    /**
+     * Carga los resupuests del usuario actual y los muestra en el listView
+     */
     private void cargarPresupuestos() {
         try {
             TableView_Presupuestos.getItems().clear();

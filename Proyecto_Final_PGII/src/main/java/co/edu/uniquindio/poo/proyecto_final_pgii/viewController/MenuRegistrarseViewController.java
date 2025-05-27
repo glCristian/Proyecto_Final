@@ -45,6 +45,11 @@ public class MenuRegistrarseViewController {
 
     private ServicioBilleteraVirtual servicio;
 
+    /**
+     * Maneja el evento de click en el boton atras
+     * regresa a la vista del menu de inciio
+     * @param event
+     */
     @FXML
     void onClick_AtrasMenuInicio(ActionEvent event) {
         try {
@@ -54,13 +59,21 @@ public class MenuRegistrarseViewController {
         }
     }
 
+    /**
+     * Maneja el evento de click en el boton registrarse
+     * inicia el proceso para crear un nuevo usuario complto
+     * @param event
+     */
     @FXML
     void onClick_Registrarse(ActionEvent event) {
         crearUsuarioCompleto();
     }
 
 
-
+    /**
+     * Metodo de inicializacion llamado automaticamente al cargar la vista
+     * Verifica que todos los componentes esten correctamente inyectados
+     */
     @FXML
     void initialize() {
         assert Button_AtrasMenuInicio != null : "fx:id=\"Button_AtrasMenuInicio\" was not injected: check your FXML file 'menuRegistrarse.fxml'.";
