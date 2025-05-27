@@ -104,8 +104,7 @@ public class GestionarUsuariosViewController {
     public void actualizarTableViewUsuarios(){
         List<Usuario> listaUsuariosActualizados = BilleteraVirtual.getInstancia().getPerfiles().stream()
                 .filter(p -> p instanceof Usuario)
-                .map(p -> (Usuario) p)
-                .toList();
+                .map(p -> (Usuario) p).toList();
 
         ObservableList<Usuario> usuariosActualizados = FXCollections.observableArrayList(listaUsuariosActualizados);
         TableView_Usuarios.setItems(usuariosActualizados);

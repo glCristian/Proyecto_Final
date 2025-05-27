@@ -92,9 +92,6 @@ private static void crearPerfilesPrueba() {
     System.out.println("Usuario 2: ana@email.com / Contraseña: 654321");
     System.out.println("Admin: admin@sistema.com / Contraseña: admin123");
 
-
-    System.out.println(BilleteraVirtual.getInstancia().getCuentas());
-
 }
 
 

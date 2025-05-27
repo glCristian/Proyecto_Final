@@ -16,6 +16,7 @@ public class DatosCompartidos {
     private static  DatosCompartidos instancia;
     private Cuenta cuentaSeleccionada;
     private Usuario usuarioSeleccionado;
+    private Presupuesto presupuestoSeleccionado;
 
     private DatosCompartidos(){
     }
@@ -31,7 +32,6 @@ public class DatosCompartidos {
         return usuarioSeleccionado;
     }
 
-
     public void setUsuarioSeleccionado(Usuario usuarioSeleccionado){
         this.usuarioSeleccionado = usuarioSeleccionado;
     }
@@ -42,5 +42,19 @@ public class DatosCompartidos {
 
     public void setCuentaSeleccionada(Cuenta cuentaSeleccionada){
         this.cuentaSeleccionada = cuentaSeleccionada;
+    }
+
+    public Presupuesto getPresupuestoSeleccionado() {
+        return presupuestoSeleccionado;
+    }
+
+    public void setPresupuestoSeleccionado(Presupuesto presupuestoSeleccionado) {
+        this.presupuestoSeleccionado = presupuestoSeleccionado;
+    }
+
+    public void limpiarDatosCompartidos() {
+        this.cuentaSeleccionada = null;
+        this.usuarioSeleccionado = null;
+        this.presupuestoSeleccionado = null;
     }
 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="AnchorPane_MenuActualizarPresupuesto" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../../styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.ActualizarPresupuestoViewController">
+<AnchorPane fx:id="AnchorPane_MenuActualizarPresupuesto" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../../styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.ActualizarPresupuestoViewController">
    <children>
       <Button fx:id="Button_ActualizarPresupuesto" layoutX="233.0" layoutY="375.0" mnemonicParsing="false" onAction="#onClick_ActualizarPresupuesto" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Actualizar Presupuesto" textFill="LIGHTGRAY" />
       <TextField fx:id="TextField_AgregarNombrePresupuesto" layoutX="218.0" layoutY="231.0" prefHeight="25.0" prefWidth="178.0" promptText="Nombre" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
-      <TextField fx:id="TextField_AgregarIDPresupuesto" layoutX="218.0" layoutY="191.0" prefHeight="25.0" prefWidth="178.0" promptText="ID Presupuesto" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
       <Label layoutX="218.0" layoutY="162.0" prefHeight="20.0" prefWidth="178.0" text="+ Actualizar Presupuesto" textFill="LIGHTGRAY">
          <font>
             <Font name="System Bold" size="14.0" />

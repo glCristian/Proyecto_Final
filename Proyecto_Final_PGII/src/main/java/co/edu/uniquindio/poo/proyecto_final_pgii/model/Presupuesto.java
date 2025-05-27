@@ -120,4 +120,17 @@ public class Presupuesto {
         montoGastado += monto;
         System.out.println("Gasto agregado de " + monto + " al presupuesto " + nombre);
     }
+
+
+    @Override
+    public String toString() {
+        return "\n--- Presupuesto ---" +
+                "\nID: " + idPresupuesto +
+                "\nNombre: " + nombre +
+                "\nMonto Asignado: $" + String.format("%,.2f", montoAsignado) +
+                "\nMonto Gastado: $" + String.format("%,.2f", montoGastado) +
+                "\nCategoría: " + (categoria != null ? categoria : "Sin categoría") +
+                "\n-------------------";
+    }
+
 }

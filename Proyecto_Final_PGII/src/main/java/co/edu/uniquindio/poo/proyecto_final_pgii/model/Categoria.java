@@ -97,4 +97,9 @@ public class Categoria {
         System.out.println("No se encontró una categoría con id " + idCategoria);
         return false;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

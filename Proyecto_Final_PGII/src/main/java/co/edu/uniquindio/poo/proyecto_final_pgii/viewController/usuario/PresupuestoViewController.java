@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Presupuesto;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Usuario;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPresupuestos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +54,8 @@ public class PresupuestoViewController {
 
     @FXML
     void onClick_ModificarPresupuesto(ActionEvent event) {
+
+        DatosCompartidos.getInstancia().setPresupuestoSeleccionado(TableView_Presupuestos.getSelectionModel().getSelectedItem());
         cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/actualizarPresupuestoUsuario.fxml");
     }
 
@@ -77,12 +81,14 @@ public class PresupuestoViewController {
     }
 
 
-    private void cargarPresupuestos(){
-        Usuario usuarioActual = GestorSesion.getInstancia().getUsuarioActual();
-
-        if (usuarioActual != null){
+    private void cargarPresupuestos() {
+        try {
             TableView_Presupuestos.getItems().clear();
-            TableView_Presupuestos.getItems().addAll(usuarioActual.getListaPresupuestos());
+            TableView_Presupuestos.getItems().addAll(
+                    GestorPresupuestos.getInstancia().obtenerPresupuestosUsuario()
+            );
+        } catch (IllegalStateException e) {
+            System.out.println("Error al cargar presupuestos: " + e.getMessage());
         }
     }
 }

@@ -286,6 +286,17 @@ public class Usuario extends Persona{
         return todasTransacciones;
    }
 
-
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nombres='" + getNombres() + '\'' +
+                ", apellidos='" + getApellidos() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", telefono='" + getTelefono() + '\'' +
+                ", direccion='" + getDireccion() + '\'' +
+                ", idUsuario='" + idUsuario + '\'' +
+                ", cantidadCuentas=" + (listaCuentas != null ? listaCuentas.size() : 0) +
+                '}';
+    }
 
 }

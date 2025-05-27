@@ -1,31 +1,20 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Categoria;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
-import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Presupuesto;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPresupuestos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+
+import java.util.UUID;
 
 public class ActualizarPresupuestoViewController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private AnchorPane AnchorPane_MenuActualizarPresupuesto;
@@ -40,76 +29,100 @@ public class ActualizarPresupuestoViewController {
     private Label Label_SaldoPresupuesto;
 
     @FXML
-    private TextField TextField_AgregarCategoriaPresupuesto;
+    private TextField TextField_AgregarNombrePresupuesto;
 
-    @FXML
-    private TextField TextField_AgregarIDPresupuesto;
 
     @FXML
     private TextField TextField_AgregarMontoTotalPresupuesto;
 
     @FXML
-    private TextField TextField_AgregarNombrePresupuesto;
+    private TextField TextField_AgregarCategoriaPresupuesto;
 
     @FXML
     void onClick_ActualizarPresupuesto(ActionEvent event) {
-        String id = TextField_AgregarIDPresupuesto.getText();
+        String id = DatosCompartidos.getInstancia().getPresupuestoSeleccionado().getIdPresupuesto();
         String nombre = TextField_AgregarNombrePresupuesto.getText();
         String montoStr = TextField_AgregarMontoTotalPresupuesto.getText();
         String nombreCategoria = TextField_AgregarCategoriaPresupuesto.getText();
 
         if (id.isBlank() || nombre.isBlank() || montoStr.isBlank() || nombreCategoria.isBlank()) {
-            System.out.println("Todos los campos son obligatorios");
+            mostrarAlerta("Todos los campos son obligatorios");
             return;
         }
 
-        double montoTotal;
         try {
-            montoTotal = Double.parseDouble(montoStr);
-            if (montoTotal <= 0) {
-                System.out.println("El monto debe ser mayor a cero");
+            double montoTotal = Double.parseDouble(montoStr);
+
+            Presupuesto presupuestoExistente = GestorPresupuestos.getInstancia().buscarPresupuestoPorId(id);
+            if (presupuestoExistente == null) {
+                mostrarAlerta("No se encontró el presupuesto con el ID especificado");
                 return;
             }
+
+            Categoria categoria = new Categoria(UUID.randomUUID().toString(), nombreCategoria, "");
+
+            GestorPresupuestos.getInstancia().actualizarPresupuesto(
+                    presupuestoExistente,
+                    nombre,
+                    montoTotal,
+                    presupuestoExistente.getMontoGastado(),
+                    categoria
+            );
+
+            System.out.println("Presupuesto actualizado exitosamente");
+            actualizarSaldoPresupuesto(presupuestoExistente);
+            limpiarCampos();
+            volverAMenuPresupuesto();
+            DatosCompartidos.getInstancia().limpiarDatosCompartidos();
+
         } catch (NumberFormatException e) {
-            System.out.println("Monto inválido");
-            return;
+            mostrarAlerta("El monto debe ser un número válido");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
-
-        Categoria categoria = new Categoria(java.util.UUID.randomUUID().toString(), nombreCategoria, "");
-        Presupuesto nuevoPresupuesto = new Presupuesto(id, nombre, montoTotal, 0, categoria);
-
-        GestorSesion.getInstancia().getUsuarioActual().getListaPresupuestos().add(nuevoPresupuesto);
-
-        Label_SaldoPresupuesto.setText(String.format("$ %.2f", montoTotal));
-
-        System.out.println("Presupuesto actualizado con exito");
     }
 
     @FXML
     void onClick_AtrasMenuPresupuesto(ActionEvent event) {
+        volverAMenuPresupuesto();
+    }
+
+    @FXML
+    void initialize() {
+        Label_SaldoPresupuesto.setText("$ 0.00");
+    }
+
+    private void actualizarSaldoPresupuesto(Presupuesto presupuesto) {
+        if (presupuesto != null) {
+            double saldo = presupuesto.getMontoAsignado() - presupuesto.getMontoGastado();
+            Label_SaldoPresupuesto.setText(String.format("$ %.2f", saldo));
+        }
+    }
+
+    private void limpiarCampos() {
+        TextField_AgregarNombrePresupuesto.clear();
+        TextField_AgregarMontoTotalPresupuesto.clear();
+        TextField_AgregarCategoriaPresupuesto.clear();
+    }
+
+    private void volverAMenuPresupuesto() {
         try {
             AnchorPane contenedorPrincipal = (AnchorPane) AnchorPane_MenuActualizarPresupuesto.getParent();
-
             PantallaPrincipalUsuarioViewController.cargarVistaEnPantallaPrincipal(
                     contenedorPrincipal,
                     "/co/edu/uniquindio/poo/proyecto_final_pgii/usuario/presupuestoUsuario.fxml"
             );
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error al volver al menú de presupuesto");
         }
     }
 
-    @FXML
-    void initialize() {
-        assert AnchorPane_MenuActualizarPresupuesto != null : "fx:id=\"AnchorPane_MenuActualizarPresupuesto\" was not injected: check your FXML file 'actualizarPresupuestoUsuario.fxml'.";
-        assert Button_ActualizarPresupuesto != null : "fx:id=\"Button_ActualizarPresupuesto\" was not injected: check your FXML file 'actualizarPresupuestoUsuario.fxml'.";
-        assert Button_AtrasMenuPresupuesto != null : "fx:id=\"Button_AtrasMenuPresupuesto\" was not injected: check your FXML file 'actualizarPresupuestoUsuario.fxml'.";
-        assert Label_SaldoPresupuesto != null : "fx:id=\"Label_SaldoPresupuesto\" was not injected: check your FXML file 'actualizarPresupuestoUsuario.fxml'.";
-        assert TextField_AgregarCategoriaPresupuesto != null : "fx:id=\"TextField_AgregarCategoriaPresupuesto\" was not injected: check your FXML file 'actualizarPresupuestoUsuario.fxml'.";
-        assert TextField_AgregarIDPresupuesto != null : "fx:id=\"TextField_AgregarIDPresupuesto\" was not injected: check your FXML file 'actualizarPresupuestoUsuario.fxml'.";
-        assert TextField_AgregarMontoTotalPresupuesto != null : "fx:id=\"TextField_AgregarMontoTotalPresupuesto\" was not injected: check your FXML file 'actualizarPresupuestoUsuario.fxml'.";
-        assert TextField_AgregarNombrePresupuesto != null : "fx:id=\"TextField_AgregarNombrePresupuesto\" was not injected: check your FXML file 'actualizarPresupuestoUsuario.fxml'.";
-
+    private void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Validación");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
-
 }

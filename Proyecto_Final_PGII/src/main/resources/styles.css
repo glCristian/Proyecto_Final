@@ -22,3 +22,59 @@
 .combo-box .arrow {
     -fx-background-color: #9327f0; /* flecha morada */
 }
+
+.list-view {
+    -fx-background-color: #292757;
+    -fx-background-radius: 10;
+    -fx-control-inner-background: #292757;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+}
+
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #9327f0;
+    -fx-text-fill: #fff;
+}
+
+.list-view .list-cell:filled:hover {
+    -fx-background-color: #2E2C61;
+    -fx-text-fill: #fff;
+}
+
+
+
+.list-view .scroll-bar:vertical,
+.list-view .scroll-bar:horizontal {
+    -fx-background-color: #292757;
+    -fx-background-radius: 8;
+}
+
+.list-view .scroll-bar .thumb {
+    -fx-background-color: #9327f0;
+    -fx-background-radius: 8;
+}
+
+.list-view .scroll-bar .track {
+    -fx-background-color: #2E2C61;
+    -fx-background-radius: 8;
+}
+
+.list-view .scroll-bar .increment-arrow,
+.list-view .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-shape: " ";
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #5a4cb1;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}

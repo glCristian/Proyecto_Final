@@ -6,6 +6,8 @@ import co.edu.uniquindio.poo.proyecto_final_pgii.model.Presupuesto;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPresupuestos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -63,14 +65,15 @@ public class CrearPresupuestoViewController {
     }
 
     @FXML
-     public void onClick_CrearPresupuesto(ActionEvent event) {
+    public void onClick_CrearPresupuesto(ActionEvent event) {
         String id = TextField_AgregarIDPresupuesto.getText();
         String nombre = TextField_AgregarNombrePresupuesto.getText();
         String montoTotalStr = TextField_AgregarMontoTotalPresupuesto.getText();
         String montoGastadoStr = TextField_AgregarMontoGastadoPresupuesto.getText();
         String nombreCategoria = TextField_AgregarCategoriaPresupuesto.getText();
 
-        if (id.isBlank() || nombre.isBlank() || montoTotalStr.isBlank() || nombreCategoria.isBlank() || montoGastadoStr.isBlank()) {
+        if (id.isBlank() || nombre.isBlank() || montoTotalStr.isBlank() ||
+                nombreCategoria.isBlank() || montoGastadoStr.isBlank()) {
             System.out.println("Todos los campos son obligatorios.");
             return;
         }
@@ -78,24 +81,19 @@ public class CrearPresupuestoViewController {
         try {
             double montoTotal = Double.parseDouble(montoTotalStr);
             double montoGastado = Double.parseDouble(montoGastadoStr);
+            Categoria categoria = new Categoria(java.util.UUID.randomUUID().toString(),
+                    nombreCategoria, "");
 
-            if (montoTotal <= 0 || montoGastado < 0 || montoGastado > montoTotal) {
-                System.out.println("Verifique los montos ingresados.");
-                return;
-            }
+            GestorPresupuestos.getInstancia().crearPresupuesto(id, nombre, montoTotal,
+                    montoGastado, categoria);
 
-            Categoria categoria = new Categoria(java.util.UUID.randomUUID().toString(), nombreCategoria, "");
-            Presupuesto presupuesto = new Presupuesto(id, nombre, montoTotal, 0, categoria );
-            presupuesto.setMontoGastado(montoGastado);
-
-            GestorSesion.getInstancia().getUsuarioActual().getListaPresupuestos().add(presupuesto);
             Label_SaldoTotal.setText(String.format("$ %.2f", montoTotal));
-
             System.out.println("Presupuesto creado con éxito.");
         } catch (NumberFormatException e) {
             System.out.println("Los montos deben ser números válidos.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
-
     }
 
     @FXML
