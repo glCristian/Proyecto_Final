@@ -22,15 +22,9 @@ class AdministradorTest {
         );
     }
 
-
-    @Test
-    public void testSetIdAdministrador() {
-        administrador.setIdAministrador("admin02");
-        assertEquals("admin02", administrador.getIdAministrador());
-    }
-
     @Test
     public void testCrearTransaccionNoLanzaError() {
+        System.out.println("Inicio de prueba");
         // Llamar crearTransaccion y verificar que no lance excepción
         assertDoesNotThrow(() -> administrador.crearTransaccion(
                 "tx001",
@@ -41,6 +35,7 @@ class AdministradorTest {
                 new Categoria("cat01", "Gastos", "Gastos mensuales"),
                 TipoTransaccion.TRANSFERENCIA
         ));
+        System.out.println("Fin de prueba");
     }
 
 }

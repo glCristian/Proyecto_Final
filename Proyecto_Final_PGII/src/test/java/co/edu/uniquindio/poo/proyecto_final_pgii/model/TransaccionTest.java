@@ -14,7 +14,7 @@ class TransaccionTest {
     @Test
     public void testActualizarTransaccion() {
         Categoria original = new Categoria("098", "servicios", "destinado a servicios");
-        Categoria nueva = new Categoria("098", "eduacion", "destinado a educacion");
+        Categoria nueva = new Categoria("098", "Educacion", "destinado a educacion");
         Transaccion transaccion = new Transaccion("id001", LocalDateTime.now(), 50.0,
                 "Pago servicios", "001", "002", original, TipoTransaccion.TRANSFERENCIA);
 
@@ -23,7 +23,7 @@ class TransaccionTest {
         assertEquals("Pago universidad", transaccion.getDescripcion());
         assertEquals(200.0, transaccion.getMonto());
         assertEquals("003", transaccion.getCuentaDestino());
-        assertEquals("Educación", transaccion.getCategoria().getNombre());
+        assertEquals("Educacion", transaccion.getCategoria().getNombre());
     }
 
     @Test

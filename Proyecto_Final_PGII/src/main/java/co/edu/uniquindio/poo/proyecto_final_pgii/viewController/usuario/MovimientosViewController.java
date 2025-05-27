@@ -44,7 +44,7 @@ public class MovimientosViewController {
         ComboBox_CategoriaMovimientos.getItems().addAll("Todos ", "Envios " , "Depositos " , "Retiros ");
         ComboBox_CategoriaMovimientos.setValue("Todos ");
 
-        ComboBox_CategoriaMovimientos.setOnAction(event -> filtrarMovimientos());
+        //ComboBox_CategoriaMovimientos.setOnAction(event -> filtrarMovimientos());
 
 
     }
