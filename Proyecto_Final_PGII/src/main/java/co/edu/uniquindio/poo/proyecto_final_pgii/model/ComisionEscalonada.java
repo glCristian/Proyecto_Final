@@ -16,10 +16,10 @@ public class ComisionEscalonada implements EstrategiaComision{
         double monto = transaccion.getMonto();
 
         if (monto <= 1000) {
-            return 0; // Sin comisión para montos pequeños
+            return 0; // 0%
         } else if (monto <= 10000) {
             return monto * 0.001; // 0.1%
-        } else if (monto <= 100000) {
+        } else if (monto < 100000) {
             return monto * 0.005; // 0.5%
         } else {
             return monto * 0.01; // 1%
