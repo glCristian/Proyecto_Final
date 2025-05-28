@@ -5,14 +5,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 public class GestionarTransaccionesViewController {
@@ -74,7 +72,7 @@ public class GestionarTransaccionesViewController {
         assert TableView_CuentasTransaccion != null : "fx:id=\"TableView_CuentasTransaccion\" was not injected: check your FXML file 'gestionarTransacciones.fxml'.";
 
         cargarTransacciones();
-        configurarSeleccionCuenta();
+        configurarListView();
 
     }
 
@@ -90,26 +88,28 @@ public class GestionarTransaccionesViewController {
     }
 
 
-    /**
-     * carga las cuentas del usuario actual en la listViw para su selecciom
-     */
-    private void cargarTransacciones(){
-        TableView_CuentasTransaccion.setItems(javafx.collections.FXCollections.observableArrayList(BilleteraVirtual.getInstancia().getTransacciones()));
-    }
+   private void configurarListView(){
+       TableView_CuentasTransaccion.setCellFactory(lv -> new ListCell<>() {
+           @Override
+           protected void updateItem(Transaccion transaccion, boolean empty) {
+               super.updateItem(transaccion, empty);
+               if (empty || transaccion == null) {
+                   setText(null);
+               } else {
+                   setText(String.format("[%s] %s - $%.2f",
+                           transaccion.getFecha().toLocalDate(),
+                           transaccion.getDescripcion(),
+                           transaccion.getMonto()));
+               }
+           }
+       });
+   }
 
-    /**
-     * Configura el comportamiento al seleccionar una cuenta en la lista
-     */
-    private void configurarSeleccionCuenta(){
-        TableView_CuentasTransaccion.setOnMouseClicked(mouseEvent -> {
-            Transaccion transaccionSelected = TableView_CuentasTransaccion.getSelectionModel().getSelectedItem();
-            if (transaccionSelected != null)
-                Label_BancoCuenta.setText(transaccionSelected.getIdTransaccion());
-            Label_NumeroCuenta.setText(transaccionSelected.getDescripcion());
-            Label_SaldoCuenta.setText(String.format("$ %.2f", transaccionSelected.getMonto()));
 
-            DatosCompartidos.getInstancia().setTransaccionSeleccionada(transaccionSelected);
-        });
+    private void cargarTransacciones() {
+        TableView_CuentasTransaccion.setItems(
+                FXCollections.observableArrayList(BilleteraVirtual.getInstancia().getTransacciones())
+        );
     }
 
 }

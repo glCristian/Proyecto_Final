@@ -7,6 +7,7 @@ import java.util.UUID;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Categoria;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Cuenta;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.DatosCompartidos;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,28 +56,34 @@ public class AgregarDineroViewController {
 
     @FXML
     void onClick_AgregarDinero(ActionEvent event) {
-        String montoStr = TextField_MontoAgregarDinero.getText();
-        String descripcion = TextField_DescripcionAgregar.getText();
-        String cuentaDestino = TextField_NumeroCuentaOrigenAgregar.getText();
-        String categoria = TextField_CategoriaTransaccion.getText();
-        Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
+        String numeroCuentaIngresado = TextField_NumeroCuentaOrigenAgregar.getText().trim();
 
-
-        double monto;
-        try {
-            monto = Double.parseDouble(montoStr);
-            if (monto <= 0){
-                System.out.println("El monto debe ser mayor a cero");
-                return;
-            }
-        } catch (NumberFormatException e){
-            System.out.println("Monto invalido");
+        if (numeroCuentaIngresado.isEmpty()) {
+            Label_NumeroCuenta.setText("Ingrese un número");
+            Label_BancoCuenta.setText("");
+            Label_SaldoCuenta.setText("");
             return;
         }
 
-        GestorTransacciones.getInstancia().realizarDeposito(cuentaDestino, monto, descripcion, categoria1);
+        if (GestorSesion.getInstancia().getAdministradorActual() == null) {
+            Label_NumeroCuenta.setText("Admin no disponible");
+            return;
+        }
 
-        System.out.println("Deposito realizado con exito");
+        Cuenta cuentaEncontrada = GestorSesion.getInstancia().getAdministradorActual().getListaCuentasAdmin().stream()
+                .filter(c -> c.getNumeroCuenta().equals(numeroCuentaIngresado))
+                .findFirst()
+                .orElse(null);
+
+        if (cuentaEncontrada != null) {
+            Label_NumeroCuenta.setText(cuentaEncontrada.getNumeroCuenta());
+            Label_BancoCuenta.setText(cuentaEncontrada.getNombreBanco());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaEncontrada.getSaldoTotal()));
+        } else {
+            Label_NumeroCuenta.setText("Cuenta no encontrada");
+            Label_BancoCuenta.setText("");
+            Label_SaldoCuenta.setText("");
+        }
     }
 
 
@@ -107,19 +114,9 @@ public class AgregarDineroViewController {
         assert TextField_MontoAgregarDinero != null : "fx:id=\"TextField_MontoAgregarDinero\" was not injected: check your FXML file 'agregarDinero.fxml'.";
         assert TextField_NumeroCuentaOrigenAgregar != null : "fx:id=\"TextField_NumeroCuentaOrigenAgregar\" was not injected: check your FXML file 'agregarDinero.fxml'.";
 
-        cargarDatosCuenta();
+
     }
 
-    /**
-     * Carga los datos de la cuenta seleccionada en los labels correspondientes
-     */
-    public void cargarDatosCuenta(){
-        Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
-        if (cuenta != null){
-            Label_BancoCuenta.setText(cuenta.getNombreBanco());
-            Label_NumeroCuenta.setText(cuenta.getNumeroCuenta());
-            Label_SaldoCuenta.setText(String.format("$ %.2f", cuenta.getSaldoTotal()));
-        }
-    }
+
 
 }
