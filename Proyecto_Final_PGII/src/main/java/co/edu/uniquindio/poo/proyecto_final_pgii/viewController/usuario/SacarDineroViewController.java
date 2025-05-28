@@ -5,10 +5,12 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCategorias;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -48,8 +50,9 @@ public class SacarDineroViewController {
     @FXML
     private TextField TextField_NumeroCuentaDestinoSacar;
 
+
     @FXML
-    private TextField TextField_CategoriaTransaccion;
+    private ComboBox<String> ComboBox_CategoriaTransaccion;
 
     /**
      * Evento que maneja el boton para regresar al menu principal de transacciones
@@ -87,9 +90,15 @@ public class SacarDineroViewController {
 
         String montoTexto = TextField_MontoSacarDinero.getText();
         String descripcion = TextField_DescripcionSacar.getText();
-        String categoria = TextField_CategoriaTransaccion.getText();
+
+
+        String nombreCategoria = ComboBox_CategoriaTransaccion.getValue();
+        Categoria categoria = GestorCategorias.getInstancia().obtenerCategoriaPorNombre(nombreCategoria);
+
         Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
         String numeroCuentaOrigen = cuentaSeleccionada.getNumeroCuenta();
+
+
 
         double monto;
         try {
