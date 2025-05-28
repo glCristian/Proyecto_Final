@@ -1,14 +1,19 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
 import java.net.URL;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCategorias;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorTransacciones;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -49,7 +54,7 @@ public class AgregarDineroViewController {
     private TextField TextField_NumeroCuentaOrigenAgregar;
 
     @FXML
-    private TextField TextField_CategoriaTransaccion;
+    private ComboBox<String> ComboBox_CategoriaTransaccion;
 
 
     /**
@@ -63,8 +68,10 @@ public class AgregarDineroViewController {
         String montoStr = TextField_MontoAgregarDinero.getText();
         String descripcion = TextField_DescripcionAgragar.getText();
         String cuentaDestino = TextField_NumeroCuentaOrigenAgregar.getText();
-        String categoria = TextField_CategoriaTransaccion.getText();
-        Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
+
+        String nombreCategoria = ComboBox_CategoriaTransaccion.getValue();
+        Categoria categoria = GestorCategorias.getInstancia().obtenerCategoriaPorNombre(nombreCategoria);
+
 
 
         double monto;
@@ -79,7 +86,7 @@ public class AgregarDineroViewController {
             return;
         }
 
-        GestorTransacciones.getInstancia().realizarDeposito(cuentaDestino, monto, descripcion, categoria1);
+        GestorTransacciones.getInstancia().realizarDeposito(cuentaDestino, monto, descripcion, categoria);
 
         System.out.println("Deposito realizado con exito");
 
@@ -119,10 +126,23 @@ public class AgregarDineroViewController {
         assert TextField_DescripcionAgragar != null : "fx:id=\"TextField_DescripcionAgragar\" was not injected: check your FXML file 'agregarDineroUsuario.fxml'.";
         assert TextField_MontoAgregarDinero != null : "fx:id=\"TextField_MontoAgregarDinero\" was not injected: check your FXML file 'agregarDineroUsuario.fxml'.";
         assert TextField_NumeroCuentaOrigenAgregar != null : "fx:id=\"TextField_NumeroCuentaOrigenAgregar\" was not injected: check your FXML file 'agregarDineroUsuario.fxml'.";
-        assert TextField_CategoriaTransaccion != null : "fx:id=\"TextField_TipoTransaccion\" was not injected: check your FXML file 'agregarDineroUsuario.fxml'.";
+
+        cargarCategorias();
+
 
         cargarDatosCuenta();
     }
+
+    private void cargarCategorias() {
+        Collection<Categoria> categorias = GestorCategorias.getInstancia().obtenerCategoriasPredefinidas();
+        List<String> nombresCategorias = categorias.stream()
+                .map(Categoria::getNombre)
+                .collect(Collectors.toList());
+
+        ComboBox_CategoriaTransaccion.getItems().addAll(nombresCategorias);
+        ComboBox_CategoriaTransaccion.setValue(nombresCategorias.get(0)); // Seleccionar primera categoría por defecto
+    }
+
 
     /**
      * Carga los datos de la cuenta seleccionada en los labels correspondientes

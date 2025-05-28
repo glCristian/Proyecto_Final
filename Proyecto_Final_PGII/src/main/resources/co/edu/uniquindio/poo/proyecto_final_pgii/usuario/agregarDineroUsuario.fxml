@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="AnchorPane_MenuAgregarDinero" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.AgregarDineroViewController">
+<AnchorPane fx:id="AnchorPane_MenuAgregarDinero" prefHeight="500.0" prefWidth="613.0" style="-fx-background-color: #262450;" stylesheets="@../../../../../../styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario.AgregarDineroViewController">
    <children>
       <Button fx:id="Button_AgregarDinero" layoutX="252.0" layoutY="434.0" mnemonicParsing="false" onAction="#onClick_AgregarDinero" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #2E2C61; -fx-background-radius: 10;" text="Agregar" textFill="LIGHTGRAY" />
       <TextField fx:id="TextField_MontoAgregarDinero" layoutX="218.0" layoutY="262.0" prefHeight="25.0" prefWidth="178.0" promptText="Monto" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
@@ -44,6 +45,6 @@
             </Label>
          </children>
       </Pane>
-      <TextField fx:id="TextField_CategoriaTransaccion" layoutX="218.0" layoutY="386.0" prefHeight="25.0" prefWidth="178.0" promptText="Categoria" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
+      <ComboBox fx:id="ComboBox_CategoriaTransaccion" layoutX="218.0" layoutY="385.0" prefWidth="178.0" promptText="Seleccionar categoría" style="-fx-background-radius: ;" />
    </children>
 </AnchorPane>

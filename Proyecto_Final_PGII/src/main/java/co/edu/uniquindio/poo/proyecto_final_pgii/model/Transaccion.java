@@ -286,17 +286,19 @@ public class Transaccion {
         );
     }
 
+
     @Override
     public String toString() {
-        return "Transaccion{" +
-                "idTransaccion='" + idTransaccion + '\'' +
-                ", fecha=" + fecha +
-                ", monto=" + monto +
-                ", descripcion='" + descripcion + '\'' +
-                ", cuentaOrigen='" + cuentaOrigen + '\'' +
-                ", cuentaDestino='" + cuentaDestino + '\'' +
-                ", categoria=" + categoria.getNombre() +
-                ", tipoTransaccion=" + tipoTransaccion +
-                '}';
+        return "\n--- Detalles de la Transacción ---\n" +
+                "ID Transacción     : " + idTransaccion + "\n" +
+                "Fecha              : " + fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "\n" +
+                "Monto              : $" + String.format("%,.2f", monto) + "\n" +
+                "Descripción        : " + descripcion + "\n" +
+                "Cuenta Origen      : " + (cuentaOrigen != null ? cuentaOrigen : "N/A") + "\n" +
+                "Cuenta Destino     : " + (cuentaDestino != null ? cuentaDestino : "N/A") + "\n" +
+                "Categoría          : " + (categoria != null ? categoria.getNombre() : "N/A") + "\n" +
+                "Tipo de Transacción: " + (tipoTransaccion != null ? tipoTransaccion.name() : "N/A") + "\n" +
+                "-------------------------------";
     }
+
 }

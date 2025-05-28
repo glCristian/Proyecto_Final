@@ -92,7 +92,7 @@ public class GestorTransacciones {
             if (persona instanceof Usuario usuario) {
                 for (Cuenta cuenta : usuario.getListaCuentas()) {
                     if (cuenta.getNumeroCuenta().equals(numeroCuentaa)) {
-                        cuenta.depositar(monto); // deposita el monto a la cuenta
+                        cuenta.depositar(monto);
                         return true;
                     }
                 }
@@ -136,18 +136,37 @@ public class GestorTransacciones {
     }
 
 
-    /**
-     * Realiza un deposito a una cuenta, genera la transaccion y la registra
-     * @param idCuentaDestino
-     * @param monto
-     * @param descripcion
-     * @param categoria
-     * @return
-     */
     public boolean realizarDeposito(String idCuentaDestino, double monto, String descripcion, Categoria categoria) {
         if (depositarDinero(idCuentaDestino, monto)) {
-            Transaccion t = Transaccion.crearDeposito(idCuentaDestino, monto, descripcion, categoria);
-            registrarTransaccion(t);
+            Transaccion transaccion = new Transaccion(
+                    generarIdUnico(),
+                    obtenerFechaActual(),
+                    monto,
+                    descripcion,
+                    null,  // cuenta origen es null para depósitos
+                    idCuentaDestino,
+                    categoria,
+                    TipoTransaccion.DEPOSITO
+            );
+            registrarTransaccion(transaccion);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean realizarRetiro(String idCuentaOrigen, double monto, String descripcion, Categoria categoria) {
+        if (retirarDinero(idCuentaOrigen, monto)) {
+            Transaccion transaccion = new Transaccion(
+                    generarIdUnico(),
+                    obtenerFechaActual(),
+                    monto,
+                    descripcion,
+                    idCuentaOrigen,
+                    null,  // cuenta destino es null para retiros
+                    categoria,
+                    TipoTransaccion.RETIRO
+            );
+            registrarTransaccion(transaccion);
             return true;
         }
         return false;
@@ -155,21 +174,75 @@ public class GestorTransacciones {
 
 
     /**
-     * Realiza un retiro de una cuenta, genera la transaccion y la registra
-     * @param idCuentaOrigen
-     * @param monto
-     * @param descripcion
-     * @param categoria
-     * @return
+     * Metodo que realiza una transferencia entre cuentas
+     * @param idCuentaOrigen cuenta que envía el dinero
+     * @param idCuentaDestino cuenta que recibe el dinero
+     * @param monto cantidad a transferir
+     * @param descripcion descripción de la transferencia
+     * @param categoria categoría de la transferencia
+     * @return true si la transferencia fue exitosa, false en caso contrario
      */
-    public boolean realizarRetiro(String idCuentaOrigen, double monto, String descripcion, Categoria categoria) {
+    public boolean realizarTransferencia(String idCuentaOrigen, String idCuentaDestino,
+                                         double monto, String descripcion, Categoria categoria) {
+        // 1. Intentar realizar el retiro
         if (retirarDinero(idCuentaOrigen, monto)) {
-            Transaccion t = Transaccion.crearRetiro(idCuentaOrigen, monto, descripcion, categoria);
-            registrarTransaccion(t);
-            return true;
+            // 2. Si el retiro fue exitoso, intentar realizar el depósito
+            if (depositarDinero(idCuentaDestino, monto)) {
+                try {
+                    // 3. Crear la transacción usando el método factory
+                    Transaccion transaccion = Transaccion.crearTransferencia(
+                            idCuentaOrigen, idCuentaDestino, monto, descripcion, categoria);
+
+                    // 4. Registrar la transacción en el sistema y en los usuarios
+                    registrarTransaccion(transaccion);
+
+                    // 5. Obtener los usuarios involucrados
+                    Usuario usuarioOrigen = buscarUsuarioPorNumeroCuenta(idCuentaOrigen);
+                    Usuario usuarioDestino = buscarUsuarioPorNumeroCuenta(idCuentaDestino);
+
+                    // 6. Agregar la transacción a las listas de los usuarios
+                    if (usuarioOrigen != null) {
+                        usuarioOrigen.agregarTransaccion(transaccion);
+                    }
+                    if (usuarioDestino != null) {
+                        usuarioDestino.agregarTransaccion(transaccion);
+                    }
+
+                    // 7. Calcular y aplicar comisión si corresponde
+                    double comision = calculadoraComisiones.calcular(transaccion);
+                    if (comision > 0) {
+                        System.out.println(" Comisión aplicada: $" + String.format("%.2f", comision) +
+                                " (" + calculadoraComisiones.getEstrategiaActual() + ")");
+
+                        // Aplicar la comisión retirando el monto adicional
+                        retirarDinero(idCuentaOrigen, comision);
+                    }
+
+                    // 8. Notificar a los observadores
+                    sujetoNotificaciones.notificarObservadores(transaccion, "TRANSFERENCIA_COMPLETADA");
+
+                    return true;
+
+                } catch (Exception e) {
+                    System.out.println("Error al procesar la transferencia: " + e.getMessage());
+                    // Revertir las operaciones en caso de error
+                    depositarDinero(idCuentaOrigen, monto);
+                    retirarDinero(idCuentaDestino, monto);
+                    return false;
+                }
+            } else {
+                // Si falla el depósito, revertir el retiro
+                depositarDinero(idCuentaOrigen, monto);
+                System.out.println("No se pudo completar el depósito en la cuenta destino");
+                return false;
+            }
         }
+        System.out.println("No se pudo realizar el retiro de la cuenta origen");
         return false;
     }
+
+
+
 
     private Usuario buscarUsuarioPorCuenta(Cuenta cuenta) {
         for (Usuario usuario : BilleteraVirtual.getInstancia().getUsuarios()) {
@@ -194,99 +267,42 @@ public class GestorTransacciones {
         return null;
     }
 
+
     /**
-     * Metodo generico para resgitrar una transaccion
+     * Metodo generico para registrar una transaccion
      * @param transaccion
      */
     private void registrarTransaccion(Transaccion transaccion) {
-        if (transaccion == null) return;
+        // Agregar al sistema
+        BilleteraVirtual.getInstancia().getTransacciones().add(transaccion);
 
-        BilleteraVirtual sistema = BilleteraVirtual.getInstancia();
-
-        // Añadir a la cuenta origen
+        // Buscar y agregar al usuario correspondiente
         if (transaccion.getCuentaOrigen() != null) {
-            Cuenta cuentaOrigen = buscarCuentaPorId(transaccion.getCuentaOrigen());
-            if (cuentaOrigen != null) {
-                cuentaOrigen.getListaTransacciones().add(transaccion);
-
-                Usuario propietarioOrigen = buscarUsuarioPorCuenta(cuentaOrigen);
-                if (propietarioOrigen != null) {
-                    propietarioOrigen.getListaTransacciones().add(transaccion);
-                }else{
-                    System.out.println("No se encontró el propietario de la cuenta origen.");
-                }
+            Usuario usuarioOrigen = buscarUsuarioPorNumeroCuenta(transaccion.getCuentaOrigen());
+            if (usuarioOrigen != null) {
+                usuarioOrigen.agregarTransaccion(transaccion);
             }
-        } else{
-            // Si no hay cuenta de origen, se asume que es un depósito sin cuenta origen
-            System.out.println("No se especificó cuenta de origen para la transacción.");
         }
 
-        // Añadir a la cuenta destino si es distinta a la de origen
-        if (transaccion.getCuentaDestino() != null &&
-                !transaccion.getCuentaDestino().equals(transaccion.getCuentaOrigen())) {
-
-            Cuenta cuentaDestino = buscarCuentaPorId(transaccion.getCuentaDestino());
-            if (cuentaDestino != null) {
-                cuentaDestino.getListaTransacciones().add(transaccion);
-
-                Usuario propietarioDestino = buscarUsuarioPorCuenta(cuentaDestino);
-                if (propietarioDestino != null) {
-                    propietarioDestino.getListaTransacciones().add(transaccion);
-                }else{
-                    System.out.println("No se encontró el propietario de la cuenta destino.");
-                }
+        if (transaccion.getCuentaDestino() != null) {
+            Usuario usuarioDestino = buscarUsuarioPorNumeroCuenta(transaccion.getCuentaDestino());
+            if (usuarioDestino != null) {
+                usuarioDestino.agregarTransaccion(transaccion);
             }
-        }else{
-            // Si no hay cuenta de destino, se asume que es un retiro sin cuenta destino
-            System.out.println("No se especificó cuenta de destino para la transacción.");
         }
 
-        sistema.getTransacciones().add(transaccion);
+        // Si es una transferencia, agregar a ambos usuarios
+        if (transaccion.getTipoTransaccion() == TipoTransaccion.TRANSFERENCIA) {
+            // La transacción ya se agregó a ambos usuarios arriba
+            System.out.println("Transferencia registrada para ambos usuarios");
+        }
     }
 
 
 
 
 
-    /**
-     * Metodo que realiza una transferencia
-     * @param idCuentaOrigen
-     * @param idCuentaDestino
-     * @param monto
-     * @param descripcion
-     * @param categoria
-     * @return
-     */
-    public boolean realizarTransferencia(String idCuentaOrigen, String idCuentaDestino,
-                                  double monto, String descripcion, Categoria categoria) {
-        if (retirarDinero(idCuentaOrigen, monto)) {
-            if (depositarDinero(idCuentaDestino, monto)) {
 
-                // Crear transacción
-                Transaccion transaccion = Transaccion.crearTransferencia(
-                        idCuentaOrigen, idCuentaDestino, monto, descripcion, categoria);
-
-                // Registrar transacción
-                registrarTransaccion(transaccion);
-
-                // Calcular comisión
-                double comision = calculadoraComisiones.calcular(transaccion);
-                if (comision > 0) {
-                    System.out.println(" Comisión aplicada: $" + comision +
-                            " (" + calculadoraComisiones.getEstrategiaActual() + ")");
-                }
-
-                // Notificar observadores
-                sujetoNotificaciones.notificarObservadores(transaccion, "TRANSFERENCIA_COMPLETADA");
-
-                return true;
-            } else {
-                // Si falla el depósito, se revierte el retiro
-                depositarDinero(idCuentaOrigen, monto);
-            }
-        }
-        return false;
-    }
 
 
     public void agregarObservador(ObservadorTransacciones observador) {

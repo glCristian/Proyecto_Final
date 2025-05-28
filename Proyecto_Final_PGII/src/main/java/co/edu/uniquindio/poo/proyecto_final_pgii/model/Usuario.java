@@ -314,6 +314,23 @@ public class Usuario extends Persona{
     }
 
     /**
+     * Metodo para agregar una transaccion a la lista
+     * @param transaccion
+     */
+    public void agregarTransaccion(Transaccion transaccion){
+        if (transaccion != null && listaTransacciones != null) {
+            // Verificar si la transacción ya existe en la lista
+            boolean existe = listaTransacciones.stream()
+                    .anyMatch(t -> t.getIdTransaccion().equals(transaccion.getIdTransaccion()));
+
+            if (!existe) {
+                listaTransacciones.add(transaccion);
+                System.out.println("Transacción agregada al usuario: " + transaccion.getIdTransaccion());
+            }
+        }
+    }
+
+    /**
      * Metodo que obtiene todas las transacciones de todas las cuentas
      * del usuario que actualmente ha iniciado sesion
      * @return (Una Collection con todas las transacciones de todas las cuentas del usuario actual)
