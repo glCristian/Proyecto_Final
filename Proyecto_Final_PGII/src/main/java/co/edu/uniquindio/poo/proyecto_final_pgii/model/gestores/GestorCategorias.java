@@ -21,6 +21,11 @@ public class GestorCategorias {
         return instancia;
     }
 
+
+
+    /**
+     * Inicializa las categorías predefinidas para gastos, ingresos y transferencias.
+     */
     private void inicializarCategoriasPredefinidas() {
         // Categorías para gastos
         agregarCategoriaPredefinida("Alimentación", "Gastos relacionados con comida y bebida");
@@ -40,6 +45,12 @@ public class GestorCategorias {
         agregarCategoriaPredefinida("Otros", "Categoría general para otros movimientos");
     }
 
+    /**
+     * Agrega una categoría predefinida a la colección.
+     *
+     * @param nombre      Nombre de la categoría.
+     * @param descripcion Descripción de la categoría.
+     */
     private void agregarCategoriaPredefinida(String nombre, String descripcion) {
         categoriasPredefinidas.add(new Categoria(
                 UUID.randomUUID().toString(),
@@ -48,10 +59,21 @@ public class GestorCategorias {
         ));
     }
 
+    /**
+     * Obtiene todas las categorías predefinidas.
+     *
+     * @return Colección de categorías predefinidas.
+     */
     public Collection<Categoria> obtenerCategoriasPredefinidas() {
         return new LinkedList<>(categoriasPredefinidas);
     }
 
+    /**
+     * Obtiene una categoría por su nombre.
+     *
+     * @param nombre Nombre de la categoría a buscar.
+     * @return La categoría encontrada o null si no existe.
+     */
     public Categoria obtenerCategoriaPorNombre(String nombre) {
         return categoriasPredefinidas.stream()
                 .filter(c -> c.getNombre().equals(nombre))

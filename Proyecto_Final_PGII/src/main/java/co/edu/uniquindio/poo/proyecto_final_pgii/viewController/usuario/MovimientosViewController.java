@@ -55,6 +55,9 @@ public class MovimientosViewController {
 
     }
 
+    /**
+     * Carga las transacciones del usuario actual en la tabla de movimientos.
+     */
     public void cargarTransacciones(){
 
         TableView_Movimientos.setItems(javafx.collections.FXCollections.observableArrayList(GestorSesion.getInstancia().getUsuarioActual().consultarTransacciones()));

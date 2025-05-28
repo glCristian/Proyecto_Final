@@ -31,6 +31,6 @@
       </Label>
       <TextField fx:id="TextField_AgregarMontoTotalPresupuesto" layoutX="218.0" layoutY="277.0" prefHeight="25.0" prefWidth="178.0" promptText="Monto Total Asignado" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
       <TextField fx:id="TextField_AgregarMontoGastadoPresupuesto" layoutX="218.0" layoutY="318.0" prefHeight="25.0" prefWidth="178.0" promptText="Monto Gastado" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
-      <TextField fx:id="TextField_AgregarCategoriaPresupuesto" layoutX="218.0" layoutY="357.0" prefHeight="25.0" prefWidth="178.0" promptText="Categoria" style="-fx-background-color: #33316B; -fx-background-radius: 8;" />
+      <ComboBox fx:id="ComboBox_CategoriaTransaccion" layoutX="218.0" layoutY="385.0" prefWidth="178.0" promptText="Seleccionar categoría" />
    </children>
 </AnchorPane>

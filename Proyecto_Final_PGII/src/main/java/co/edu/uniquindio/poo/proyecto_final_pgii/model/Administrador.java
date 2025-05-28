@@ -73,6 +73,16 @@ public class Administrador extends Persona{
 
     //-------------------------------------Gestion de transacciones------------------//
 
+    /**
+     * Metodo que crea una nueva transaccion y la añade
+     * @param idTransaccion
+     * @param monto
+     * @param descripcion
+     * @param cuentaOrigen
+     * @param cuentaDestino
+     * @param categoria
+     * @param tipoTransaccion
+     */
     public void crearTransaccion(String idTransaccion,
                                  double monto, String descripcion, String cuentaOrigen,
                                  String cuentaDestino, Categoria categoria, TipoTransaccion tipoTransaccion){

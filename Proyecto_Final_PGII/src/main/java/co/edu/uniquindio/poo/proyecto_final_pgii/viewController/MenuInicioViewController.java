@@ -43,11 +43,16 @@ public class MenuInicioViewController {
         String contrasenia = TextField_IngresarContrasenia.getText();
 
         if (email.isEmpty() || contrasenia.isEmpty()) {
-            System.out.println("Por favor, complete todos los campos.");
+            mostrarAlerta("Por favor, complete todos los campos.");
             return;
         }
 
         boolean sesionIniciada = GestorPerfiles.getInstancia().autenticar(email, contrasenia);
+
+        if (!sesionIniciada) {
+            mostrarAlerta("Credenciales incorrectas. Por favor, intente nuevamente.");
+            return;
+        }
 
         if (sesionIniciada) {
 
@@ -94,6 +99,18 @@ public class MenuInicioViewController {
         assert TextField_IngresarContrasenia != null : "fx:id=\"TextField_IngresarContrasenia\" was not injected: check your FXML file 'menuInicio.fxml'.";
         assert TextField_IngresarEmail != null : "fx:id=\"TextField_IngresarEmail\" was not injected: check your FXML file 'menuInicio.fxml'.";
 
+    }
+
+    /**
+     * Muestra una alerta de error con el mensaje proporcionado.
+     * @param mensaje Mensaje a mostrar en la alerta.
+     */
+    private void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
 }

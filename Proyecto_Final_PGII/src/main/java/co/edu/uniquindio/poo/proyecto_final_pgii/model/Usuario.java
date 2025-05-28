@@ -352,15 +352,15 @@ public class Usuario extends Persona{
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "nombres='" + getNombres() + '\'' +
-                ", apellidos='" + getApellidos() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", telefono='" + getTelefono() + '\'' +
-                ", direccion='" + getDireccion() + '\'' +
-                ", idUsuario='" + idUsuario + '\'' +
-                ", cantidadCuentas=" + (listaCuentas != null ? listaCuentas.size() : 0) +
-                '}';
+        return "\n🧑‍💼 Usuario: " +
+                "\n  • Nombres: " + getNombres() +
+                "\n  • Apellidos: " + getApellidos() +
+                "\n  • Email: " + getEmail() +
+                "\n  • Teléfono: " + getTelefono() +
+                "\n  • Dirección: " + getDireccion() +
+                "\n  • ID Usuario: " + idUsuario +
+                "\n  • Cantidad de cuentas: " + (listaCuentas != null ? listaCuentas.size() : 0) +
+                "\n";
     }
 
 }

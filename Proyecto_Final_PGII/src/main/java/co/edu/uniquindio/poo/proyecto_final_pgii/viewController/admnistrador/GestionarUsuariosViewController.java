@@ -80,6 +80,11 @@ public class GestionarUsuariosViewController {
         cargarUsuarios();
     }
 
+    /**
+     * Carga la vista especificada en el AnchorPane_MenuGestionarUsuarios.
+     *
+     * @param nombreFXML Ruta del archivo FXML a cargar.
+     */
     private void cargarVista(String nombreFXML) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));
@@ -90,6 +95,9 @@ public class GestionarUsuariosViewController {
         }
     }
 
+    /**
+     * Carga los usuarios desde la BilleteraVirtual y los muestra en el TableView.
+     */
     private void cargarUsuarios() {
         List<Usuario> listaUsuarios = BilleteraVirtual.getInstancia().getPerfiles().stream()
                 .filter(p -> p instanceof Usuario)
@@ -101,6 +109,9 @@ public class GestionarUsuariosViewController {
     }
 
 
+    /**
+     * Actualiza el TableView de usuarios con la lista actualizada de usuarios.
+     */
     public void actualizarTableViewUsuarios(){
         List<Usuario> listaUsuariosActualizados = BilleteraVirtual.getInstancia().getPerfiles().stream()
                 .filter(p -> p instanceof Usuario)

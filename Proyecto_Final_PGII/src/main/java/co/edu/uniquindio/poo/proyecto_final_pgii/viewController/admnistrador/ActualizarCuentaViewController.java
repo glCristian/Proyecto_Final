@@ -54,15 +54,15 @@ public class ActualizarCuentaViewController {
     void onClick_ActualizarCuenta(ActionEvent event) {
         Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
 
-        if (cuenta != null){
+        if (cuenta != null) {
             String nuevoBanco = TextField_AgregarBancoCuenta.getText();
             TipoCuenta nuevoTipoCuenta = cmb_select_tipoCuenta.getValue();
 
-            if (nuevoBanco != null && !nuevoBanco.isBlank()){
+            if (nuevoBanco != null && !nuevoBanco.isBlank()) {
                 cuenta.setNombreBanco(nuevoBanco);
             }
 
-            if(nuevoTipoCuenta != null){
+            if (nuevoTipoCuenta != null) {
                 cuenta.setTipoCuenta(nuevoTipoCuenta);
             }
 
@@ -102,11 +102,17 @@ public class ActualizarCuentaViewController {
 
     }
 
+    /**
+     * Carga los tipos de cuenta en el ComboBox
+     */
     private void cargarComboBoxTipoCuenta() {
         cmb_select_tipoCuenta.setItems(FXCollections.observableArrayList(TipoCuenta.values()));
         cmb_select_tipoCuenta.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Muestra los datos de la cuenta seleccionada en los labels y campos de edición
+     */
     private void mostrarDatosCuentaSeleccionada(){
         Cuenta cuenta = DatosCompartidos.getInstancia().getCuentaSeleccionada();
 

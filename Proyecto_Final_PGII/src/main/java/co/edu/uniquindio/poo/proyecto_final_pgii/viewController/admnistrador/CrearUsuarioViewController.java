@@ -138,7 +138,11 @@ public class CrearUsuarioViewController {
         servicio = new ServicioBilleteraVirtual();
     }
 
-
+    /**
+     * Muestra una alerta con el mensaje de error proporcionado
+     * @param titulo Titulo de la alerta
+     * @param mensaje Mensaje de error a mostrar
+     */
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(titulo);
@@ -147,6 +151,9 @@ public class CrearUsuarioViewController {
         alert.showAndWait();
     }
 
+    /**
+     * Limpia los campos del formulario de creación de usuario
+     */
     private void limpiarFormulario() {
         TextField_AgregarNombreUsuario1.clear();
         TextField_AgregarApellidosUsuario.clear();

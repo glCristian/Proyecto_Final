@@ -5,12 +5,17 @@ import co.edu.uniquindio.poo.proyecto_final_pgii.model.GestorSesion;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.Presupuesto;
 
 import java.net.URL;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
+import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCategorias;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorPresupuestos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -36,7 +41,7 @@ public class CrearPresupuestoViewController {
     private Label Label_SaldoTotal;
 
     @FXML
-    private TextField TextField_AgregarCategoriaPresupuesto;
+    private ComboBox<String> ComboBox_CategoriaTransaccion;
 
     @FXML
     private TextField TextField_AgregarIDPresupuesto;
@@ -80,7 +85,13 @@ public class CrearPresupuestoViewController {
         String nombre = TextField_AgregarNombrePresupuesto.getText();
         String montoTotalStr = TextField_AgregarMontoTotalPresupuesto.getText();
         String montoGastadoStr = TextField_AgregarMontoGastadoPresupuesto.getText();
-        String nombreCategoria = TextField_AgregarCategoriaPresupuesto.getText();
+
+
+
+        String nombreCategoria = ComboBox_CategoriaTransaccion.getValue();
+        Categoria categoria = GestorCategorias.getInstancia().obtenerCategoriaPorNombre(nombreCategoria);
+
+
 
         if (id.isBlank() || nombre.isBlank() || montoTotalStr.isBlank() ||
                 nombreCategoria.isBlank() || montoGastadoStr.isBlank()) {
@@ -91,8 +102,7 @@ public class CrearPresupuestoViewController {
         try {
             double montoTotal = Double.parseDouble(montoTotalStr);
             double montoGastado = Double.parseDouble(montoGastadoStr);
-            Categoria categoria = new Categoria(java.util.UUID.randomUUID().toString(),
-                    nombreCategoria, "");
+
 
             GestorPresupuestos.getInstancia().crearPresupuesto(id, nombre, montoTotal,
                     montoGastado, categoria);
@@ -116,13 +126,26 @@ public class CrearPresupuestoViewController {
         assert Button_AtrasMenuPresupuesto != null : "fx:id=\"Button_AtrasMenuPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
         assert Button_CrearPresupuesto != null : "fx:id=\"Button_CrearPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
         assert Label_SaldoTotal != null : "fx:id=\"Label_SaldoTotal\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
-        assert TextField_AgregarCategoriaPresupuesto != null : "fx:id=\"TextField_AgregarCategoriaPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
         assert TextField_AgregarIDPresupuesto != null : "fx:id=\"TextField_AgregarIDPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
         assert TextField_AgregarMontoGastadoPresupuesto != null : "fx:id=\"TextField_AgregarMontoGastadoPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
         assert TextField_AgregarMontoTotalPresupuesto != null : "fx:id=\"TextField_AgregarMontoTotalPresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
         assert TextField_AgregarNombrePresupuesto != null : "fx:id=\"TextField_AgregarNombrePresupuesto\" was not injected: check your FXML file 'crearPresupuestoUsuario.fxml'.";
-
+        cargarCategorias();
         cargarSaldoTotal();
+    }
+
+
+    /**
+     * Carga las categorias predefinidas en el comboBox de categorias
+     */
+    private void cargarCategorias() {
+        Collection<Categoria> categorias = GestorCategorias.getInstancia().obtenerCategoriasPredefinidas();
+        List<String> nombresCategorias = categorias.stream()
+                .map(Categoria::getNombre)
+                .collect(Collectors.toList());
+
+        ComboBox_CategoriaTransaccion.getItems().addAll(nombresCategorias);
+        ComboBox_CategoriaTransaccion.setValue(nombresCategorias.get(0)); // Seleccionar primera categoría por defecto
     }
 
     /**

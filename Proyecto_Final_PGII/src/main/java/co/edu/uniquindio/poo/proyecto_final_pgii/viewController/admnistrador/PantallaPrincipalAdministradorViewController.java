@@ -93,6 +93,11 @@ public class PantallaPrincipalAdministradorViewController {
         cargarUsuariosEnListView();
     }
 
+    /**
+     * Carga una vista en el contenedor principal de la pantalla del administrador
+     * @param contenedor El AnchorPane donde se cargará la vista
+     * @param nombreFXML El nombre del archivo FXML de la vista a cargar
+     */
     public static void cargarVistaEnPantallaPrincipal(AnchorPane contenedor, String nombreFXML) {
         try {
             FXMLLoader loader = new FXMLLoader(PantallaPrincipalUsuarioViewController.class.getResource(nombreFXML));
@@ -103,6 +108,9 @@ public class PantallaPrincipalAdministradorViewController {
         }
     }
 
+    /**
+     * Carga los usuarios registrados en el ListView de la pantalla principal del administrador
+     */
     private void cargarUsuariosEnListView() {
         // Obtener todos los perfiles registrados
         Collection<Persona> perfiles = BilleteraVirtual.getInstancia().getPerfiles();

@@ -136,6 +136,14 @@ public class GestorTransacciones {
     }
 
 
+    /**
+     * Metodo que genera un deposito a una cuenta
+     * @param idCuentaDestino cuenta destino del deposito
+     * @param monto cantidad a depositar
+     * @param descripcion descripcion del deposito
+     * @param categoria categoria del deposito
+     * @return true si el deposito fue exitoso, false en caso contrario
+     */
     public boolean realizarDeposito(String idCuentaDestino, double monto, String descripcion, Categoria categoria) {
         if (depositarDinero(idCuentaDestino, monto)) {
             Transaccion transaccion = new Transaccion(
@@ -154,6 +162,14 @@ public class GestorTransacciones {
         return false;
     }
 
+    /**
+     * Metodo que realiza un retiro de dinero de una cuenta
+     * @param idCuentaOrigen cuenta de la que se retira el dinero
+     * @param monto cantidad a retirar
+     * @param descripcion descripcion del retiro
+     * @param categoria categoria del retiro
+     * @return true si el retiro fue exitoso, false en caso contrario
+     */
     public boolean realizarRetiro(String idCuentaOrigen, double monto, String descripcion, Categoria categoria) {
         if (retirarDinero(idCuentaOrigen, monto)) {
             Transaccion transaccion = new Transaccion(
@@ -244,6 +260,11 @@ public class GestorTransacciones {
 
 
 
+    /**
+     * Metodo que busca un usuario por su cuenta
+     * @param cuenta cuenta del usuario
+     * @return usuario encontrado o null si no se encuentra
+     */
     private Usuario buscarUsuarioPorCuenta(Cuenta cuenta) {
         for (Usuario usuario : BilleteraVirtual.getInstancia().getUsuarios()) {
             if (usuario.consultarCuentas().contains(cuenta)) {
@@ -256,6 +277,11 @@ public class GestorTransacciones {
         return null;
     }
 
+    /**
+     * Metodo que busca un usuario por su numero de cuenta
+     * @param numeroCuenta numero de cuenta del usuario
+     * @return usuario encontrado o null si no se encuentra
+     */
     private Usuario buscarUsuarioPorNumeroCuenta(String numeroCuenta) {
         for (Usuario usuario : BilleteraVirtual.getInstancia().getUsuarios()) {
             for (Cuenta cuenta : usuario.consultarCuentas()) {
@@ -302,26 +328,43 @@ public class GestorTransacciones {
 
 
 
-
-
-
+    /**
+     * Metodo que elimina una transaccion del sistema
     public void agregarObservador(ObservadorTransacciones observador) {
         sujetoNotificaciones.agregarObservador(observador);
     }
-
+     * @param idTransaccion id de la transaccion a eliminar
+     * @return true si la transaccion fue eliminada, false en caso contrario
+     */
     public void setEstrategiaComision(EstrategiaComision estrategia) {
         calculadoraComisiones.setEstrategia(estrategia);
     }
 
+
+    /**
+     * Configura los observadores por defecto para el sujeto de notificaciones
+     */
     private void configurarObservadoresPorDefecto() {
         // Agregar observadores básicos
         sujetoNotificaciones.agregarObservador(new RegistradorAuditoria());
         sujetoNotificaciones.agregarObservador(new ControladorLimites());
     }
 
+    /**
+     * Elimina una transacción del sistema y notifica a los observadores
+     * @param idTransaccion ID de la transacción a eliminar
+     * @return true si la transacción fue eliminada, false en caso contrario
+     */
     public List<Transaccion> obtenerTodasTransacciones() {
         return BilleteraVirtual.getInstancia().getTransacciones().stream().toList();
     }
 
 
+    public void agregarObservador(NotificadorEmail notificadorEmail) {
+        if (notificadorEmail != null) {
+            sujetoNotificaciones.agregarObservador(notificadorEmail);
+        } else {
+            System.out.println("No se puede agregar un observador nulo");
+        }
+    }
 }

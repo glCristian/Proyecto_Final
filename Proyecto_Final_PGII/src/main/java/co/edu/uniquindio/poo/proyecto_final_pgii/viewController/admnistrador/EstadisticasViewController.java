@@ -54,6 +54,10 @@ public class EstadisticasViewController {
 
     }
 
+    /**
+     * Carga la vista correspondiente al botón presionado.
+     * @param nombreFXML Ruta del archivo FXML a cargar.
+     */
     private void cargarVista(String nombreFXML) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombreFXML));

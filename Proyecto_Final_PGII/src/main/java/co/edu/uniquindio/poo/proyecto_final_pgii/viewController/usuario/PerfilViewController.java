@@ -52,7 +52,10 @@ public class PerfilViewController {
             String nuevoEmail = TextField_AgregarEmailUsuario.getText();
             String nuevoTelefono = TextField_AgregarNumeroTelefonoUsuario.getText();
 
-            gestorPerfiles.actualizarUsuario(null, nuevoNombre,null,  nuevoEmail, nuevoTelefono, null, null);
+            String idUsuario = usuario.getIdUsuario();
+
+
+            gestorPerfiles.actualizarUsuario(idUsuario, nuevoNombre,null,  nuevoEmail, nuevoTelefono, null, null);
 
             System.out.println("Perfil actualizado correctamente");
         }
@@ -69,6 +72,20 @@ public class PerfilViewController {
         assert TextField_AgregarEmailUsuario != null : "fx:id=\"TextField_AgregarEmailUsuario\" was not injected: check your FXML file 'perfilUsuario.fxml'.";
         assert TextField_AgregarNombreUsuario != null : "fx:id=\"TextField_AgregarNombreUsuario\" was not injected: check your FXML file 'perfilUsuario.fxml'.";
         assert TextField_AgregarNumeroTelefonoUsuario != null : "fx:id=\"TextField_AgregarNumeroTelefonoUsuario\" was not injected: check your FXML file 'perfilUsuario.fxml'.";
+
+        // Obtener el usuario actual de la sesión
+        Usuario usuarioActual = GestorSesion.getInstancia().getUsuarioActual();
+
+        // Verificar si hay un usuario en sesión
+        if (usuarioActual != null) {
+            // Establecer los datos del usuario en los campos de texto
+            TextField_AgregarNombreUsuario.setText(usuarioActual.getNombres());
+            TextField_AgregarEmailUsuario.setText(usuarioActual.getEmail());
+            TextField_AgregarNumeroTelefonoUsuario.setText(usuarioActual.getTelefono());
+        }
+
+
+
     }
 
 }

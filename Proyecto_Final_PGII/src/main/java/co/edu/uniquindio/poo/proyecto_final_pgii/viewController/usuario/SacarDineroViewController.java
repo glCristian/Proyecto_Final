@@ -146,7 +146,9 @@ public class SacarDineroViewController {
         cargarDatosCuenta();
     }
 
-
+    /**
+     * Carga las categorias predefinidas en el ComboBox de categorias
+     */
     private void cargarCategorias() {
         Collection<Categoria> categorias = GestorCategorias.getInstancia().obtenerCategoriasPredefinidas();
         List<String> nombresCategorias = categorias.stream()
