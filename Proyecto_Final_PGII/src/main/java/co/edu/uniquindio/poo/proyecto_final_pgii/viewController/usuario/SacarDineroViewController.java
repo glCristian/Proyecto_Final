@@ -1,8 +1,11 @@
 package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.usuario;
 
 import java.net.URL;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.gestores.GestorCategorias;
@@ -95,7 +98,6 @@ public class SacarDineroViewController {
         String nombreCategoria = ComboBox_CategoriaTransaccion.getValue();
         Categoria categoria = GestorCategorias.getInstancia().obtenerCategoriaPorNombre(nombreCategoria);
 
-        Categoria categoria1 = new Categoria(UUID.randomUUID().toString(), categoria, "");
         String numeroCuentaOrigen = cuentaSeleccionada.getNumeroCuenta();
 
 
@@ -118,7 +120,7 @@ public class SacarDineroViewController {
             return;
         }
 
-        GestorTransacciones.getInstancia().realizarRetiro(numeroCuentaOrigen, monto, descripcion, categoria1);
+        GestorTransacciones.getInstancia().realizarRetiro(numeroCuentaOrigen, monto, descripcion, categoria);
 
         System.out.println("Dinero retirado exitosamente");
 
@@ -139,9 +141,20 @@ public class SacarDineroViewController {
         assert TextField_DescripcionSacar != null : "fx:id=\"TextField_DescripcionSacar\" was not injected: check your FXML file 'sacarDineroUsuario.fxml'.";
         assert TextField_MontoSacarDinero != null : "fx:id=\"TextField_MontoSacarDinero\" was not injected: check your FXML file 'sacarDineroUsuario.fxml'.";
         assert TextField_NumeroCuentaDestinoSacar != null : "fx:id=\"TextField_NumeroCuentaDestinoSacar\" was not injected: check your FXML file 'sacarDineroUsuario.fxml'.";
-        assert TextField_CategoriaTransaccion != null : "fx:id=\"TextField_TipoTransaccion\" was not injected: check your FXML file 'sacarDineroUsuario.fxml'.";
 
+        cargarCategorias();
         cargarDatosCuenta();
+    }
+
+
+    private void cargarCategorias() {
+        Collection<Categoria> categorias = GestorCategorias.getInstancia().obtenerCategoriasPredefinidas();
+        List<String> nombresCategorias = categorias.stream()
+                .map(Categoria::getNombre)
+                .collect(Collectors.toList());
+
+        ComboBox_CategoriaTransaccion.getItems().addAll(nombresCategorias);
+        ComboBox_CategoriaTransaccion.setValue(nombresCategorias.get(0)); // Seleccionar primera categoría por defecto
     }
 
     /**
