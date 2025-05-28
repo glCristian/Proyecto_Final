@@ -51,11 +51,13 @@ public class MovimientosViewController {
 
         //ComboBox_CategoriaMovimientos.setOnAction(event -> filtrarMovimientos());
 
+        System.out.println(GestorSesion.getInstancia().getUsuarioActual().getListaTransacciones());
+
     }
 
     public void cargarTransacciones(){
 
-        TableView_Movimientos.setItems(javafx.collections.FXCollections.observableArrayList(GestorSesion.getInstancia().getUsuarioActual().getListaTransacciones()));
+        TableView_Movimientos.setItems(javafx.collections.FXCollections.observableArrayList(GestorSesion.getInstancia().getUsuarioActual().consultarTransacciones()));
     }
 
 

@@ -176,6 +176,9 @@ public class GestorTransacciones {
             if (usuario.consultarCuentas().contains(cuenta)) {
                 return usuario;
             }
+            else{
+                System.out.println("El metodo buscarUsuarioPorCuenta no encontró el usuario propietario de la cuenta.");
+            }
         }
         return null;
     }
@@ -209,8 +212,13 @@ public class GestorTransacciones {
                 Usuario propietarioOrigen = buscarUsuarioPorCuenta(cuentaOrigen);
                 if (propietarioOrigen != null) {
                     propietarioOrigen.getListaTransacciones().add(transaccion);
+                }else{
+                    System.out.println("No se encontró el propietario de la cuenta origen.");
                 }
             }
+        } else{
+            // Si no hay cuenta de origen, se asume que es un depósito sin cuenta origen
+            System.out.println("No se especificó cuenta de origen para la transacción.");
         }
 
         // Añadir a la cuenta destino si es distinta a la de origen
@@ -224,8 +232,13 @@ public class GestorTransacciones {
                 Usuario propietarioDestino = buscarUsuarioPorCuenta(cuentaDestino);
                 if (propietarioDestino != null) {
                     propietarioDestino.getListaTransacciones().add(transaccion);
+                }else{
+                    System.out.println("No se encontró el propietario de la cuenta destino.");
                 }
             }
+        }else{
+            // Si no hay cuenta de destino, se asume que es un retiro sin cuenta destino
+            System.out.println("No se especificó cuenta de destino para la transacción.");
         }
 
         sistema.getTransacciones().add(transaccion);
