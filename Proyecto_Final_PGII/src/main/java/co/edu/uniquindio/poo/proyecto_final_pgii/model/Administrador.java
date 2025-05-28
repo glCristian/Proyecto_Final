@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * Clase que representa a un administrador del sistema
@@ -31,6 +32,7 @@ public class Administrador extends Persona{
 
         this.contrasena = contrasena;
         this.idAministrador = idAministrador;
+        this.listaCuentasAdmin = new LinkedList<>();
     }
 
     public String getContrasena() {

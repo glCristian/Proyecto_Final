@@ -2,6 +2,8 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.viewController.admnistrador;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.proyecto_final_pgii.model.*;
@@ -43,7 +45,7 @@ public class GestionarTransaccionesViewController {
     private Label Label_SaldoCuenta;
 
     @FXML
-    private ListView<Transaccion> TableView_CuentasTransaccion;
+    private ListView<Cuenta> TableView_CuentasTransaccion;
 
     @FXML
     void onClick_AgregarDinero(ActionEvent event) {
@@ -71,8 +73,8 @@ public class GestionarTransaccionesViewController {
         assert Label_SaldoCuenta != null : "fx:id=\"Label_SaldoCuenta\" was not injected: check your FXML file 'gestionarTransacciones.fxml'.";
         assert TableView_CuentasTransaccion != null : "fx:id=\"TableView_CuentasTransaccion\" was not injected: check your FXML file 'gestionarTransacciones.fxml'.";
 
-        cargarTransacciones();
-        configurarListView();
+        cargarCuentas();
+        configurarSeleccionCuenta();
 
     }
 
@@ -88,28 +90,37 @@ public class GestionarTransaccionesViewController {
     }
 
 
-   private void configurarListView(){
-       TableView_CuentasTransaccion.setCellFactory(lv -> new ListCell<>() {
-           @Override
-           protected void updateItem(Transaccion transaccion, boolean empty) {
-               super.updateItem(transaccion, empty);
-               if (empty || transaccion == null) {
-                   setText(null);
-               } else {
-                   setText(String.format("[%s] %s - $%.2f",
-                           transaccion.getFecha().toLocalDate(),
-                           transaccion.getDescripcion(),
-                           transaccion.getMonto()));
-               }
-           }
-       });
-   }
 
 
-    private void cargarTransacciones() {
-        TableView_CuentasTransaccion.setItems(
-                FXCollections.observableArrayList(BilleteraVirtual.getInstancia().getTransacciones())
-        );
+
+    /**
+     * carga las cuentas del usuario en la listViw para su selecciom
+     */
+    private void cargarCuentas(){
+        List<Cuenta> todasLasCuentas = new ArrayList<>();
+
+        for (Persona persona : BilleteraVirtual.getInstancia().getPerfiles()) {
+            if (persona instanceof Usuario usuario) {
+                todasLasCuentas.addAll(usuario.getListaCuentas());
+            }
+        }
+
+        TableView_CuentasTransaccion.setItems(FXCollections.observableArrayList(todasLasCuentas));
+    }
+
+    /**
+     * Configura el comportamiento al seleccionar una cuenta en la lista
+     */
+    private void configurarSeleccionCuenta(){
+        TableView_CuentasTransaccion.setOnMouseClicked(mouseEvent -> {
+            Cuenta cuentaSeleccionada = TableView_CuentasTransaccion.getSelectionModel().getSelectedItem();
+            if (cuentaSeleccionada != null)
+                Label_BancoCuenta.setText(cuentaSeleccionada.getNombreBanco());
+            Label_NumeroCuenta.setText(cuentaSeleccionada.getNumeroCuenta());
+            Label_SaldoCuenta.setText(String.format("$ %.2f", cuentaSeleccionada.getSaldoTotal()));
+
+            DatosCompartidos.getInstancia().setCuentaSeleccionada(cuentaSeleccionada);
+        });
     }
 
 }
