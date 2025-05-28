@@ -52,7 +52,7 @@ public class PantallaPrincipalAdministradorViewController {
     @FXML
     void onClick_CerrarSesionAdmin(ActionEvent event) {
         GestorSesion.getInstancia().cerrarSesion();
-        DatosCompartidos.getInstancia().setCuentaSeleccionada(null);
+        DatosCompartidos.getInstancia().limpiarDatosCompartidos();
         try {
             App.cargarVista("/co/edu/uniquindio/poo/proyecto_final_pgii/menuInicio.fxml", event);
         } catch (IOException e) {

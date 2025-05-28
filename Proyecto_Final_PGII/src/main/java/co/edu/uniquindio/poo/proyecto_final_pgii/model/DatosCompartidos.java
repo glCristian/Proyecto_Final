@@ -14,6 +14,8 @@ package co.edu.uniquindio.poo.proyecto_final_pgii.model;
 public class DatosCompartidos {
 
     private static  DatosCompartidos instancia;
+    
+    private Transaccion transaccionSeleccionada;
     private Cuenta cuentaSeleccionada;
     private Usuario usuarioSeleccionado;
     private Presupuesto presupuestoSeleccionado;
@@ -82,7 +84,26 @@ public class DatosCompartidos {
     public void setPresupuestoSeleccionado(Presupuesto presupuestoSeleccionado) {
         this.presupuestoSeleccionado = presupuestoSeleccionado;
     }
+    
+    /**
+     * Metodo que obtiene la transaccion seleccionada
+     * @return
+     */
+    public Transaccion getTransaccionSeleccionada() {
+        return transaccionSeleccionada;
+    }
 
+    /**
+     * Metodo que establece la transaccion seleccionada
+     * @param transaccionSeleccionada
+     */
+   public void setTransaccionSeleccionada(Transaccion transaccionSeleccionada) {
+        this.transaccionSeleccionada = transaccionSeleccionada;
+    }
+    
+    
+    
+    
 
     /**
      * Limpia todos los datos almacenados en esta instancia
@@ -92,5 +113,34 @@ public class DatosCompartidos {
         this.cuentaSeleccionada = null;
         this.usuarioSeleccionado = null;
         this.presupuestoSeleccionado = null;
+        this.transaccionSeleccionada = null;
+    }
+
+    /**
+     * Limpia solo el usuario seleccionado
+     */
+    public void limpiarUsuarioSeleccionado() {
+        this.usuarioSeleccionado = null;
+    }
+
+    /**
+     * Limpia solo la cuenta seleccionada
+     */
+    public void limpiarCuentaSeleccionada() {
+        this.cuentaSeleccionada = null;
+    }
+
+    /**
+     * Limpia solo el presupuesto seleccionado
+     */
+    public void limpiarPresupuestoSeleccionado() {
+        this.presupuestoSeleccionado = null;
+    }
+
+    /**
+     * Limpia solo la transaccion seleccionada
+     */
+    public void limpiarTransaccionSeleccionada() {
+        this.transaccionSeleccionada = null;
     }
 }

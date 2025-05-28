@@ -63,4 +63,20 @@ public class BilleteraVirtual {
     }
 
 
+
+    /**
+     * Metodo que filtra y devuelve solo los usuarios de la lista de perfiles
+     * @return Collection con todos los usuarios registrados
+     */
+    public Collection<Usuario> getUsuarios() {
+        Collection<Usuario> usuarios = new LinkedList<>();
+        for (Persona perfil : perfiles) {
+            if (perfil instanceof Usuario) {
+                usuarios.add((Usuario) perfil);
+            }
+        }
+        return usuarios;
+    }
+
+
 }

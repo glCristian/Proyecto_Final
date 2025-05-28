@@ -54,8 +54,8 @@ public class MovimientosViewController {
     }
 
     public void cargarTransacciones(){
-        ObservableList<Transaccion> movimientos = FXCollections.observableArrayList(usuarioActual.getListaTransacciones());
-        TableView_Movimientos.setItems(movimientos);
+
+        TableView_Movimientos.setItems(javafx.collections.FXCollections.observableArrayList(GestorSesion.getInstancia().getUsuarioActual().getListaTransacciones()));
     }
 
 

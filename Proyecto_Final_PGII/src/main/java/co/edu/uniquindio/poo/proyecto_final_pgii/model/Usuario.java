@@ -38,7 +38,7 @@ public class Usuario extends Persona{
 
         this.contrasena = contrasena;
         this.notificacion = notificacion;
-        this.listaTransacciones = mostrarTodosLosMovimientos();
+        this.listaTransacciones = new LinkedList<>();
         this.listaCuentas = new LinkedList<>();
         this.listaPresupuestos = new LinkedList<>();
         this.saldoTotal = getSaldoTotal();

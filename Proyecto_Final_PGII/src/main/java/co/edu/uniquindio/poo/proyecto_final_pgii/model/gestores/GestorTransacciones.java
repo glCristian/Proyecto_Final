@@ -171,6 +171,25 @@ public class GestorTransacciones {
         return false;
     }
 
+    private Usuario buscarUsuarioPorCuenta(Cuenta cuenta) {
+        for (Usuario usuario : BilleteraVirtual.getInstancia().getUsuarios()) {
+            if (usuario.consultarCuentas().contains(cuenta)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    private Usuario buscarUsuarioPorNumeroCuenta(String numeroCuenta) {
+        for (Usuario usuario : BilleteraVirtual.getInstancia().getUsuarios()) {
+            for (Cuenta cuenta : usuario.consultarCuentas()) {
+                if (cuenta.getNumeroCuenta().equals(numeroCuenta)) {
+                    return usuario;
+                }
+            }
+        }
+        return null;
+    }
 
     /**
      * Metodo generico para resgitrar una transaccion
@@ -179,24 +198,41 @@ public class GestorTransacciones {
     private void registrarTransaccion(Transaccion transaccion) {
         if (transaccion == null) return;
 
-        // Añadir a la cuenta origen si es necesario
+        BilleteraVirtual sistema = BilleteraVirtual.getInstancia();
+
+        // Añadir a la cuenta origen
         if (transaccion.getCuentaOrigen() != null) {
             Cuenta cuentaOrigen = buscarCuentaPorId(transaccion.getCuentaOrigen());
             if (cuentaOrigen != null) {
                 cuentaOrigen.getListaTransacciones().add(transaccion);
+
+                Usuario propietarioOrigen = buscarUsuarioPorCuenta(cuentaOrigen);
+                if (propietarioOrigen != null) {
+                    propietarioOrigen.getListaTransacciones().add(transaccion);
+                }
             }
         }
 
-        // Añadir a la cuenta destino si es necesario y es distinta a la de origen
-        if (transaccion.getCuentaDestino() != null && !transaccion.getCuentaDestino().equals(transaccion.getCuentaOrigen())) {
+        // Añadir a la cuenta destino si es distinta a la de origen
+        if (transaccion.getCuentaDestino() != null &&
+                !transaccion.getCuentaDestino().equals(transaccion.getCuentaOrigen())) {
+
             Cuenta cuentaDestino = buscarCuentaPorId(transaccion.getCuentaDestino());
             if (cuentaDestino != null) {
                 cuentaDestino.getListaTransacciones().add(transaccion);
+
+                Usuario propietarioDestino = buscarUsuarioPorCuenta(cuentaDestino);
+                if (propietarioDestino != null) {
+                    propietarioDestino.getListaTransacciones().add(transaccion);
+                }
             }
         }
 
-        BilleteraVirtual.getInstancia().getTransacciones().add(transaccion);
+        sistema.getTransacciones().add(transaccion);
     }
+
+
+
 
 
     /**

@@ -169,12 +169,12 @@ public class Cuenta {
 
     @Override
     public String toString() {
-        return "Cuenta{" +
-                "idCuenta='" + idCuenta + '\'' +
-                ", nombreBanco='" + nombreBanco + '\'' +
-                ", numeroCuenta='" + numeroCuenta + '\'' +
-                ", saldoTotal=" + saldoTotal +
-                ", tipoCuenta=" + tipoCuenta +
-                '}';
+        return "\n--- Cuenta ---" +
+                "\nID: " + idCuenta +
+                "\nBanco: " + nombreBanco +
+                "\nNúmero de Cuenta: " + numeroCuenta +
+                "\nSaldo Total: $" + String.format("%,.2f", saldoTotal) +
+                "\nTipo de Cuenta: " + (tipoCuenta != null ? tipoCuenta : "Sin tipo") +
+                "\n----------------";
     }
 }
